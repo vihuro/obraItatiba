@@ -1,0 +1,126 @@
+import React, { useState, useEffect } from "react";
+import style from "./cardNota.module.css";
+import { BiAddToQueue } from "react-icons/Bi"
+import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md"
+import Documento from "./Documento";
+import AdicionarNota from "./AdicicionarNota";
+
+const CardNotas = ({ data, dataIndex, ...props }) => {
+
+    const [notas, setNotas] = useState(null);
+    const [index, setIndex] = useState(null);
+    const [cardDocumento, setCardDocumentos] = useState(false);
+    const [visibleValue, setVisibleValue] = useState(false);
+    const [cardNovaNota, setCarNovaNota] = useState(false);
+
+    useEffect(() => {
+        setNotas(data);
+        setIndex(dataIndex);
+    }, [])
+
+    return (
+        <div className={style.card}>
+            <div className={style.containerTitle}>
+                <div className={style.wrapTitle}>
+                    <h1 className={style.numeroNota}>
+                        NFº {data.numeroNota}
+                    </h1>
+                </div>
+                <div >
+                    <div onClick={() => setCarNovaNota(true)} className={style.wrapButtonAdd}>
+                        <BiAddToQueue style={{
+                            width: 30,
+                            height: 30,
+                            color: "blue"
+                        }} />
+                    </div>
+                </div>
+            </div>
+            <div className={style.wrapContainer}>
+                <div className={style.column} style={{ width: 800 }}>
+                    <div className={style.row}>
+                        <p >
+                            CNPJ : {data.cnpj}
+                        </p>
+                    </div>
+                    <div className={style.row}>
+                        <p>
+                            Fornecedor : {data.fornecedor}
+                        </p>
+                    </div>
+                    <div className={style.row}>
+                        <p>
+                            Descrição do Serviço : {data.descricaoProdutoServico}
+                        </p>
+                    </div>
+                    <div className={style.row}>
+                        <p>
+                            Tipo de Serviço : {data.produtoServico}
+                        </p>
+                    </div>
+                </div>
+                <div className={style.column}>
+                    <div className={style.row} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
+                        <div style={{ width: 200 }}>
+                            <p>
+                                Valor da Nota:
+                            </p>
+                            <p style={{
+                                position: 'relative', 
+                                background: visibleValue ? 
+                                'none' : 
+                                'linear-gradient(to right, rgba(128,128,128,0.1), rgba(128,128,128,0.2), rgba(235,238,236,0.7), rgba(236,236,236,0.5))'
+                            }}>
+                                <span style={{ opacity: visibleValue ? 1 : 0 }}>{`R$ ${data.valorTotalNota}`}</span>
+
+                            </p>
+
+                        </div>
+
+                        <div onClick={() => setVisibleValue(!visibleValue)} className={style.containerButtonVisibility} >
+                            {!visibleValue ?
+                                <MdOutlineVisibilityOff color="#585858" size={20} style={{ marginLeft: 5, alignItems: 'center', justifyContent: 'center' }} />
+                                :
+                                <MdOutlineVisibility color="#585858" size={20} style={{ marginLeft: 5, alignItems: 'center', justifyContent: 'center' }} />
+                            }
+
+                        </div>
+
+                    </div>
+                    <div className={style.row} style={{ textAlign: 'left', justifyItems: 'initial', display: 'flex', justifyContent: 'flex-start' }}>
+                        <div className={style.cardDocumento}>
+
+                            <div className={style.documentos} onClick={() => setCardDocumentos(true)}>
+                                <p style={{ fontSize: 12, color: 'white', marginLeft: 8 }}>
+                                    Documentos
+                                </p>
+                                <div className={style.quantidadeDocumentos}>
+                                    <p style={{ fontSize: 15, color: 'white', fontWeight: 500 }}>
+                                        {data.numeroDocumento.length}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {cardDocumento && (
+                    <Documento
+                        documento={data.numeroDocumento}
+                        visible={setCardDocumentos}
+                    />
+                )}
+                {cardNovaNota &&(
+                    <AdicionarNota 
+                    visible={setCarNovaNota}
+                    data={data}
+                    
+                    />
+                )}
+            </div>
+        </div>
+    )
+
+}
+
+export default CardNotas
