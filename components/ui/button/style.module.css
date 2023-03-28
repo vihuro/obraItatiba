@@ -1,0 +1,33 @@
+.container{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    background-color: aqua;
+}
+
+.container:hover{
+    cursor: pointer;
+}
+
+.button{
+    width: 100%;
+    height: 100%;
+    font-weight: 500;
+    border-radius: 10px;
+    border: none;
+    transition: box-shadow 0.5s ease-out;
+}
+
+.button--borderder-red{
+    color: red;
+    background-color: transparent;
+    border: 1px solid red;
+}
+.button--borderder-red:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 1px red;
+
+}
+
