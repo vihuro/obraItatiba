@@ -34,16 +34,18 @@ const AdicionarNota = ({ data, visible }) => {
                                 </div>
                             </div>
                             <div className={style.wrapContinarRow}>
-                                <div className={style.row}>
-                                    <div className={style.wrapRow}>
-                                        <h5>CNPJ: </h5>
-                                        <input readOnly value={nota.cnpj} />
+                                <div className={style.wrapSize} >
+                                    <div className={style.row}>
+                                        <div className={style.wrapRow}>
+                                            <h5>CNPJ: </h5>
+                                            <input readOnly value={nota.cnpj} />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={style.row}>
-                                    <div className={style.wrapRow}>
-                                        <h5>Fornecedor: </h5>
-                                        <input style={{ width: 450 }} readOnly value={nota.fornecedor} />
+                                    <div className={style.row}>
+                                        <div className={style.wrapRow}>
+                                            <h5>Fornecedor: </h5>
+                                            <input style={{ width: 450 }} readOnly value={nota.fornecedor} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

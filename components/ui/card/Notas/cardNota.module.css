@@ -19,9 +19,8 @@
 .wrapTitle{
     align-items: flex-start;
     width: 100%;
-
-
 }
+
 .wrapButtonAdd{
     width: 100%;
     display: flex;
@@ -94,4 +93,29 @@
     height: 38px;
     display: flex;
     align-items: flex-end 
+}
+
+@media (max-width:430px) {
+    .card{
+        padding: 10px;
+        margin: 20px;
+        box-shadow: 1px 1px 5px 2px #868686;
+        border-radius: 7px;
+        height: auto;
+        font-family: NotoSans,Arial,"Arial Unicode MS",sans-serif;
+        font-size: 16px;
+    }
+    .wrapContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;    
+    }
+    .column{
+        width: 160px;
+    }
+    .row{
+        padding: 10px;
+    }
+    
 }
