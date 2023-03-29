@@ -1,0 +1,47 @@
+.container{
+    width: 100%;
+}
+
+.input{
+    width: 100%;
+
+}
+
+.input:hover{
+    cursor: default;
+}
+
+.card_select{
+    position: absolute;
+    margin-top: 5px;
+    height: 85px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 10px 1px rgb(116, 116, 116);
+    overflow: auto;
+}
+
+.containerSelect{
+    margin: 5px;
+}
+
+.containerSelect:hover{
+    background-color: #c7c7c7;
+    cursor: default;
+
+}
+
+.card_select::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.card_select::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
+
+.card_select::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    border-radius: 10px;
+}

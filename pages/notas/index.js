@@ -1,33 +1,44 @@
-import React,{useState,useEffect} from "react"
-import api from '../../api/apiObraItatiba';
-import style from "./index.module.css";
-import Card from "../../components/ui/card/Notas/CardNota"
+import react,{useState,useEffect} from "react"
+import { useRouter } from "next/router";
+import {setCookie ,parseCookies} from "nookies"
 
+const Notas = ({...props}) =>{
+    const navigation = useRouter();
 
-const Notas = () =>{
-    const[notas, setNotas] = useState(null);
+    function VerifyUser(){
+        if(localStorage.getItem("TOKEN")) return true;
+
+        return false;
+    }
     
-    useEffect(() =>{
-        api.get("notas")
-        .then(res => setNotas(res.data))
-        .catch(err => console.log(err))
-    },[])
     return(
-        <div className={style.body}>
-            <div className={style.container}>
-                {notas && (
-                    notas.map((item,index) =>
-                    <Card key={index}
-                    data={item}
-                    dataIndex={index}
-                     />
-                    )
-                )}
-            </div>
-        </div>
+        <div>
 
+        </div>
     )
 
 }
 
 export default Notas
+
+export const getServerSideProps=(context)=>{
+    const token = parseCookies().TOKEN_OBRA;
+    setCookie(context,"TOKEN_OBRA","SLKJSKLSJLKSJLSK",{
+        maxAge:60*60*1 //1 hora
+    })
+    console.log(token)
+
+    if(!token){
+        setCookie(context, "OBRA_THR",encodeURIComponent(context.resolvedUrl))
+        return{
+            redirect:{
+                destination:"/",
+                permanent:false
+            },
+            props:{}
+        }
+    }
+
+    return{props:{}}
+
+}

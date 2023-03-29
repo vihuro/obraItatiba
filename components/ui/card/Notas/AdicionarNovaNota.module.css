@@ -19,6 +19,7 @@
     position: absolute;
     border-radius: 7px;
     overflow: auto;
+    box-shadow: 7px 10px 20px 1px rgb(48, 94, 221, 0.5);
 
 }
 
@@ -32,7 +33,27 @@
 
 .containerTitle h1 {
     font-weight: 300;
+    color: rgb(0, 4, 255);
 
+}
+.containerTitle h1::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background-image: linear-gradient(to right, rgb(0, 38, 255),rgb(255, 0, 191));
+    top: 50px;
+    left: 200px;
+    animation: trans 1s infinite;
+
+}
+@keyframes trans {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
 }
 
 .wrapContainer {
@@ -48,7 +69,7 @@
 .wrapSize{
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     justify-items: center;
 }
 
@@ -71,6 +92,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    padding: 10px;
 }
 
 .row p {

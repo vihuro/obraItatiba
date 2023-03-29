@@ -9,7 +9,9 @@ const Button = ({
     }) =>{
     return(
 
-            <button className={
+            <button
+            onClick={() => action()} 
+            className={
                 `${styles['button']} 
                 ${styles[`button--${theme}`]}
                 `}>

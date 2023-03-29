@@ -31,3 +31,14 @@
 
 }
 
+.button--borderder-green{
+    color: rgb(48, 77, 51);
+    background-color: transparent;
+    border: 1px solid rgb(0, 255, 21);
+}
+.button--borderder-green:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 1px rgb(0, 255, 21)
+
+}
+
