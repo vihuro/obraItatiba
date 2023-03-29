@@ -42,3 +42,18 @@
 
 }
 
+.button--login{
+    border: 1px solid blue;
+    color: blue;
+    background: transparent;
+
+}
+
+.button--login:hover{
+    cursor: pointer;
+    color: white;
+    background-color: blue ;
+    box-shadow: 1px 1px 10px 1px blue;
+    transition: .5s;
+}
+

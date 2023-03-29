@@ -1,5 +1,176 @@
 .body{
     margin: 0 auto;
     padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+.container{
+    width: 800px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card{
+    width: 380px;
+    height: 620px;
+    margin-left: 5px;
+    box-shadow: 1px 3px 5px 1px blue;
+    border-radius: 7px;
+    overflow: auto;
+
+
+}
+.cardLogo{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    border-radius: 7px;
+    background-image: linear-gradient(to right bottom, rgba(0, 26, 255,.7) ,rgb(0, 194, 194,.5),rgb(10, 151, 207,.5),rgb(25, 0, 255,.7)),
+                      linear-gradient(to right top, rgb(0, 26, 255) ,rgba(255, 0, 234, 0.5),rgb(25, 0, 255,.7)),
+                      linear-gradient(to left bottom, rgba(243, 243, 243, 0.7) ,rgba(133, 0, 194, 0.8),rgba(234, 0, 255, 0.5),rgb(25, 0, 255,.7)),
+                      linear-gradient(to left top, rgba(0, 247, 255, 0.7) ,rgba(13, 0, 194, 0.8),rgba(3, 70, 97, 0.5),rgba(255, 8, 0, 0.7))
+}
+.wrapContainer{
+    display: flex;
+}
+
+.wrapContainerCard{
+    padding: 40px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    height: 100%;
+}
+
+.containerTitle{
+    width: 300px;
+    height: 80px;
+    display: grid;
+    align-items: center;
+}
+.containerTitle::before{
+    content: "";
+    position: absolute;
+    margin-top: 55px;
+    width: 320px;
+    height: 2px;
+    background-image: linear-gradient(to left ,#0011f8, #e500fa);
+
+}
+
+.containerForm{
+    width: 350px;
+    height: 400px;
+    display: grid;
+    padding: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrap_input{
+    position: relative;
+    border-radius: 2px solid #080808ad;
+    margin-bottom: 37px;
+    padding: 10px;
+}
+
+.input{
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    line-height: 1.2px;
+    border: none;
+    display: block;
+
+    width:300px;
+    height: 45px;
+
+    background: #dddddd;
+    padding: 0 5px;
+
+}
+
+.focus_input{
+    border-bottom: 1.2px solid #ff0000ad;
+    width: 350px;
+    height: 100%;
+    top:0;
+    left: 0;
+    pointer-events: none;
+    color: transparent;
+}
+
+.focus_input::before{
+
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 2px;
+    background-image: linear-gradient(to left ,#0011f8, #e500fa);
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+
+}
+
+.focus_input::after{
+    font-size: 15px;
+    position: absolute;
+    color: #49494999;
+    line-height: 1.2;
+    content: attr(data-placeholder);
+    margin-top: -35px;
+    width: 350px;
+    margin-left: 15px;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+
+.input:focus{
+    outline: 0;
+}
+
+.input:focus + .focus_input::after{
+    margin-top: -70px;
+    margin-left: 0px;
+
+
+}
+
+.input:focus + .focus_input::before{
+    width: 300px;
+}
+
+.has_val + .focus_input::after{
+    margin-top: -70px;
+    margin-left: 0px;
+
+    
+}
+
+.containerButton{
+    width: 300px;
+    height: 80px;
+    display: grid;
+    justify-self: center;
+    align-items: center;
+}
+.wrapButton{
+    width: 100%;
+    height: 45px;
 
 }
