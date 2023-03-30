@@ -7,7 +7,7 @@ const Menu = () => {
         <div className={style.body}>
             <div className={style.container} >
                 <NavBar />
-                Menu
+
 
             </div>
         </div>

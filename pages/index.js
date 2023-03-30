@@ -2,6 +2,7 @@ import style from "./index.module.css"
 import { parseCookies } from "nookies"
 import { useState } from "react";
 import Button from "../components/ui/button/ButtonUi"
+import { useRouter } from "next/router";
 
 function Home() {
 
@@ -12,6 +13,8 @@ function Home() {
         "apelido": "",
         "senha": ""
     })
+
+    const navigation = useRouter();
 
     return (
         <div className={style.body}>
@@ -34,20 +37,36 @@ function Home() {
                             </div>
                             <div className={style.containerForm} >
                                 <div className={style.wrapInput} >
-                                <input className={login.apelido!== '' ? `${style.has_val} ${style.input}` : style.input} onChange={e => setLogin({...login,apelido: e.target.value})} />
+                                    <input className={
+                                        login.apelido !== '' ?
+                                            `${style.has_val} ${style.input}` :
+                                            style.input}
+                                        onChange={e =>
+                                            setLogin({ ...login, apelido: e.target.value }
+                                            )}
+                                    />
                                     <span className={style.focus_input} data-placeholder="Usuário... " />
                                 </div>
                                 <div className={style.wrapInput} >
-                                <input className={login.senha!== '' ? `${style.has_val} ${style.input}` : style.input} onChange={e => setLogin({...login,senha: e.target.value})} />
+                                    <input className={login.senha !== '' ?
+                                        `${style.has_val} ${style.input}` :
+                                        style.input}
+                                        onChange={e =>
+                                            setLogin({ ...login, senha: e.target.value }
+                                            )}
+                                    />
                                     <span className={style.focus_input} data-placeholder="Usuário... " />
                                 </div>
                             </div>
                             <div className={style.containerButton} >
                                 <div className={style.wrapButton}>
-                                    <Button 
-                                    action={() => console.log(login)}
-                                    theme={"login"}
-                                    text={"ENTRAR"}
+                                    <Button
+                                        action={() => {
+                                            navigation.push("/menu")
+                                            console.log(login)
+                                        }}
+                                        theme={"login"}
+                                        text={"ENTRAR"}
                                     />
                                 </div>
 

@@ -13,6 +13,7 @@
     box-shadow: 1px 1px 5px 2px #c0c0c0;
     padding: 0;
     margin: 0 auto;
+    position: relative;
 
 }
 .wrapContainer{

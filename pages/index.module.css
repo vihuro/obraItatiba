@@ -131,7 +131,7 @@
     color: #49494999;
     line-height: 1.2;
     content: attr(data-placeholder);
-    margin-top: -35px;
+    margin-top: -30px;
     width: 350px;
     margin-left: 15px;
 
