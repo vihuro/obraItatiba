@@ -17,17 +17,18 @@
     width: 100%;
     height: 80px;
     background-color: blue;
-    position: absolute;
-    z-index: 503;
+    position: relative;
+    z-index: 1;
 }
 
 .navBar{
-    height: 100vh;
+    height: 300px;
     width: 350px;
     background-color: rgb(17, 0, 254);
     position: absolute;
     top: 0;
     transition: all 1s;
+    z-index: 2;
 }
 
 
@@ -39,11 +40,21 @@
     transition: 1s;
     visibility: visible;
     opacity: 0;
-  }
+}
+
+.containerLogo{
+    height: 0px;
+    padding: 0px;
+    transition: all 1s;
+}
 
 .containerNavBar{
+    position: absolute;
     width: 100%;
+    top: 0;
+    bottom: 0;
     height: 100vh;
+    
 
 }
 
@@ -62,7 +73,7 @@
 }
 
 .logo{
-    width: 20%;
+    width: 100%;
     position: absolute;
 }
 
