@@ -22,9 +22,11 @@ const CardNotas = ({ data, dataIndex, ...props }) => {
         <div className={style.card}>
             <div className={style.containerTitle}>
                 <div className={style.wrapTitle}>
-                    <h1 className={style.numeroNota}>
-                        NFº {data.numeroNota}
-                    </h1>
+                    <div className={style.cardTitle} >
+                        <h1 className={style.numeroNota}>
+                            NFº {data.numeroNota}
+                        </h1>
+                    </div>
                 </div>
                 <div >
                     <div onClick={() => setCarNovaNota(true)} className={style.wrapButtonAdd}>
@@ -66,10 +68,10 @@ const CardNotas = ({ data, dataIndex, ...props }) => {
                                 Valor da Nota:
                             </p>
                             <p style={{
-                                position: 'relative', 
-                                background: visibleValue ? 
-                                'none' : 
-                                'linear-gradient(to right, rgba(128,128,128,0.1), rgba(128,128,128,0.2), rgba(235,238,236,0.7), rgba(236,236,236,0.5))'
+                                position: 'relative',
+                                background: visibleValue ?
+                                    'none' :
+                                    'linear-gradient(to right, rgba(128,128,128,0.1), rgba(128,128,128,0.2), rgba(235,238,236,0.7), rgba(236,236,236,0.5))'
                             }}>
                                 <span style={{ opacity: visibleValue ? 1 : 0 }}>{`R$ ${data.valorTotalNota}`}</span>
 
@@ -110,11 +112,11 @@ const CardNotas = ({ data, dataIndex, ...props }) => {
                         visible={setCardDocumentos}
                     />
                 )}
-                {cardNovaNota &&(
-                    <AdicionarNota 
-                    visible={setCarNovaNota}
-                    data={data}
-                    
+                {cardNovaNota && (
+                    <AdicionarNota
+                        visible={setCarNovaNota}
+                        data={data}
+
                     />
                 )}
             </div>

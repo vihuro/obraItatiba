@@ -18,6 +18,7 @@ const Notas = () => {
             <div className={style.container}>
                 <NavBar />
                 <div className={style.containerCards} >
+                    {console.log("aqui")}
                     {notas && (
                         notas.map((item, index) =>
                             <Card key={index}

@@ -3,6 +3,7 @@ import { parseCookies } from "nookies"
 import { useState } from "react";
 import Button from "../components/ui/button/ButtonUi"
 import { useRouter } from "next/router";
+import api from "../api/apiObraItatiba"
 
 function Home() {
 
@@ -13,6 +14,12 @@ function Home() {
         "apelido": "",
         "senha": ""
     })
+
+    function Logar(){
+        const logando = api.post("login",login)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
 
     const navigation = useRouter();
 
@@ -62,7 +69,8 @@ function Home() {
                                 <div className={style.wrapButton}>
                                     <Button
                                         action={() => {
-                                            navigation.push("/menu")
+                                            //navigation.push("/menu")
+                                            Logar()
                                             console.log(login)
                                         }}
                                         theme={"login"}
