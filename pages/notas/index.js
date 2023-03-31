@@ -22,13 +22,13 @@ const Notas = ({...props}) =>{
 export default Notas
 
 export const getServerSideProps=(context)=>{
-    const token = parseCookies().TOKEN_OBRA;
-    setCookie(context,"TOKEN_OBRA","SLKJSKLSJLKSJLSK",{
-        maxAge:60*60*1 //1 hora
-    })
-    console.log(token)
+    const url = parseCookies(context).OBRA_THR;
+    // setCookie(context,"TOKEN_OBRA","SLKJSKLSJLKSJLSK",{
+    //     maxAge:60*60*1 //1 hora
+    // })
+    console.log(url)
 
-    if(!token){
+    if(!url){
         setCookie(context, "OBRA_THR",encodeURIComponent(context.resolvedUrl))
         return{
             redirect:{
