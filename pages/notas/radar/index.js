@@ -9,7 +9,7 @@ const Notas = () => {
     const [notas, setNotas] = useState(null);
 
     useEffect(() => {
-        api.get("notas")
+        api.get("notas/radar")
             .then(res => setNotas(res.data))
             .catch(err => console.log(err))
     }, [])

@@ -1,19 +1,19 @@
-import react,{useState,useEffect} from "react"
+import react, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {setCookie ,parseCookies} from "nookies"
+import { setCookie, parseCookies } from "nookies";
+import style from "./style.module.css";
+import Navbar from "../../components/ui/navBar/NavBar"
 
-const Notas = ({...props}) =>{
+const Notas = () => {
     const navigation = useRouter();
 
-    function VerifyUser(){
-        if(localStorage.getItem("TOKEN")) return true;
 
-        return false;
-    }
-    
-    return(
-        <div>
-
+    return (
+        <div className={style.body}>
+            <div className={style.container} >
+                <Navbar />
+                voC~e está em notas
+            </div>
         </div>
     )
 
@@ -21,24 +21,22 @@ const Notas = ({...props}) =>{
 
 export default Notas
 
-export const getServerSideProps=(context)=>{
+export const getServerSideProps = (context) => {
     const url = parseCookies(context).OBRA_THR;
-    // setCookie(context,"TOKEN_OBRA","SLKJSKLSJLKSJLSK",{
-    //     maxAge:60*60*1 //1 hora
-    // })
-    console.log(url)
+    const token = parseCookies(context).TOKEN_OBRA;
 
-    if(!url){
-        setCookie(context, "OBRA_THR",encodeURIComponent(context.resolvedUrl))
-        return{
-            redirect:{
-                destination:"/",
-                permanent:false
+    if (!token) {
+        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl))
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
             },
-            props:{}
+            props: {}
         }
+
     }
 
-    return{props:{}}
+    return { props: {} }
 
 }
