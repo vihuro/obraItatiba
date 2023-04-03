@@ -43,7 +43,10 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                                         RADAR</p>
                                 </div>
                                 <div className={style.container_sub_menu}  >
-                                    <p>THR</p>
+                                    <p
+                                    onClick={() =>
+                                    navigation.push("/notas")}
+                                    >THR</p>
                                 </div>
 
 
