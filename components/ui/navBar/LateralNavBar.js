@@ -17,7 +17,7 @@ const LateralNavBar = ({ isOpen, onClose }) => {
 
     return (
         <div className={style.overlay + (!isOpen ? `${style.show}` : "")}
-            onClick={() => { onClose(!isOpen), console.log(isOpen) }}
+            onClick={() => { onClose(!isOpen) }}
         >
             <div className={isOpen ? style.container : ""} >
                 <div className={isOpen ? style.navBarLateral : style.navBarLateral_off}  >

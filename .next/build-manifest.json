@@ -15,6 +15,11 @@
   ],
   "rootMainFiles": [],
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -28,6 +33,19 @@
     "/notas/radar": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
+<<<<<<< HEAD
+=======
+      "static/chunks/pages/menu.js"
+    ],
+    "/notas": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/notas.js"
+    ],
+    "/notas/radar": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+>>>>>>> 942fb7d9db4656aea2f152fe48a44b92c4687203
       "static/chunks/pages/notas/radar.js"
     ]
   },

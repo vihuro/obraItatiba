@@ -2,5 +2,12 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
   "/notas/radar": "pages/notas/radar.js"
+=======
+  "/": "pages/index.js",
+  "/notas/radar": "pages/notas/radar.js",
+  "/menu": "pages/menu.js",
+  "/notas": "pages/notas.js"
+>>>>>>> 942fb7d9db4656aea2f152fe48a44b92c4687203
 }
