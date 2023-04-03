@@ -7,25 +7,44 @@ import NavBar from "../../../components/ui/navBar/NavBar";
 
 const Notas = () => {
     const [notas, setNotas] = useState(null);
+    const [time, setTime] = useState(null);
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
-        api.get("notas/radar")
-            .then(res => setNotas(res.data))
-            .catch(err => console.log(err))
-    }, [])
+        setLoading(true)
+
+        const fecthData = () => {
+            
+            api.get("notas/radar")
+                .then(res => setNotas(res.data))
+                .catch(err => console.log(err));
+            api.get("time")
+                .then(res => { 
+                    setTime(res.data)
+                    setLoading(false)
+                })
+                .catch(err => console.log(err))
+        }
+        fecthData()
+    }, []);
+    
     return (
+        loading ? <div>carregando...</div> :
         <div className={style.body}>
             <div className={style.container}>
                 <NavBar />
                 <div className={style.containerCards} >
-                    {console.log("aqui")}
-                    {notas && (
-                        notas.map((item, index) =>
-                            <Card key={index}
-                                data={item}
-                                dataIndex={index}
-                            />
-                        )
+                    {time && notas && (
+                        notas.map((item, index) => {
+                            return (
+                                <Card key={index}
+                                    data={item}
+                                    dataIndex={index}
+                                    dataTimes={time}
+                                />
+                            )
+                        })
                     )}
 
                 </div>
@@ -34,6 +53,9 @@ const Notas = () => {
         </div>
 
     )
+
+
+
 
 }
 

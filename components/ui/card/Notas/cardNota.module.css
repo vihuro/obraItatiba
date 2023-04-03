@@ -53,17 +53,16 @@
 .numeroNota{
     font-size: 15px;
     font-weight: 700;
+    color: #4d4d4d;
 }
 
 .wrapContainer{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-radius: 20px;
-    box-shadow: 0px -5px 10px -7px rgb(10, 43, 228);
+    border-radius: 20px 20px 7px 7px;
+    box-shadow: 1px 1px 5px 1px rgb(10, 43, 228);
     margin-top: 30px;
-    
-
 }
 
 .column{
@@ -77,6 +76,12 @@
 
 }
 
+.row p{
+    color: #666666;
+    font-weight: 400;
+
+}
+
 
 .cardDocumento{
     display: flex;
@@ -86,25 +91,40 @@
 
 .documentos{
     width: 100px;
-    height: 15px;
-    background-color: rgb(30, 156, 30);
+    height: 20px;
+    background-color: rgb(144, 247, 144, .8);
     border-radius: 7px;
     justify-content: center;
     align-items: flex-start;
+    display: grid;
     text-align: left;
+}
+
+.documentos p{
+    color: rgb(107, 107, 107);
+    font-weight: 500;
 }
 .documentos:hover{
     cursor: pointer;
 }
 
 .quantidadeDocumentos{
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
+    width: 15px;
+    height: 15px;
+    border-radius: calc(15px / 2);
     background-color: rgb(247, 48, 48);
     margin-left: 79px;
-    margin-top: -25px;
+    margin-top: -28px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+}
+
+.quantidadeDocumentos p{
+    font-size: 12px;
+    color: white;
+    font-weight: 400;
 }
 
 .containerButtonVisibility{

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { setCookie, parseCookies } from "nookies";
 import style from "./style.module.css";
 import Navbar from "../../components/ui/navBar/NavBar"
+import NotasTHR from "../../components/ui/card/Notas/thr/Notas";
 
 const Notas = () => {
     const navigation = useRouter();
@@ -12,7 +13,18 @@ const Notas = () => {
         <div className={style.body}>
             <div className={style.container} >
                 <Navbar />
-                voC~e está em notas
+                <div className={style.wrap_container} >
+                    <div className={style.container_filtro} >
+                    </div>
+                    <div className={style.card_filtro} >
+                    </div>
+                    <div className={style.card_notas}>
+                        <NotasTHR 
+                        
+                        />
+                    </div>
+                </div>
+
             </div>
         </div>
     )

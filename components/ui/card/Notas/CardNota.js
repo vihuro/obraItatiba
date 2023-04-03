@@ -5,18 +5,38 @@ import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md"
 import Documento from "./Documento";
 import AdicionarNota from "./AdicicionarNota";
 
-const CardNotas = ({ data, dataIndex, ...props }) => {
+const CardNotas = ({
+    data,
+    dataIndex,
+    dataTimes
+    
+    }) => {
+
 
     const [notas, setNotas] = useState(null);
     const [index, setIndex] = useState(null);
     const [cardDocumento, setCardDocumentos] = useState(false);
     const [visibleValue, setVisibleValue] = useState(false);
     const [cardNovaNota, setCarNovaNota] = useState(false);
+    const [listTimes, setListTimes] = useState([])
 
     useEffect(() => {
         setNotas(data);
         setIndex(dataIndex);
+        CreateListTimes();
     }, [])
+
+    function CreateListTimes() {
+        if (dataTimes) {
+
+            setListTimes(prev => {
+                const newItem = dataTimes.map(item => ({Id: item.timeId, Value: item.time}));
+                return [...prev, ...newItem];
+            })
+            
+        }
+
+    }
 
     return (
         <div className={style.card}>
@@ -116,6 +136,7 @@ const CardNotas = ({ data, dataIndex, ...props }) => {
                     <AdicionarNota
                         visible={setCarNovaNota}
                         data={data}
+                        dataTimes={listTimes}
 
                     />
                 )}

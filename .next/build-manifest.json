@@ -25,15 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/menu": [
+    "/notas/radar": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/menu.js"
-    ],
-    "/notas": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/notas.js"
+      "static/chunks/pages/notas/radar.js"
     ]
   },
   "ampFirstPages": []

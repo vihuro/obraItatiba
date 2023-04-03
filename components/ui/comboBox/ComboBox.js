@@ -16,7 +16,6 @@ const ComboBox = ({
     useEffect(() => {
         setList(data);
     }, [])
-    console.log(data)
     return (
         <div
             onClick={e => e.stopPropagation()}
@@ -29,47 +28,49 @@ const ComboBox = ({
                 readOnly
                 onClick={() => {
                     changeVisible(true)
-                }
-                }
+                }}
             />
-            {valueVisible
-                ?
+            {valueVisible && (
                 <div className={style.card_select}>
                     {list && valueVisible && (
+                        list.map((item, index) => {
+                            console.log(item)
+                            return (
+                                <div
+                                    key={item.Id}
+                                    style={{ width: width }}
+                                    className={style.containerSelect}
+                                >
+                                    <p key={index} >{item.Value}</p>
+                                </div>
+
+                            )
+                        })
+                    )}
+                </div>
+
+
+            )}
+
+
+            {/* {list && valueVisible && (
                         
-                        list.map((item, index) =>
+                        list.map((item) =>
                             <div
                                 style={{ width: width }}
                                 className={style.containerSelect}
                                 onClick={() => {
-                                    setText(item)
+                                    setText(item.Value)
                                     changeVisible(false)
                                 }}
-                                key={index}>
+                                key={item.Id}>
                                 <p>
-                                    {item}
+                                    Time: {item.Value}
                                 </p>
-                            </div>)
-                            // list.length.map((item, index) => {
-                            //     return (
-                            //         <div
-                            //             style={{width:width}}
-                            //             className={style.containerSelect}
-                            //             onClick={() => {
-                            //             setText(item.AUTORIZADOR)
-                            //             changeVisible(false)
-                            //             }}
-                            //             key={index}>
-                            //             <p>
-                            //                 {item.AUTORIZADOR}
-                            //             </p>
-                            //         </div>
-                            //     )
-                            // })
-                        )}
-                </div>
-                :
-                null}
+                            </div>
+                            )
+                        )} */}
+
         </div>
     )
 }

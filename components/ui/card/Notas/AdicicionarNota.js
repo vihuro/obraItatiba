@@ -6,11 +6,16 @@ import { BiAddToQueue } from "react-icons/Bi"
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md"
 
 
-const AdicionarNota = ({ data, visible }) => {
+const AdicionarNota = ({ 
+    data,
+    visible,
+    dataTimes, }) => {
+
     const [nota, setNota] = useState(null);
     const [modalAprovado, setModalAprovado] = useState(false);
     const [modalTime, setModalTime] = useState(false);
     const [visibleValue, setVisibleValue] = useState(false);
+    const [listTimes, setListTimes] = useState([]);
     const [list, setList] = useState([
         {
             "AUTORIZADOR": "ROBERTO"
@@ -39,7 +44,7 @@ const AdicionarNota = ({ data, visible }) => {
     ])
 
     useEffect(() => {
-        setNota(data)
+        setNota(data);
     }, [])
 
     return (
@@ -169,7 +174,7 @@ const AdicionarNota = ({ data, visible }) => {
                                             changeVisible={setModalAprovado}
                                             valueVisible={modalAprovado}
                                             placeHolder={"Selecione o autorizador..."}
-                                            data={list.map((item,index) => item.AUTORIZADOR)}
+                                            //data={list.map((item,index) => item.AUTORIZADOR)}
                                         />
                                     </div>
                                 </div>
@@ -191,7 +196,7 @@ const AdicionarNota = ({ data, visible }) => {
                                             changeVisible={setModalTime}
                                             valueVisible={modalTime}
                                             placeHolder={"Selecione o time..."}
-                                            data={listTime}
+                                            data={dataTimes}
                                         />
                                     </div>
                                 </div>
