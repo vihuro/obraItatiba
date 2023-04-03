@@ -61,8 +61,10 @@
     justify-content: space-between;
     align-items: flex-start;
     border-radius: 20px 20px 7px 7px;
-    box-shadow: 1px 1px 5px 1px rgb(10, 43, 228);
+    box-shadow: 1px 1px 5px 1px rgb(10, 43, 228) ;
+    /* box-shadow: 0px -5px 10px -7px rgb(10, 43, 228); */
     margin-top: 30px;
+
 }
 
 .column{
@@ -89,18 +91,11 @@
 .documentos{
     width: 100px;
     height: 20px;
-<<<<<<< HEAD
-    background-color: rgb(144, 247, 144, .8);
-    border-radius: 7px;
-    justify-content: center;
-    align-items: flex-start;
-=======
     background-color: rgba(144, 247, 144, 0.8);
     border-radius: 7px;
     justify-content: center;
     align-items: center;
     justify-content: center;
->>>>>>> 942fb7d9db4656aea2f152fe48a44b92c4687203
     display: grid;
     text-align: left;
 }
@@ -109,10 +104,7 @@
     color: rgb(107, 107, 107);
     font-weight: 500;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 942fb7d9db4656aea2f152fe48a44b92c4687203
 .documentos:hover{
     cursor: pointer;
 }
@@ -120,17 +112,10 @@
 .quantidadeDocumentos{
     width: 15px;
     height: 15px;
-<<<<<<< HEAD
-    border-radius: calc(15px / 2);
-    background-color: rgb(247, 48, 48);
-    margin-left: 79px;
-    margin-top: -28px;
-=======
     border-radius: calc(15px /2);
     background-color: rgb(247, 48, 48);
     margin-left: 79px;
     margin-top: -35px;
->>>>>>> 942fb7d9db4656aea2f152fe48a44b92c4687203
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,16 +123,10 @@
 }
 
 .quantidadeDocumentos p{
-<<<<<<< HEAD
-    font-size: 12px;
-    color: white;
-    font-weight: 400;
-=======
     font-size: 12px; 
     color: white; 
     font-weight: 400;
 
->>>>>>> 942fb7d9db4656aea2f152fe48a44b92c4687203
 }
 
 .containerButtonVisibility{
