@@ -93,14 +93,14 @@ function Home() {
                                     <span className={style.focus_input} data-placeholder="Usuário... " />
                                 </div>
                                 <div className={style.wrapInput} >
-                                    <input className={login.senha !== '' ?
+                                    <input type={"password"} className={login.senha !== '' ?
                                         `${style.has_val} ${style.input}` :
                                         style.input}
                                         onChange={e =>
                                             setLogin({ ...login, senha: e.target.value }
                                             )}
                                     />
-                                    <span className={style.focus_input} data-placeholder="Usuário... " />
+                                    <span className={style.focus_input} data-placeholder="Senha... " />
                                 </div>
                             </div>
                             <div className={style.containerButton} >

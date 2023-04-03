@@ -17,10 +17,15 @@ const Notas = () => {
                     <div className={style.container_filtro} >
                     </div>
                     <div className={style.card_filtro} >
+                        filtro
+                        
                     </div>
                     <div className={style.card_notas}>
-                        <NotasTHR 
-                        
+                        <NotasTHR
+
+                        />
+                        <NotasTHR
+
                         />
                     </div>
                 </div>
