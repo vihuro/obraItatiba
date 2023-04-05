@@ -1,8 +1,10 @@
 {
-  "/_app": "pages/_app.js",
+  "/": "pages/index.html",
   "/_error": "pages/_error.js",
+  "/menu": "pages/menu.html",
+  "/notas/radar": "pages/notas/radar.html",
+  "/_app": "pages/_app.js",
+  "/notas": "pages/notas.js",
   "/_document": "pages/_document.js",
-  "/menu": "pages/menu.js",
-  "/": "pages/index.js",
-  "/notas": "pages/notas.js"
+  "/404": "pages/404.html"
 }
