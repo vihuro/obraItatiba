@@ -71,7 +71,7 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                     </div>
                     <div className={style.containerBottao_Sair}
                         onClick={() => {
-                            destroyCookie(null,"TOKEN_OBRA")
+                        destroyCookie(null,"TOKEN_OBRA")
                             navigation.push("/")
                         }}
                     >
