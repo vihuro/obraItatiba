@@ -35,10 +35,14 @@ function Home() {
                 Navegar()
             })
             .catch(err => {
-                if (err.response.status === 404) {
-                    setmsgErr(err.response.data);
-                    setToogleModal(true);
-                }
+                console.log(err)
+                // if(!err.response){
+                //     console.log(err)
+                // }
+                // if (err.response.status === 404) {
+                //     setmsgErr(err.response.data);
+                //     setToogleModal(true);
+                // }
             })
     }
 
