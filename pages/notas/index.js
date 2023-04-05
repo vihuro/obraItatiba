@@ -4,9 +4,19 @@ import { setCookie, parseCookies } from "nookies";
 import style from "./style.module.css";
 import Navbar from "../../components/ui/navBar/NavBar"
 import NotasTHR from "../../components/ui/card/Notas/thr/Notas";
+import api from "../../api/apiObraItatiba";
 
 const Notas = () => {
     const navigation = useRouter();
+    const [data, setData] = useState([]);
+
+
+    useEffect(() =>{
+        api.get("/notas")
+        .then(res => {console.log(res),setData(res.data)})
+        .catch(err => console.log(err))
+
+    },[])
 
 
     return (
@@ -21,12 +31,11 @@ const Notas = () => {
                         
                     </div>
                     <div className={style.card_notas}>
-                        <NotasTHR
-
-                        />
-                        <NotasTHR
-
-                        />
+                        {data &&(
+                            data.map((item,index) => {
+                                return <NotasTHR key={index} data={item}/>
+                            })
+                        )}
                     </div>
                 </div>
 

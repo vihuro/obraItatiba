@@ -39,6 +39,42 @@
     background-color: rgb(241, 76, 0);
     border-radius: 7px 0px 0px 7px;
   }
+
+  .sucess::before{
+    content: "";
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(0, 241, 20);
+    border-radius: 7px 0px 0px 7px;
+
+  }
+
+  .warning::before{
+    content: "";
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(241, 217, 0);
+    border-radius: 7px 0px 0px 7px;
+
+  }
+
+  .error::before{
+    content: "";
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(255, 0, 0);
+    border-radius: 7px 0px 0px 7px;
+
+  }
   
 
   

@@ -5,6 +5,11 @@ import style from "./AdicionarNovaNota.module.css";
 import { BiAddToQueue } from "react-icons/Bi"
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md"
 import api from "../../../../api/apiObraItatiba";
+import TokenDecriptor from "../../../../service/TokenDecriptor"
+import { parseCookies } from "nookies"
+import Modal from "../modal/Modal"
+import RingLoader from "../../Load/RingLoader";
+import LoaderRing from "../../Load/RingLoader";
 
 
 const AdicionarNota = ({
@@ -13,9 +18,11 @@ const AdicionarNota = ({
     dataTimes, }) => {
 
     const [nota, setNota] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [modalAprovado, setModalAprovado] = useState(false);
     const [modalTime, setModalTime] = useState(false);
     const [visibleValue, setVisibleValue] = useState(false);
+    const [dadosUsuario, setDadosUsuario] = useState([]);
     const [valueTIme, setValueTime] = useState({
         "id": 0,
         "value": ""
@@ -23,20 +30,26 @@ const AdicionarNota = ({
     const [valueNota, setValueNota] = useState({
         "numeroNota": parseInt(data.numeroNota),
         "fornecedor": data.fornecedor,
-        "valorTotalNota":parseFloat(data.valorTotalNota.replace(/\./g,'').replace(',','.')),
-        "cnpj":data.cnpj.replace(/[^\d]+/g, ''),
+        "valorTotalNota": parseFloat(data.valorTotalNota.replace(/\./g, '').replace(',', '.')),
+        "cnpj": data.cnpj.replace(/[^\d]+/g, ''),
         "descricaoProdutoServico": data.descricaoProdutoServico,
         "avulsoFinalidade": "",
         "autorizador": "Bruno",
         "produtoServico": data.produtoServico,
-        "usuarioCadastroId": 1,
+        "usuarioCadastroId": 0,
         "timeId": 0,
-        "parcelas": 
-            data.numeroDocumento.map(item =>{
-                return {"parcela":item.numeroDocumento}
+        "parcelas":
+            data.numeroDocumento.map(item => {
+                return { "parcela": item.numeroDocumento }
             })
         ,
     })
+
+    const [infoMessage, setInfoMessage] = useState({
+        "message": "",
+        "type": "warning"
+    });
+    const [visibleMessage, setVisibleMessage] = useState(false);
 
     const [list, setList] = useState([
         {
@@ -62,15 +75,22 @@ const AdicionarNota = ({
 
     useEffect(() => {
         setNota(data);
+        const token = parseCookies().TOKEN_OBRA;
+        const infoUsuario = TokenDecriptor(token)
+        setDadosUsuario(infoUsuario);
+        setValueNota({ ...valueNota, usuarioCadastroId: parseInt(infoUsuario.idUser) })
     }, [])
 
-    function CadastrarNota(){
-        const nota = {...valueNota, timeId:valueTIme.id }
+    function CadastrarNota() {
+        setLoading(true)
+        const nota = { ...valueNota, timeId: valueTIme.id }
         console.log(nota)
+        api.post("/notas", nota)
+            .then(res => { setVisibleMessage(true), setInfoMessage({ message: "Cadastrado com sucesso!", type: "sucess" }) })
+            .catch(err => { setVisibleMessage(true), setInfoMessage({ message: err.response.data, type: "warning" }) })
+            .catch(err => { setVisibleMessage(true), setInfoMessage({ message: "Erro inesperado", type: "error" }) })
+            .finally(setLoading(false))
 
-         api.post("/notas",nota)
-         .then(res => console.log(res))
-         .catch(err => console.log(err))
 
     }
 
@@ -80,6 +100,7 @@ const AdicionarNota = ({
             onClick={() => {
                 visible(false)
             }}>
+
             <div
                 onClick={(e => {
                     e.stopPropagation();
@@ -87,12 +108,22 @@ const AdicionarNota = ({
                     setModalTime(false);
                 })}
                 className={style.cardNovaNota}>
+                    
+
+                {visibleMessage ? <Modal
+                    visible={setVisibleMessage}
+                    mensagem={infoMessage.message}
+                    type={infoMessage.type}
+                /> : null}
+                {loading ? <LoaderRing /> : null}
                 <div className={style.containerTitle}>
+
                     <h1>
                         ADICIONAR NOTA
                     </h1>
                 </div>
                 <div className={style.wrapContainer}>
+
                     {nota && (
                         <>
                             <div >
@@ -251,9 +282,9 @@ const AdicionarNota = ({
                 <div className={style.containerButton} >
                     <div className={style.button}>
                         <Button
-                            action={() => { 
+                            action={() => {
                                 CadastrarNota()
-                                }}
+                            }}
                             color={"green"}
                             text={"SALVAR"}
                             theme={"borderder-green"}

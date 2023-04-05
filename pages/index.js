@@ -5,6 +5,7 @@ import Button from "../components/ui/button/ButtonUi"
 import { useRouter } from "next/router";
 import api from "../api/apiObraItatiba"
 import Modal from "../components/ui/card/modal/Modal";
+import Loader from "../components/ui/Load/RingLoader";
 
 function Home() {
 
@@ -13,12 +14,14 @@ function Home() {
     const [toogleModal, setToogleModal] = useState(false)
     const [msgErr, setmsgErr] = useState("");
     const [showLogo, setShowLogo] = useState(true);
-
-    const [widthWindow, setWidthWindow] = useState(1024)
-
+    const [load, setLoad] = useState(false);
     const [login, setLogin] = useState({
         "apelido": "",
         "senha": ""
+    });
+    const [infoMessage, setInfoMessage] = useState({
+        "message": "",
+        "type": "warning"
     })
 
     useEffect(() => {
@@ -26,24 +29,24 @@ function Home() {
         if (window.outerWidth < 430) {
             setShowLogo(false)
         }
-    },[])
+    }, [])
 
     function Logar() {
+        setLoad(true)
         const logando = api.post("login", login)
             .then(res => {
                 setCookie(null, "TOKEN_OBRA", res.data)
                 Navegar()
             })
             .catch(err => {
-                console.log(err)
-                // if(!err.response){
-                //     console.log(err)
-                // }
-                // if (err.response.status === 404) {
-                //     setmsgErr(err.response.data);
-                //     setToogleModal(true);
-                // }
+                setInfoMessage({ message: err.response.data, type: "warning" },
+                    setToogleModal(true))
             })
+            .catch(err => {
+                setInfoMessage({ message: "Erro inesperado!", type: "error" }),
+                    setToogleModal(true)
+            })
+            .finally(setLoad(false))
     }
 
     const navigation = useRouter();
@@ -63,7 +66,8 @@ function Home() {
                 {toogleModal ?
                     <Modal
                         visible={setToogleModal}
-                        mensagem={msgErr}
+                        mensagem={infoMessage.message}
+                        type={infoMessage.type}
                     /> :
                     null}
                 <div className={style.wrapContainer} >
@@ -78,13 +82,16 @@ function Home() {
                         null
                     }
                     <div className={style.card} >
+
                         <div className={style.wrapContainerCard}>
+                        {load ? <Loader /> : null}
                             <div className={style.containerTitle} >
                                 <h1>
                                     LOGIN
                                 </h1>
                             </div>
                             <div className={style.containerForm} >
+
                                 <div className={style.wrapInput} >
                                     <input className={
                                         login.apelido !== '' ?
