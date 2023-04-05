@@ -34,14 +34,18 @@ const ComboBox = ({
                 <div className={style.card_select}>
                     {list && valueVisible && (
                         list.map((item, index) => {
-                            console.log(item)
                             return (
                                 <div
                                     key={item.Id}
                                     style={{ width: width }}
                                     className={style.containerSelect}
                                 >
-                                    <p key={index} >{item.Value}</p>
+                                    <p onClick={() => {
+                                        setText(item.Value);
+                                        value({ "id": item.Id, "value": item.Value })
+                                        changeVisible(false)
+                                    }
+                                    } key={index} >{item.Value}</p>
                                 </div>
 
                             )

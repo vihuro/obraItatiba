@@ -3,13 +3,12 @@ import { parseCookies } from "nookies";
 
 const ApiObra = axios.create({
 
-    baseURL: "http://192.168.2.67:9000/api"
+    baseURL: "http://localhost:5215/api"
 })
 
 ApiObra.interceptors.request.use((request) => {
     const token = parseCookies("TOKEN_OBRA");
     if(token){
-        console.log(token)
         request.headers.Authorization = `Bearer ${token.TOKEN_OBRA}`;
     } return request;
 })
