@@ -27,6 +27,10 @@ const AdicionarNota = ({
         "id": 0,
         "value": ""
     });
+    const [valueAutorizador, setValueAutorizador] = useState({
+        "id": 0,
+        "value": ""
+    });
     const [valueNota, setValueNota] = useState({
         "numeroNota": parseInt(data.numeroNota),
         "fornecedor": data.fornecedor,
@@ -38,6 +42,7 @@ const AdicionarNota = ({
         "produtoServico": data.produtoServico,
         "usuarioCadastroId": 0,
         "timeId": 0,
+        "tipoExportacao":"RADAR",
         "parcelas":
             data.numeroDocumento.map(item => {
                 return { "parcela": item.numeroDocumento }
@@ -51,26 +56,27 @@ const AdicionarNota = ({
     });
     const [visibleMessage, setVisibleMessage] = useState(false);
 
-    const [list, setList] = useState([
+    const [listAutorizador, setlistAutorizador] = useState([
         {
-            "AUTORIZADOR": "ROBERTO"
+            "Id":1,"Value":"ROBERTO"
         },
         {
-            "AUTORIZADOR": "BRUNO"
+            "Id":2, "Value":"BRUNO"
         },
         {
-            "AUTORIZADOR": "TETSUO"
+            "Id":3,"Value":"TETSUO"
         },
         {
-            "AUTORIZADOR": "HELENA"
+            "Id":4,"Value":"HELENA"
         },
         {
-            "AUTORIZADOR": "TOMIKO"
+            "Id":5,"Value": "TOMIKO"
         },
         {
-            "AUTORIZADOR": "WAGNER"
+            "Id": 6,"Value": "WAGNER"
         },
     ])
+
 
 
     useEffect(() => {
@@ -83,13 +89,15 @@ const AdicionarNota = ({
 
     function CadastrarNota() {
         setLoading(true)
-        const nota = { ...valueNota, timeId: valueTIme.id }
+        const nota = { ...valueNota, timeId: valueTIme.id, autorizador:  valueAutorizador.value}
+        console.log("leu notas===============================")
         console.log(nota)
+
         api.post("/notas", nota)
-            .then(res => { setVisibleMessage(true), setInfoMessage({ message: "Cadastrado com sucesso!", type: "sucess" }) })
-            .catch(err => { setVisibleMessage(true), setInfoMessage({ message: err.response.data, type: "warning" }) })
-            .catch(err => { setVisibleMessage(true), setInfoMessage({ message: "Erro inesperado", type: "error" }) })
-            .finally(setLoading(false))
+            .then(res => {console.log("Deu um response ===============================")  ,setVisibleMessage(true), setInfoMessage({ message: "Cadastrado com sucesso!", type: "sucess" }) })
+            .catch(err => {console.log("Primeiro catch ===============================") ,console.log(err), setVisibleMessage(true), setInfoMessage({ message: err.response.data, type: "warning" }) })
+            .catch(err => {console.log("segundo catch ===============================") ,setVisibleMessage(true), setInfoMessage({ message: "Erro inesperado", type: "error" }) })
+            .finally(() => setLoading(false))
 
 
     }
@@ -232,7 +240,9 @@ const AdicionarNota = ({
                                             changeVisible={setModalAprovado}
                                             valueVisible={modalAprovado}
                                             placeHolder={"Selecione o autorizador..."}
-                                        //data={list.map((item,index) => item.AUTORIZADOR)}
+                                            data={listAutorizador}
+                                            value={setValueAutorizador}
+                                            
                                         />
                                     </div>
                                 </div>

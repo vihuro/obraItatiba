@@ -31,6 +31,8 @@ function Home() {
         }
     }, [])
 
+
+
     function Logar() {
         setLoad(true)
         const logando = api.post("login", login)
@@ -46,7 +48,7 @@ function Home() {
                 setInfoMessage({ message: "Erro inesperado!", type: "error" }),
                     setToogleModal(true)
             })
-            .finally(setLoad(false))
+            .finally(() => setLoad(false))
     }
 
     const navigation = useRouter();

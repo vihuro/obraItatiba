@@ -8,9 +8,9 @@
   }
   
   .card {
-    width: 350px;
-    height: 70px;
     background-color: white;
+    min-width: 375px;
+    min-height: 80px;
     display: grid;
     grid-template-columns:.8fr 2fr .2fr;
     grid-template-rows: 1fr;

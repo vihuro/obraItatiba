@@ -4,7 +4,6 @@ const NotasTHR = ({
     data
 }) => {
 
-    console.log(data)
 
 
     return (

@@ -5,18 +5,36 @@ import style from "./style.module.css";
 import Navbar from "../../components/ui/navBar/NavBar"
 import NotasTHR from "../../components/ui/card/Notas/thr/Notas";
 import api from "../../api/apiObraItatiba";
+import NotasObra from "../../components/ui/tabela/notas/obra/NotasObra";
 
 const Notas = () => {
     const navigation = useRouter();
     const [data, setData] = useState([]);
+    const [time, setTime] = useState(new Date());
 
 
     useEffect(() =>{
         api.get("/notas")
-        .then(res => {console.log(res),setData(res.data)})
+        .then(res => {setData(res.data)})
         .catch(err => console.log(err))
 
     },[])
+    useEffect(() =>{
+        // const tick = setInterval(() => {
+        //     console.log(time)
+        //     CarregarData();
+        //     setTime(new Date());
+        // }, 10000);
+        // return () => clearInterval(tick);
+
+    },[])
+
+    function CarregarData(){
+        api.get("/notas")
+        .then(res => {setData(res.data)})
+        .catch(err => console.log(err))
+
+    }
 
 
     return (
@@ -28,14 +46,17 @@ const Notas = () => {
                     </div>
                     <div className={style.card_filtro} >
                         filtro
-                        
                     </div>
+
                     <div className={style.card_notas}>
-                        {data &&(
+                        <NotasObra 
+                        data={data}
+                        />
+                        {/* {data &&(
                             data.map((item,index) => {
                                 return <NotasTHR key={index} data={item}/>
                             })
-                        )}
+                        )} */}
                     </div>
                 </div>
 
