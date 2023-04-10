@@ -118,6 +118,7 @@ function Home() {
                                 <div className={style.wrapButton}>
                                     <Button
                                         action={() => {
+                                            setLoad(true);
                                             //navigation.push("/menu")
                                             Logar()
                                         }}

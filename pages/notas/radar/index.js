@@ -3,9 +3,10 @@ import api from '../../../api/apiObraItatiba';
 import style from "./index.module.css";
 import Card from "../../../components/ui/card/Notas/CardNota"
 import NavBar from "../../../components/ui/navBar/NavBar";
+import { setCookie, parseCookies } from "nookies";
 
 
-const Notas = () => {
+const NotasRadar = () => {
     const [notas, setNotas] = useState(null);
     const [time, setTime] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -53,10 +54,26 @@ const Notas = () => {
         </div>
 
     )
-
-
-
-
 }
 
-export default Notas
+export default NotasRadar
+
+export const getServerSideProps = (context) => {
+    const url = parseCookies(context).OBRA_THR;
+    const token = parseCookies(context).TOKEN_OBRA;
+
+    if (!token) {
+        console.log(context.resolvedUrl)
+        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl))
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            },
+            props: {}
+        }
+
+    }
+
+    return { props: {} }
+}

@@ -47,7 +47,7 @@ const Notas = () => {
 
 export default Notas
 
-export const getServerSideProps = (context) => {
+export const getInitialProps = (context) => {
     const url = parseCookies(context).OBRA_THR;
     const token = parseCookies(context).TOKEN_OBRA;
 

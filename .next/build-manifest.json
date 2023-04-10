@@ -29,6 +29,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/notas.js"
+    ],
+    "/notas/radar": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/notas/radar.js"
     ]
   },
   "ampFirstPages": []
