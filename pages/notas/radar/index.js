@@ -1,52 +1,93 @@
 import React, { useState, useEffect } from "react"
 import api from '../../../api/apiObraItatiba';
 import style from "./index.module.css";
-import Card from "../../../components/ui/card/Notas/CardNota"
+import Card from "../../../components/ui/card/Notas/CardNota";
 import NavBar from "../../../components/ui/navBar/NavBar";
 import { setCookie, parseCookies } from "nookies";
+import Loader from "../../../components/ui/Load/RingLoader";
+import Modal from "../../../components/ui/card/modal/Modal";
 
 
 const NotasRadar = () => {
     const [notas, setNotas] = useState(null);
     const [time, setTime] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [infoMessage, setInfoMessage] = useState({
+        "type": "",
+        "message": ""
+    });
+    const [visibleMessage, setVisibleMessage] = useState(false);
 
 
     useEffect(() => {
         setLoading(true)
 
-        const fecthData = () => {
-            
-            api.get("notas/radar")
-                .then(res => setNotas(res.data))
-                .catch(err => console.log(err));
-            api.get("time")
-                .then(res => { 
+        const fecthData = async () => {
+
+            await api.get("notas/radar")
+                .then(res =>{ 
+                    MontarTabela({data : res.data}),
+                    setNotas(res.data)})
+                .catch(err => {
+                    if (err.response) {
+                        setInfoMessage({ type: "warning", message: err.data.message })
+                    } else if (err.message) {
+                        setInfoMessage({ type: "error", message: err.message })
+                    }
+                    else {
+                        setInfoMessage({ type: "error", message: err })
+
+                    }
+                    setVisibleMessage(true)
+                }
+                )
+            await api.get("time")
+                .then(res => {
                     setTime(res.data)
                     setLoading(false)
                 })
                 .catch(err => console.log(err))
+                .finally(() => setLoading(false))
         }
         fecthData()
     }, []);
-    
+
+    function MontarTabela({
+        data
+    }){
+        for(var i = 0; i < data.length; i++){
+            console.log(data[i]["numeroNota"])
+        }
+    }
+
     return (
-        loading ? <div>carregando...</div> :
         <div className={style.body}>
             <div className={style.container}>
                 <NavBar />
                 <div className={style.containerCards} >
-                    {time && notas && (
-                        notas.map((item, index) => {
-                            return (
-                                <Card key={index}
-                                    data={item}
-                                    dataIndex={index}
-                                    dataTimes={time}
-                                />
-                            )
-                        })
-                    )}
+                    {visibleMessage ? 
+                        <Modal
+                        mensagem={infoMessage.message}
+                        type={infoMessage.type}
+                        visible={setVisibleMessage}
+                        /> 
+                        : null}
+
+                    {loading ? <Loader /> :
+                        time && notas && (
+                            notas.map((item, index) => {
+                                return (
+                                    <Card key={index}
+                                        data={item}
+                                        dataIndex={index}
+                                        dataTimes={time}
+                                    />
+                                )
+                            })
+                        )
+                    }
+
+
 
                 </div>
 
@@ -63,8 +104,8 @@ export const getServerSideProps = (context) => {
     const token = parseCookies(context).TOKEN_OBRA;
 
     if (!token) {
-        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl),{
-            path:"/"
+        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl), {
+            path: "/"
         })
         return {
             redirect: {

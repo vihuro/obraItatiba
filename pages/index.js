@@ -41,13 +41,15 @@ function Home() {
                 Navegar()
             })
             .catch(err => {
-                setInfoMessage({ message: err.response.data, type: "warning" },
-                    setToogleModal(true))
+                if(err.response){
+                    setInfoMessage({ message: err.response.data, type: "warning" });
+                }else{
+                    setInfoMessage({message:err.message,type:"error"})
+                }
+                setToogleModal(true)
+
             })
-            .catch(err => {
-                setInfoMessage({ message: "Erro inesperado!", type: "error" }),
-                    setToogleModal(true)
-            })
+
             .finally(() => setLoad(false))
     }
 

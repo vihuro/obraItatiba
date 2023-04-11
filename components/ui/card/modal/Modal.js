@@ -10,7 +10,6 @@ const Modal = ({
     type,
     visible
 }) => {
-    console.log(mensagem)
 
     const cor = type === "warning" ? "#F1D900": type === "error" ? "#FF0000" : type === "sucess" ?"#00F114" : "#FF0000";
 
