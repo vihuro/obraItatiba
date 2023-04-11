@@ -16,6 +16,7 @@ const NotasObra = ({
     useEffect(() => {
         setWidth(window.outerWidth)
     }, [width])
+    console.log(width)
 
 
     return (
