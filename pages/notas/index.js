@@ -1,25 +1,35 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { setCookie, parseCookies } from "nookies";
 import style from "./style.module.css";
 import Navbar from "../../components/ui/navBar/NavBar"
-import NotasTHR from "../../components/ui/card/Notas/thr/Notas";
 import api from "../../api/apiObraItatiba";
 import NotasObra from "../../components/ui/tabela/notas/obra/NotasObra";
+import Loader from "../../components/ui/Load/RingLoader";
+import Modal from "../../components/ui/card/modal/Modal";
 
 const Notas = () => {
     const navigation = useRouter();
     const [data, setData] = useState([]);
     const [time, setTime] = useState(new Date());
+    const [loading, setLoading] = useState(true);
+    const [infoMessage, setInfoMessage] = useState({
+        "message": "",
+        "type": ""
+    });
+    const [visibleMessage, setVisibleMessage] = useState(false) 
 
 
-    useEffect(() =>{
+    useEffect(() => {
         api.get("/notas")
-        .then(res => {setData(res.data)})
-        .catch(err => console.log(err))
+            .then(res => { setData(res.data) })
+            .catch(err => setInfoMessage({type:"error",message:err.message}))
+            .catch(err => {setInfoMessage({type:"warning",message:err.response.data})})
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false));
 
-    },[])
-    useEffect(() =>{
+    }, [])
+    useEffect(() => {
         // const tick = setInterval(() => {
         //     console.log(time)
         //     CarregarData();
@@ -27,12 +37,12 @@ const Notas = () => {
         // }, 10000);
         // return () => clearInterval(tick);
 
-    },[])
+    }, [])
 
-    function CarregarData(){
+    function CarregarData() {
         api.get("/notas")
-        .then(res => {setData(res.data)})
-        .catch(err => console.log(err))
+            .then(res => { setData(res.data) })
+            .catch(err => console.log(err))
 
     }
 
@@ -42,6 +52,11 @@ const Notas = () => {
             <div className={style.container} >
                 <Navbar />
                 <div className={style.wrap_container} >
+                    <Modal 
+                    mensagem={infoMessage.message}
+                    type={infoMessage.type}
+                    visible={setVisibleMessage}
+                    />
                     <div className={style.container_filtro} >
                     </div>
                     <div className={style.card_filtro} >
@@ -49,14 +64,10 @@ const Notas = () => {
                     </div>
 
                     <div className={style.card_notas}>
-                        <NotasObra 
-                        data={data}
-                        />
-                        {/* {data &&(
-                            data.map((item,index) => {
-                                return <NotasTHR key={index} data={item}/>
-                            })
-                        )} */}
+                        {loading? <Loader /> : <NotasObra
+                            data={data}
+                        /> }
+
                     </div>
                 </div>
 
@@ -68,7 +79,7 @@ const Notas = () => {
 
 export default Notas
 
-export const getInitialProps = (context) => {
+export const getServerSideProps = (context) => {
     const url = parseCookies(context).OBRA_THR;
     const token = parseCookies(context).TOKEN_OBRA;
 

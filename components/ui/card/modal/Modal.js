@@ -10,8 +10,9 @@ const Modal = ({
     type,
     visible
 }) => {
+    console.log(mensagem)
 
-    const cor = type === "warning" ? "#F1D900": type === "error" ? "#FF0000" : type === "sucess" ?"#00F114" : null;
+    const cor = type === "warning" ? "#F1D900": type === "error" ? "#FF0000" : type === "sucess" ?"#00F114" : "#FF0000";
 
     return (
         <div className={style.container} >
@@ -32,6 +33,7 @@ const Modal = ({
                                     size={50}
                                     color={cor}
                                 />
+
                     }
                 </div>
                 <div className={`${style.containerBody} ${

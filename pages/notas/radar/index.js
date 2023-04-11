@@ -63,8 +63,9 @@ export const getServerSideProps = (context) => {
     const token = parseCookies(context).TOKEN_OBRA;
 
     if (!token) {
-        console.log(context.resolvedUrl)
-        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl))
+        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl),{
+            path:"/"
+        })
         return {
             redirect: {
                 destination: "/",
@@ -76,4 +77,5 @@ export const getServerSideProps = (context) => {
     }
 
     return { props: {} }
+
 }

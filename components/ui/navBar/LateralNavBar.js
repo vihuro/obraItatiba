@@ -44,9 +44,15 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                                 </div>
                                 <div className={style.container_sub_menu}  >
                                     <p
-                                    onClick={() =>
-                                    navigation.push("/notas")}
+                                        onClick={() =>
+                                            navigation.push("/notas")}
                                     >THR</p>
+                                </div>
+                                <div className={style.container_sub_menu}  >
+                                    <p
+                                        onClick={() =>
+                                            navigation.push("/notas/dash/time")}
+                                    >DASH (NOTAS/TIME)</p>
                                 </div>
 
 
@@ -71,7 +77,7 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                     </div>
                     <div className={style.containerBottao_Sair}
                         onClick={() => {
-                        destroyCookie(null,"TOKEN_OBRA")
+                            destroyCookie(null, "TOKEN_OBRA")
                             navigation.push("/")
                         }}
                     >

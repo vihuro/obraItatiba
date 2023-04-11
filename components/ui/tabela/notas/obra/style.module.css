@@ -1,10 +1,9 @@
 .table_wrapper{
-    max-height: 700px;
     overflow: auto;
+    height: 900px;
 }
 
 .body_table{
-    background-color: rgb(226, 40, 40);
     border-collapse: collapse;
     border: 1px solid black;
     overflow: scroll;
@@ -14,10 +13,11 @@
     background-color: rgb(24, 0, 236);
     color: white;
     position: sticky;
-    top: 0;
+    top: -2px;
 }
 
-.body_table td, .body_table th{
+.body_table td, 
+.body_table th{
     border: 1px solid black;
 }
 
@@ -25,33 +25,65 @@
 
 .table_row {
     border: 1px solid black;
-    padding: 20px;
     align-items: center;
     text-align: center;
+    color: rgb(66, 65, 65);
 }
 
 .table_row td, .body_table th{
-    padding: 20px;
+    padding: 30px;
     
 }
 
-@media(max-height:768px){
+@media(max-height:1036px){
     .table_wrapper{
-        height: 750px;
         overflow: auto;
+        height: 700px;
     }
+
 }
-@media(max-height:1150px){
+
+@media(max-height:770px){
     .table_wrapper{
-        height: 1850px;
         overflow: auto;
+        height: 520px;
     }
+    .body_table{
+        border-collapse: collapse;
+        border: 1px solid black;
+        overflow: scroll;
+    }
+
+    .table_row td, 
+    .body_table th{
+        padding: 7px;
+        font-size: 12px;
+        
+    }
+    
 }
-@media(max-height:1080px){
+
+
+@media(max-height:770px){
     .table_wrapper{
-        height: 1050px;
         overflow: auto;
+        height: 560px;
     }
+    .body_table{
+        border-collapse: collapse;
+        border: 1px solid black;
+        overflow: scroll;
+        width: 100%;
+    }
+
+    .table_row td, .body_table th{
+        padding: 15px;
+        font-size: 14px;
+        
+    }
+    
 }
+
+
 
 

@@ -6,14 +6,17 @@ import { parseCookies } from "nookies";
 
 const TopBar = ({ onToggleNav, onClose }) => {
 
-    const[usuario, setUsuario] = useState("");
+    const [usuario, setUsuario] = useState("");
 
-    useEffect(() =>{
+    useEffect(() => {
         const token = parseCookies().TOKEN_OBRA;
         const infoUsuario = TokenDecriptor(token)
-        setUsuario(infoUsuario.Nome)
+        if (infoUsuario) {
+            setUsuario(infoUsuario.Nome)
 
-    },[])
+        }
+
+    }, [])
 
     return (
         <div className={style.topBar} >

@@ -1,7 +1,11 @@
 const TokenDecriptor = (token) => {
-    const tokenDescription = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    if (token) {
+        const tokenDescription = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
 
-    return tokenDescription;
+        return tokenDescription;
+
+    }
+
 
 }
 
