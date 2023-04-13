@@ -3,14 +3,15 @@ import style from "./cardNota.module.css";
 import { BiAddToQueue } from "react-icons/Bi"
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md"
 import Documento from "./Documento";
-import AdicionarNota from "./AdicicionarNota";
+import AdicicionarNotaRadar from "./AdicicionarNotaRadar";
+import DateString from "../../../../service/DateString";
 
 const CardNotas = ({
     data,
     dataIndex,
     dataTimes
-    
-    }) => {
+
+}) => {
 
 
     const [notas, setNotas] = useState(null);
@@ -30,10 +31,10 @@ const CardNotas = ({
         if (dataTimes) {
 
             setListTimes(prev => {
-                const newItem = dataTimes.map(item => ({Id: item.timeId, Value: item.time}));
+                const newItem = dataTimes.map(item => ({ Id: item.timeId, Value: item.time }));
                 return [...prev, ...newItem];
             })
-            
+
         }
 
     }
@@ -66,6 +67,7 @@ const CardNotas = ({
                         </p>
                     </div>
                     <div className={style.row}>
+
                         <p>
                             Fornecedor : {data.fornecedor}
                         </p>
@@ -73,11 +75,6 @@ const CardNotas = ({
                     <div className={style.row}>
                         <p>
                             Descrição do Serviço : {data.descricaoProdutoServico}
-                        </p>
-                    </div>
-                    <div className={style.row}>
-                        <p>
-                            Tipo de Serviço : {data.produtoServico}
                         </p>
                     </div>
                 </div>
@@ -111,29 +108,38 @@ const CardNotas = ({
                     </div>
                     <div className={style.row} style={{ textAlign: 'left', justifyItems: 'initial', display: 'flex', justifyContent: 'flex-start' }}>
                         <div className={style.cardDocumento}>
-
                             <div className={style.documentos} onClick={() => setCardDocumentos(true)}>
                                 <p style={{ fontSize: 12, marginLeft: 8 }}>
-                                    Documentos
+                                    Parcelas
                                 </p>
                                 <div className={style.quantidadeDocumentos}>
                                     <p >
-                                        {data.numeroDocumento.length}
+                                        {data.parcelas.length}
                                     </p>
-
+                                </div>
+                                <div className={style.produtoServico} onClick={() => setCardDocumentos(true)}>
+                                    <p style={{ fontSize: 12, marginLeft:-25 }}>
+                                        Prod/Serv.
+                                    </p>
+                                    <div className={style.quantidadeDocumentos}>
+                                        <p >
+                                            {data.produtoServico.length}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 {cardDocumento && (
                     <Documento
-                        documento={data.numeroDocumento}
+                        documento={data.parcelas}
                         visible={setCardDocumentos}
                     />
                 )}
                 {cardNovaNota && (
-                    <AdicionarNota
+                    <AdicicionarNotaRadar
                         visible={setCarNovaNota}
                         data={data}
                         dataTimes={listTimes}

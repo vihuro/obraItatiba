@@ -84,6 +84,9 @@
     display: flex;
     width: 100px;
     margin-left: 0px;
+    height: 60px;
+    justify-content: space-between;
+
 }
 
 .documentos{
@@ -92,15 +95,29 @@
     background-color: rgb(144, 247, 144, .8);
     border-radius: 7px;
     justify-content: center;
-    align-items: flex-start;
     align-items: center;
     display: grid;
     text-align: left;
+    margin-top: 10px;
+}
+.produtoServico{
+    width: 100px;
+    height: 20px;
+    background-color: rgb(144, 247, 144, .8);
+    border-radius: 7px;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    text-align: left;
+    margin-top: 10px;
+
 }
 
-.documentos p{
+.documentos p,
+.produtoServico p{
     color: rgb(107, 107, 107);
     font-weight: 500;
+    
 }
 .documentos:hover{
     cursor: pointer;
@@ -111,9 +128,10 @@
     height: 15px;
     border-radius: calc(15px / 2);
     background-color: rgb(247, 48, 48);
-    margin-left: 79px;
     margin-top: -28px;
     display: flex;
+    position: relative;
+    left: 40px;
     align-items: center;
     justify-content: center;
     justify-self: center;

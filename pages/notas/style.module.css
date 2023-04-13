@@ -28,6 +28,12 @@
     grid-area: 1 / 1 / 2 / 13; 
     width: 100%;
 }
+
+.container_button{
+    width: 200px;
+    height: 40px;
+    margin: 20px;
+}
 .card_filtro{
     grid-area: 1 / 2 / 2 / 13;
     width: 100%;

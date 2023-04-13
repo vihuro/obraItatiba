@@ -17,6 +17,15 @@
 
 }
 
+.container ::-webkit-scrollbar{
+    width: 8px;
+
+}
+.container ::-webkit-scrollbar-thumb{
+    background-color: rgb(51, 51, 51);
+    border-radius: 5px;
+}
+
 .containerCards{
     width: 100%;
     height: calc(100vh - 100px);

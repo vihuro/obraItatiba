@@ -7,6 +7,8 @@ import api from "../../api/apiObraItatiba";
 import NotasObra from "../../components/ui/tabela/notas/obra/NotasObra";
 import Loader from "../../components/ui/Load/RingLoader";
 import Modal from "../../components/ui/card/modal/Modal";
+import Button from "../../components/ui/button/ButtonUi";
+import AdicionarNota from "../../components/ui/card/Notas/thr/AdicionarNotaManual";
 
 const Notas = () => {
     const navigation = useRouter();
@@ -52,15 +54,24 @@ const Notas = () => {
             <div className={style.container} >
                 <Navbar />
                 <div className={style.wrap_container} >
-                    <Modal 
+                    <AdicionarNota />
+                    {/* <Modal 
                     mensagem={infoMessage.message}
                     type={infoMessage.type}
                     visible={setVisibleMessage}
-                    />
+                    /> */}
                     <div className={style.container_filtro} >
                     </div>
                     <div className={style.card_filtro} >
-                        filtro
+                        <div className={style.container_button} >
+                            <Button 
+                            action={() =>{}}
+                            text={"NOVA NOTA"}
+                            theme={"borderder-green"}
+                            />
+
+                        </div>
+                        
                     </div>
 
                     <div className={style.card_notas}>

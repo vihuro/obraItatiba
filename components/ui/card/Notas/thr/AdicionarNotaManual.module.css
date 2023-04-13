@@ -1,0 +1,122 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(144, 144, 144, 0.5);
+    z-index: 901;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card {
+    width: 800px;
+    height: 630px;
+    background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+    border-radius: 7px;
+    overflow: auto;
+    box-shadow: 7px 10px 20px 1px rgb(48, 94, 221, 0.5);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: 100px repeat(4, 1fr) repeat(2, 80px) repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.container_title {
+    grid-area: 1 / 1 / 2 / 11;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+.container_title h2{
+    font-weight: 300;
+}
+.container_title h2::before{
+    content: "";
+    position: absolute;
+    width: 23%;
+    margin-top: 35px;
+    height: 1px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.container_primeiraLinha {
+    grid-area: 2 / 1 / 3 / 11;
+    width: 100%;
+    padding: 10px;
+}
+
+.wrapRow{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wrapRow input{
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+.column{
+    width: 100%;
+}
+
+.container_segundaLinha {
+    grid-area: 3 / 1 / 4 / 11;
+    width: 100%;
+    padding: 10px;
+}
+.input_large{
+    width: 95%;
+}
+
+.container_terceiraLinha {
+    grid-area: 4 / 1 / 5 / 11;
+    width: 100%;
+    padding: 10px;
+}
+
+.row_comboBox{
+    padding: 10px;
+    width: 70%;
+    
+}
+
+.container_quartaLinha {
+    grid-area: 5 / 1 / 6 / 11;
+    width: 100%;
+}
+
+.container_produto_servico {
+    grid-area: 6 / 1 / 8 / 7;
+    width: 100%;
+}
+
+.container_produto_servico_adicionar {
+    grid-area: 6 / 7 / 8 / 11;
+    width: 100%;
+}
+
+.container_button {
+    grid-area: 8 / 1 / 10 / 11;
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+
+.wrap_container_button{
+    width: 250px;
+    height: 40px;
+}

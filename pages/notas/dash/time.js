@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./time.module.css";
 import api from "../../../api/apiObraItatiba";
+import {parseCookies,setCookie}from "nookies"
 
 const DashNotasPorTime = () => {
     const [data, setData] = useState([]);
