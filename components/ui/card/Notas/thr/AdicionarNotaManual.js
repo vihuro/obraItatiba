@@ -15,6 +15,27 @@ const AdicionarNota = ({
     const [dataTime, setDataTime] = useState([]);
     const [comboBoxTime, setComboBoxTime] = useState(true);
     const [valueTime, setValueTime] = useState();
+    const [listAutorizador, setlistAutorizador] = useState([
+        {
+            "Id": 1, "Value": "ROBERTO"
+        },
+        {
+            "Id": 2, "Value": "BRUNO"
+        },
+        {
+            "Id": 3, "Value": "TETSUO"
+        },
+        {
+            "Id": 4, "Value": "HELENA"
+        },
+        {
+            "Id": 5, "Value": "TOMIKO"
+        },
+        {
+            "Id": 6, "Value": "WAGNER"
+        },
+    ]);
+    const [visibleAutorizador, setVisibleAutorizador] = useState(false);
 
     useEffect(() => {
         async function times() {
@@ -24,6 +45,7 @@ const AdicionarNota = ({
         }
         times();
     }, [])
+    console.log(valueTime)
 
     return (
         <div className={style.container} >
@@ -100,10 +122,10 @@ const AdicionarNota = ({
                                 Autorizador:
                             </h5>
                             <ComboBox
-                                data={dataTime}
+                                data={listAutorizador}
                                 placeHolder={"Selecione o autorizador..."}
-                                changeVisible={setComboBoxTime}
-                                valueVisible={comboBoxTime}
+                                changeVisible={setVisibleAutorizador}
+                                valueVisible={visibleAutorizador}
                                 value={valueTime}
                             />
                         </div>
