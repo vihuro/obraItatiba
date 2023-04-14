@@ -16,7 +16,9 @@ const ComboBox = ({
     useEffect(() => {
         setList(data);
     }, [])
+    
     return (
+        data ? 
         <div
             onClick={e => e.stopPropagation()}
             style={{ width: width }}
@@ -75,7 +77,7 @@ const ComboBox = ({
                             )
                         )} */}
 
-        </div>
+        </div>:null
     )
 }
 

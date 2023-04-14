@@ -19,14 +19,14 @@ const Notas = () => {
         "message": "",
         "type": ""
     });
-    const [visibleMessage, setVisibleMessage] = useState(false) 
+    const [visibleMessage, setVisibleMessage] = useState(false)
 
 
     useEffect(() => {
         api.get("/notas")
             .then(res => { setData(res.data) })
-            .catch(err => setInfoMessage({type:"error",message:err.message}))
-            .catch(err => {setInfoMessage({type:"warning",message:err.response.data})})
+            .catch(err => setInfoMessage({ type: "error", message: err.message }))
+            .catch(err => { setInfoMessage({ type: "warning", message: err.response.data }) })
             .catch(err => console.log(err))
             .finally(() => setLoading(false));
 
@@ -64,20 +64,21 @@ const Notas = () => {
                     </div>
                     <div className={style.card_filtro} >
                         <div className={style.container_button} >
-                            <Button 
-                            action={() =>{}}
-                            text={"NOVA NOTA"}
-                            theme={"borderder-green"}
+                            <Button
+                                action={() => { }}
+                                text={"NOVA NOTA"}
+                                theme={"borderder-green"}
                             />
 
                         </div>
-                        
+
                     </div>
 
                     <div className={style.card_notas}>
-                        {loading? <Loader /> : <NotasObra
-                            data={data}
-                        /> }
+                        {loading ? <Loader /> :
+                            <NotasObra
+                                data={data}
+                            />}
 
                     </div>
                 </div>
