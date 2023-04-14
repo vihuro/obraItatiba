@@ -24,7 +24,7 @@ const AdicionarNota = ({
         "parcelas": [],
         "produtoServico": []
 
-    })
+    });
     const [dataTime, setDataTime] = useState([]);
     const [listAutorizador, setlistAutorizador] = useState([
         {
@@ -46,12 +46,17 @@ const AdicionarNota = ({
             "Id": 6, "Value": "WAGNER"
         },
     ]);
-    const [valueAutorizador, setValueAutorizador] = useState();
-    const [valueTime, setValueTime] = useState();
+    const [valueAutorizador, setValueAutorizador] = useState({
+        "id": 0,
+        "value": ""
+    });
+    const [valueTime, setValueTime] = useState({
+        "id": 0,
+        "value": ""
+    });
     const [visibleAutorizador, setVisibleAutorizador] = useState(false);
     const [visibleTime, setVisibleTime] = useState(false);
-    const [listProdutoServico, setListProdutoServico] = useState([])
-
+    const [listProdutoServico, setListProdutoServico] = useState([]);
 
     useEffect(() => {
         function times() {
@@ -68,14 +73,12 @@ const AdicionarNota = ({
         const list = times.map(item => ({ Id: item.timeId, Value: item.time }));
         setDataTime(list);
     }
-    function formatCNPJ(cnpj) {
-
-        if (!cnpj) return "";
-        const formart = cnpj.replace(/\D/g, "");
-        return formart.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+    function CadastarNota() {
+        const obj = { ...nota, timeId: valueTime.id, autorizador: valueAutorizador.value };
+        console.log(obj)
     }
 
-    const [valorNota, setValorNota] = useState(2.20);
+    const [valorNota, setValorNota] = useState(0);
 
 
     return (
@@ -103,45 +106,44 @@ const AdicionarNota = ({
                             <h5>
                                 Valor:
                             </h5>
-                            <input
-                                value={ parseFloat(valorNota).toLocaleString("pt-Br")}
-                                onChange={e => {
-                                    const re = /^[0-9]+([,][0-9]{0,2})?$/;
-                                    const value = e.target.value
-                                    const valueLimpo = value.replaceAll(".",""). replace(",",".").toLocaleString("pt-Br");
-                                    console.log("value limpo = " + valueLimpo)
-                                    if (re.test(valueLimpo)) {
-                                        // console.log("salvar valor = " + parseFloat(e.target.value.replace(",", ".")))
-                                        // console.log("valor bruto = " + valueLimpo)
-                                        console.log("visualização = " + value)
-                                        // console.log("voltando valor bruto = " + valueLimpo.toLocaleString("pt-Br"))
-                                        console.log("==================================================================================")
-                                        console.log(valueLimpo.replace(".",","))
-                                        setValorNota(valueLimpo.replace(".", ","))
-                                        setnota({ ...nota, valorTotalNota: parseFloat(e.target.value.replace(",", ".")) })
-
-                                    }
-
-                                }}
-                            />
                             {/* <input
-
-                                value={valorNota.toLocaleString("pt-Br")}
+                                value={nota.valorTotalNota.toLocaleString("pt-Br")}
                                 onChange={e => {
-                                    const re = /^[0-9]+([,][0-9]{0,2})?$/;
-                                    const value =  e.target.value
-                                    if (re.test(value)) {
-                                        console.log("salvar valor = " + parseFloat(e.target.value.replace(",", ".")))
-                                        console.log("valor bruto = " + value)
-                                        console.log("visualização = " + parseFloat(value.replace(",", ".")).toLocaleString("pt-Br"))
-                                        console.log("voltando valor bruto = " + value.toLocaleString("pt-Br"))
-                                        setValorNota(value.replace(".", ","))
-                                        setnota({ ...nota, valorTotalNota: parseFloat(e.target.value.replace(",", ".")) })
+                                    const re = /^[0-9]+([,.][0-9]{0,2})?$/;
+                                    const value = e.target.value
+                                    const valueLimpo = value.replaceAll(".", '').replace(',', '.');
+                                    if (re.test(valueLimpo.replace(".",""))) {
+                                        console.log("aperar virugla e entrar aqui")
+                                        let teste = valueLimpo.replace(",",".")
+                                        const posicaoVirgula = teste.indexOf(".")
+                                        if(posicaoVirgula !== -1 && teste.length - posicaoVirgula <=3){
+                                            console.log("valor de teste = " +teste)
+                                            teste += 0
+                                            console.log("tem virgula  " + (teste +=0))
+                                        }
+                                        console.log(posicaoVirgula)
+
+                                        console.log("aqui é o que vai ser salvo = " + teste)
+                                        setnota({ ...nota, valorTotalNota: teste })
 
                                     }
 
                                 }}
                             /> */}
+                            <input
+
+                                value={valorNota.toLocaleString("pt-Br")}
+                                onChange={e => {
+                                    const re = /^[0-9]+([,][0-9]{0,2})?$/;
+                                    const value = e.target.value
+                                    if (re.test(value)) {
+                                        setValorNota(value.replace(".", ","))
+                                        setnota({ ...nota, valorTotalNota: parseFloat(value.replace(",", ".")).toLocaleString("pt-Br") })
+
+                                    }
+
+                                }}
+                            />
 
                             {/* <input
                             value={valorNota}
@@ -177,13 +179,6 @@ const AdicionarNota = ({
                                     cnpj: e.target.value.replace(/[^\d]+/g, '')
                                 })}
                             />
-                            {/* <input
-                                value={nota.cnpj}
-                                maxLength={14}
-                                
-                                onChange={(e) => {
-                                    setnota({ ...nota, cnpj: (CNPJInput(e)) })
-                                }} /> */}
                         </div>
                     </div>
                 </div>
@@ -253,7 +248,7 @@ const AdicionarNota = ({
                 <div className={style.container_button} >
                     <div className={style.wrap_container_button} >
                         <Button
-                            action={() => { console.log(nota) }}
+                            action={() => { CadastarNota() }}
                             text={"ADICIONAR"}
                             theme={"borderder-green"}
                         />
