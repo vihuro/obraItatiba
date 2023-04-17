@@ -81,7 +81,6 @@
 
 
 .cardDocumento{
-    display: flex;
     width: 100px;
     margin-left: 0px;
     height: 60px;
@@ -94,8 +93,6 @@
     height: 20px;
     background-color: rgb(144, 247, 144, .8);
     border-radius: 7px;
-    justify-content: center;
-    align-items: center;
     display: grid;
     text-align: left;
     margin-top: 10px;

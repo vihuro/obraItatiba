@@ -63,7 +63,8 @@
     align-items: center;
     justify-content: space-between;
 }
-.wrapRow input{
+.wrapRow input,
+.column input{
     margin-top: 10px;
     padding: 8px;
     border: none;
@@ -104,13 +105,61 @@
 }
 
 .container_produto_servico {
-    grid-area: 6 / 1 / 8 / 7;
+    grid-area: 6 / 1 / 8 / 6;
     width: 100%;
+    display: grid;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px;
+
+
+}
+
+.wrap_produto_servico{
+    border: 1px solid rgb(84, 84, 84,.5);
+    border-radius: 7px;
+    width: 380px;
+    height: 150px;
+    overflow-y: auto;
+}
+.container_title{
+    display: flex;
+}
+
+.wrap_row{
+    margin-top: 7px;
+    width: 100%;
+    display: flex;
+}
+
+.row{
+    width: 100px;
+}
+
+.row_button{
+    width: 40px;
+}
+
+.container_row{
+    width: 100px;
 }
 
 .container_produto_servico_adicionar {
-    grid-area: 6 / 7 / 8 / 11;
+    grid-area: 6 / 6 / 8 / 11;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    padding: 15px;
+}
+
+.container_button_produto_servico{
+    width: 200px;
+    height: 35px;
+    margin-right: 80px;
+    margin-top: 15px;
+
 }
 
 .container_button {
@@ -124,3 +173,4 @@
     width: 250px;
     height: 40px;
 }
+

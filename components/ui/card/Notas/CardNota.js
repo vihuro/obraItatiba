@@ -5,18 +5,20 @@ import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md"
 import Documento from "./Documento";
 import AdicicionarNotaRadar from "./AdicicionarNotaRadar";
 import DateString from "../../../../service/DateString";
+import ProdutoServico from "./ProdutoServico";
 
 const CardNotas = ({
     data,
     dataIndex,
-    dataTimes
-
+    dataTimes,
+    refresh
 }) => {
 
 
     const [notas, setNotas] = useState(null);
     const [index, setIndex] = useState(null);
     const [cardDocumento, setCardDocumentos] = useState(false);
+    const [cardProdutoServico, setCardProdutoServico] = useState(false);
     const [visibleValue, setVisibleValue] = useState(false);
     const [cardNovaNota, setCarNovaNota] = useState(false);
     const [listTimes, setListTimes] = useState([])
@@ -108,7 +110,7 @@ const CardNotas = ({
                     </div>
                     <div className={style.row} style={{ textAlign: 'left', justifyItems: 'initial', display: 'flex', justifyContent: 'flex-start' }}>
                         <div className={style.cardDocumento}>
-                            <div className={style.documentos} onClick={() => setCardDocumentos(true)}>
+                            <div className={style.documentos} onClick={() => { setCardDocumentos(true) }}>
                                 <p style={{ fontSize: 12, marginLeft: 8 }}>
                                     Parcelas
                                 </p>
@@ -118,35 +120,43 @@ const CardNotas = ({
                                     </p>}
 
                                 </div>
-                                <div className={style.produtoServico} onClick={() => setCardDocumentos(true)}>
-                                    <p style={{ fontSize: 12, marginLeft: -25 }}>
-                                        Prod/Serv.
+
+                            </div>
+                            <div className={style.produtoServico} onClick={() => { setCardProdutoServico(true) }}>
+                                <p style={{ fontSize: 12, marginLeft: -25 }}>
+                                    Prod/Serv.
+                                </p>
+                                <div className={style.quantidadeDocumentos}>
+                                    <p >
+                                        {data.produtoServico.length}
                                     </p>
-                                    <div className={style.quantidadeDocumentos}>
-                                        <p >
-                                            {data.produtoServico.length}
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {cardDocumento && (
+                {cardDocumento &&
                     <Documento
                         documento={data.parcelas}
                         visible={setCardDocumentos}
                     />
+                }
+                {cardProdutoServico && (
+                    <ProdutoServico
+                        data={data.produtoServico}
+                        visible={setCardProdutoServico}
+                    />
                 )}
-                {cardNovaNota && (
+                {cardNovaNota &&
                     <AdicicionarNotaRadar
                         visible={setCarNovaNota}
                         data={data}
                         dataTimes={listTimes}
+                        refesh={refresh}
 
                     />
-                )}
+                }
             </div>
         </div>
     )

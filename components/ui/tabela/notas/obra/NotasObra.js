@@ -3,6 +3,7 @@ import style from "./style.module.css";
 import { FiEdit } from "react-icons/fi";
 import CardNota from "../../../card/Notas/thr/Notas";
 import Loader from "../../../Load/RingLoader";
+import FiltroNotasTHR from "../../../filter/notas/FiltroNotasTHR";
 
 const NotasObra = ({
     data
@@ -12,11 +13,18 @@ const NotasObra = ({
     const [valueNota, setValueNota] = useState(null);
     const [width, setWidth] = useState();
     const [loading, setLoading] = useState(true);
+    const [filter, setFilter] = useState();
+    const [visibleFilter, setVisibleFilter] = useState(false);
 
     useEffect(() => {
-        setWidth(window.outerWidth)
-    }, [width])
-    console.log(data)
+        setWidth(window.outerWidth);
+
+    }, [width]);
+
+    useEffect(() => {
+        data ? setFilter(data) : null;
+
+    });
 
 
     return (
@@ -25,6 +33,7 @@ const NotasObra = ({
                 <CardNota
                     data={valueNota}
                 /> : null}
+
             <table className={style.body_table} >
                 <thead>
                     <tr>
@@ -34,12 +43,13 @@ const NotasObra = ({
                         <th>VALOR NF</th>
                         <th>TIME</th>
                         {width > 770 ? <th>PARCELAS</th> : null}
+                        {width > 770 ? <th>Prod/Ser.</th> : null}
                         {width > 770 ? <th>EDIT</th> : null}
                     </tr>
                 </thead>
                 <tbody >
-                    {data && (
-                        data.map((item, index) =>
+                    {filter && (
+                        filter.map((item, index) =>
                             <tr key={index}
                                 className={style.table_row}
                             >
@@ -55,6 +65,7 @@ const NotasObra = ({
                                 <td>{item.valorTotalNota.toLocaleString("pt-BR")}</td>
                                 <td>{item.time}</td>
                                 {width > 770 ? <td>{item.parcelas.length}</td> : null}
+                                {width > 770 ? <td>{item.produtosServico.length}</td> : null}
                                 {width > 770 ? <td>
                                     <FiEdit size={25} color="blue" />
                                 </td>

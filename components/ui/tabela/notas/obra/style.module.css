@@ -38,7 +38,7 @@
 @media(max-height:1036px){
     .table_wrapper{
         overflow: auto;
-        height: 700px;
+        height: 680px;
     }
 
 }
@@ -67,7 +67,8 @@
 @media(max-height:770px){
     .table_wrapper{
         overflow: auto;
-        height: 560px;
+        height: 480px;
+        
     }
     .body_table{
         border-collapse: collapse;

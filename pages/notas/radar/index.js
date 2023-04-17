@@ -22,54 +22,52 @@ const NotasRadar = () => {
     useEffect(() => {
         setLoading(true)
 
-        const fecthData = async () => {
-
-            await api.get("notas/radar")
-                .then(res =>{ 
-                    MontarTabela({data : res.data}),
-                    setNotas(res.data)})
-                .catch(err => {
-                    if (err.response) {
-                        setInfoMessage({ type: "warning", message: err.data.message })
-                    } else if (err.message) {
-                        setInfoMessage({ type: "error", message: err.message })
-                    }
-                    else {
-                        setInfoMessage({ type: "error", message: err })
-
-                    }
-                    setVisibleMessage(true)
-                }
-                )
-            await api.get("time")
-                .then(res => {
-                    setTime(res.data)
-                    setLoading(false)
-                })
-                .catch(err => console.log(err))
-                .finally(() => setLoading(false))
-        }
-        fecthData()
+        FetchData();
+        api.get("time")
+            .then(res => {
+                setTime(res.data)
+                setLoading(false)
+            })
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
     }, []);
 
-    function MontarTabela({
-        data
-    }){
-        for(var i = 0; i < data.length; i++){
-        }
+    async function FetchData() {
+        await api.get("notas/radar/notsaved")
+            .then(res => {
+                console.log(res.data.length)
+                setNotas(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+                if (err.response.message) {
+                    setInfoMessage({ type: "warning", message: err.data.message })
+                } else if (err.message) {
+                    setInfoMessage({ type: "error", message: err.message })
+                }
+                else {
+                    setInfoMessage({ type: "error", message: err })
+
+                }
+                setVisibleMessage(true)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }
+
 
     return (
         <div className={style.body}>
             <div className={style.container}>
                 <NavBar />
                 <div className={style.containerCards} >
-                    {visibleMessage ? 
+                    {visibleMessage ?
                         <Modal
-                        mensagem={infoMessage.message}
-                        type={infoMessage.type}
-                        visible={setVisibleMessage}
-                        /> 
+                            mensagem={infoMessage.message}
+                            type={infoMessage.type}
+                            visible={setVisibleMessage}
+                        />
                         : null}
 
                     {loading ? <Loader /> :
@@ -80,6 +78,7 @@ const NotasRadar = () => {
                                         data={item}
                                         dataIndex={index}
                                         dataTimes={time}
+                                        refresh={FetchData}
                                     />
                                 )
                             })

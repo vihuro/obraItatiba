@@ -9,6 +9,7 @@ import Loader from "../../components/ui/Load/RingLoader";
 import Modal from "../../components/ui/card/modal/Modal";
 import Button from "../../components/ui/button/ButtonUi";
 import AdicionarNota from "../../components/ui/card/Notas/thr/AdicionarNotaManual";
+import FiltroNotasTHR from "../../components/ui/filter/notas/FiltroNotasTHR";
 
 const Notas = () => {
     const navigation = useRouter();
@@ -19,18 +20,24 @@ const Notas = () => {
         "message": "",
         "type": ""
     });
-    const [visibleMessage, setVisibleMessage] = useState(false)
+    const [visibleMessage, setVisibleMessage] = useState(false);
+    const [cardAdicionarNota, setCardAdicionarNota] = useState(false);
+    const [filter, setFilter] = useState();
+    const [visibleFilter, setVisibleFilter] = useState(false);
 
 
     useEffect(() => {
         api.get("/notas")
-            .then(res => { setData(res.data) })
+            .then(res => { CarregarData() })
             .catch(err => setInfoMessage({ type: "error", message: err.message }))
             .catch(err => { setInfoMessage({ type: "warning", message: err.response.data }) })
             .catch(err => console.log(err))
             .finally(() => setLoading(false));
 
     }, [])
+
+    console.log(filter)
+
     useEffect(() => {
         // const tick = setInterval(() => {
         //     console.log(time)
@@ -43,7 +50,7 @@ const Notas = () => {
 
     function CarregarData() {
         api.get("/notas")
-            .then(res => { setData(res.data) })
+            .then(res => { setFilter(res.data) })
             .catch(err => console.log(err))
 
     }
@@ -54,7 +61,22 @@ const Notas = () => {
             <div className={style.container} >
                 <Navbar />
                 <div className={style.wrap_container} >
-                    <AdicionarNota />
+                    {cardAdicionarNota &&
+                        <AdicionarNota
+                            functions={CarregarData}
+                            visible={cardAdicionarNota}
+                            changeVisible={setCardAdicionarNota}
+                        />
+                    }
+                    {visibleFilter &&
+                        <FiltroNotasTHR
+                            data={setFilter}
+                            changeVisible={setVisibleFilter}
+                            visible={visibleFilter}
+                            dataFilter={filter}
+                        />
+                    }
+
                     {/* <Modal 
                     mensagem={infoMessage.message}
                     type={infoMessage.type}
@@ -65,9 +87,17 @@ const Notas = () => {
                     <div className={style.card_filtro} >
                         <div className={style.container_button} >
                             <Button
-                                action={() => { }}
+                                action={() => { setCardAdicionarNota(true) }}
                                 text={"NOVA NOTA"}
                                 theme={"borderder-green"}
+                            />
+
+                        </div>
+                        <div className={style.container_button} >
+                            <Button
+                                action={() => { setVisibleFilter(true) }}
+                                text={"FILTRO"}
+                                theme={"borderder-blue"}
                             />
 
                         </div>
@@ -77,7 +107,7 @@ const Notas = () => {
                     <div className={style.card_notas}>
                         {loading ? <Loader /> :
                             <NotasObra
-                                data={data}
+                                data={filter}
                             />}
 
                     </div>

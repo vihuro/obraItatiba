@@ -16,7 +16,9 @@ import DateStingFormat from "../../../../service/DateString";
 const AdicionarNota = ({
     data,
     visible,
-    dataTimes, }) => {
+    dataTimes, 
+    refesh    
+}) => {
 
     const [nota, setNota] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -40,7 +42,6 @@ const AdicionarNota = ({
         "descricaoProdutoServico": data.descricaoProdutoServico,
         "avulsoFinalidade": "",
         "autorizador": "Bruno",
-        // "produtoServico": data.produtoServico,
         "usuarioCadastroId": 0,
         "timeId": 0,
         "tipoExportacao": "RADAR",
@@ -96,9 +97,15 @@ const AdicionarNota = ({
         const nota = { ...valueNota, timeId: valueTIme.id, autorizador: valueAutorizador.value }
 
         api.post("/notas", nota)
-            .then(res => { console.log("Deu um response ==============================="), setVisibleMessage(true), setInfoMessage({ message: "Cadastrado com sucesso!", type: "sucess" }) })
+            .then(res => { 
+                setVisibleMessage(true), 
+                setInfoMessage({ message: "Cadastrado com sucesso!", type: "sucess" }) 
+                refesh()
+            })
             .catch(err => {
+                console.log(err)
                 if (err.response.data) {
+                    
                     setInfoMessage({ message: err.response.data, type: "warning" })
                 } else {
                     setInfoMessage({ message: err, type: "warning" })
@@ -107,7 +114,9 @@ const AdicionarNota = ({
                 setVisibleMessage(true)
             })
 
-            .finally(() => setLoading(false))
+            .finally(() => {
+                setLoading(false)
+            })
 
 
     }
@@ -223,7 +232,6 @@ const AdicionarNota = ({
                                         placeHolder={"Selecione o time..."}
                                         data={dataTimes}
                                         value={setValueTime}
-
                                     />
                                 </div>
                             </div>
