@@ -113,12 +113,13 @@ const CardNotas = ({
                                     Parcelas
                                 </p>
                                 <div className={style.quantidadeDocumentos}>
-                                    <p >
+                                    {data.parcelas && <p >
                                         {data.parcelas.length}
-                                    </p>
+                                    </p>}
+
                                 </div>
                                 <div className={style.produtoServico} onClick={() => setCardDocumentos(true)}>
-                                    <p style={{ fontSize: 12, marginLeft:-25 }}>
+                                    <p style={{ fontSize: 12, marginLeft: -25 }}>
                                         Prod/Serv.
                                     </p>
                                     <div className={style.quantidadeDocumentos}>

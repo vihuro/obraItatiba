@@ -79,6 +79,7 @@ const AdicionarNota = ({
     }
 
     const [valorNota, setValorNota] = useState(0);
+    const [testeValor, setTesteValor] = useState();
 
 
     return (
@@ -131,7 +132,6 @@ const AdicionarNota = ({
                                 }}
                             /> */}
                             <input
-
                                 value={valorNota.toLocaleString("pt-Br")}
                                 onChange={e => {
                                     const re = /^[0-9]+([,][0-9]{0,2})?$/;
@@ -166,6 +166,18 @@ const AdicionarNota = ({
                                     setnota({ ...nota, fornecedor: e.target.value })
                                 }
                             />
+                            {/* <input 
+                            value={ parseFloat(testeValor).toLocaleString("pt-Br")}
+                            onChange={e =>{
+                                const formater = new Intl.NumberFormat('pt-Br')
+                                const value = formater.format(e.target.value);
+                                const teste = e.target.value.replaceAll(".","").replace(",",".")
+                                
+                                console.log(formater.format(e.target.value.replace(",",".")));
+                                console.log('valor para salvar = ' + teste)
+                                setTesteValor(e.target.value)
+                            }}
+                            /> */}
                         </div >
                         <div className={style.column}>
                             <h5>
