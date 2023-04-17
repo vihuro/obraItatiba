@@ -30,7 +30,6 @@ const FiltroNotasTHR = ({
             times.map(item => ({ "Id": item.timeId, "Value": item.time }))
         );
     }
-    console.log(listTimes)
 
     function Filtrar() {
         const filtrado = dataFilter.filter(item => {

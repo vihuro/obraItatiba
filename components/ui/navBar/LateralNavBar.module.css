@@ -118,13 +118,15 @@
 }
 
 
-.container_sub_menu p{
+.container_sub_menu p,
+.container_sub_menu a{
     color: rgba(77, 77, 77, 0.726);
     width: 100%;
     padding: 7px;
     border-radius: 7px;
     font-size: 14px;
     font-weight: 600;
+    text-decoration: none;
 
 }
 .container_sub_menu p:hover{

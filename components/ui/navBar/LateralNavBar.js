@@ -49,10 +49,11 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                                     >THR</p>
                                 </div>
                                 <div className={style.container_sub_menu}  >
-                                    <p
-                                        onClick={() =>
-                                            navigation.push("/notas/dash/time")}
-                                    >DASH (NOTAS/TIME)</p>
+                                    <a href="/notas/dash/time"
+                                    target="_blank"
+                                        // onClick={() =>
+                                        //     navigation.push("/notas/dash/time")}
+                                    >DASH (NOTAS/TIME)</a>
                                 </div>
 
 
