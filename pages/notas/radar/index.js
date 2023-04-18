@@ -35,7 +35,6 @@ const NotasRadar = () => {
     async function FetchData() {
         await api.get("notas/radar/notsaved")
             .then(res => {
-                console.log(res.data.length)
                 setNotas(res.data)
             })
             .catch(err => {

@@ -103,12 +103,11 @@ const AdicionarNota = ({
                 refesh()
             })
             .catch(err => {
-                console.log(err)
                 if (err.response.data) {
                     
-                    setInfoMessage({ message: err.response.data, type: "warning" })
+                    setInfoMessage({ message: err.response.data.title, type: "warning" })
                 } else {
-                    setInfoMessage({ message: err, type: "warning" })
+                    setInfoMessage({ message: err.message, type: "warning" })
                 }
 
                 setVisibleMessage(true)

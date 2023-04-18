@@ -11,7 +11,7 @@ const DashNotasPorTime = () => {
     }, [])
     function AtualizarDash() {
         api.get("/notas")
-            .then(res => MontarTabela({ info: res.data }))
+            .then(res => {console.log(res),MontarTabela({ info: res.data })})
             .catch(err => console.log(err))
     }
     function MontarTabela({
@@ -30,11 +30,7 @@ const DashNotasPorTime = () => {
         let filter = table.find(item => item.time === "Leonardi");
         let index = table.indexOf(filter);
         table[index].contratado = 30000000
-        filter = table.find(item => item.time === "Unicon");
-        index = table.indexOf(filter);
-        table[index].contratado = 50000000
-        filter = table.find(item => item.time === "Pellizzer");
-        index = table.indexOf(filter);
+
         table[index].contratado = 15000000
         setData(table);
     }
