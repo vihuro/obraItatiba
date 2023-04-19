@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./time.module.css";
 import api from "../../../api/apiObraItatiba";
-import {parseCookies,setCookie}from "nookies"
+import { parseCookies, setCookie } from "nookies"
 
 const DashNotasPorTime = () => {
     const [data, setData] = useState([]);
@@ -17,12 +17,29 @@ const DashNotasPorTime = () => {
             setTime(new Date());
         }, 10000);
         return () => clearInterval(tick);
-    },[])
+    }, [])
     function AtualizarDash() {
         api.get("/notas")
-            .then(res => {console.log(res),MontarTabela({ info: res.data })})
+            .then(res => { console.log(res), MontarTabela({ info: res.data }) })
             .catch(err => console.log(err))
     }
+
+
+    const cores = {
+        FUNDO_PADRAO: "#FFF0DD",
+        FUNDO_PRETO: "#0D0D0D",
+        LETRA_CABECALHO: "#FFC000",
+        FUNDO_LEONARDI: "#F4B084",
+        FUNDO_UNICON: "#DB6AF6",
+        FUNDO_AVULSO: "#A9D08E",
+        FUNDO_PELIZER: "#8EA9DB",
+        FUNDO_CONTRATADO: "#0000FF",
+        LETRA_CONTRARADO: "#FFFF00",
+        LETRA_VERDE: "#66FF33",
+        FUNDO_VERDE:"#66FF33"
+    }
+
+
     function MontarTabela({
         info
     }) {
@@ -59,30 +76,99 @@ const DashNotasPorTime = () => {
             {data && (
                 <table className={style.body_table} >
                     <thead>
-                        <tr>
+                        <tr
+                            style={{
+                                background: cores.FUNDO_PRETO,
+                                color: cores.LETRA_CABECALHO
+                            }}
+                        >
                             <th>TIME</th>
+                            <th>PAGO</th>
+                            <th>A PAGAR</th>
                             <th>TOTAL GASTO</th>
                             <th>CONTRATADO</th>
-                            <th>SALDO</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.map((item, index) =>
                             <tr key={index} >
-                                <td>
+                                <td
+                                    style={
+                                        item.time === "Leonardi" ?
+                                            { background: cores.FUNDO_LEONARDI } :
+                                            item.time === "Unicon" ?
+                                                { background: cores.FUNDO_UNICON } :
+                                                item.time === "Pellizzer" ?
+                                                    { background: cores.FUNDO_PELIZER } :
+                                                    item.time === "Avulso" ?
+                                                        { background: cores.FUNDO_AVULSO } :
+                                                        { background: cores.FUNDO_PADRAO }
+                                    }
+                                >
                                     {item.time}
                                 </td>
-                                <td>
-                                    {item.totalGasto.toLocaleString("pt-br")}
+                                <td
+                                    style={{
+                                        background: cores.FUNDO_PADRAO
+                                    }}
+                                >
+                                    R$ {item.totalGasto.toLocaleString("pt-br")}
                                 </td>
-                                <td>{item.contratado.toLocaleString("pt-br")}</td>
-                                <td>
-                                    {`${(item.contratado - item.totalGasto).toLocaleString("pt-br")}`}
+                                <td
+                                    style={{
+                                        background: cores.FUNDO_PADRAO
+                                    }}
+                                >R$ {item.contratado.toLocaleString("pt-br")}</td>
+                                <td
+                                    style={{
+                                        background: cores.FUNDO_PADRAO
+                                    }}
+                                >
+                                    {`R$ ${(item.totalGasto).toLocaleString("pt-br")}`}
+                                </td>
+                                <td
+                                    style={{
+                                        background: cores.FUNDO_CONTRATADO,
+                                        color: cores.LETRA_CONTRARADO
+                                    }}
+                                >
+                                    {`R$ ${(item.contratado).toLocaleString("pt-br")}`}
+                                </td>
+                                <td
+                                style={{
+                                    background:"#66FF33"
+                                }}
+                                >
+                                    {"NÃO ATINGIDO"}
                                 </td>
                             </tr>
 
                         )}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th
+                                style={{
+                                    borderRight: 0,
+                                    background: cores.FUNDO_PRETO,
+                                    color: cores.LETRA_VERDE
+                                }}
+                            >
+                                ATÉ HOJE R$
+                            </th>
+                            <th
+                                style={{
+                                    borderRight: 0,
+                                    background: cores.FUNDO_PRETO,
+                                    color: cores.LETRA_VERDE
+                                }}
+                            >
+                                R$ 800.000,00
+                            </th>
+
+                        </tr>
+                    </tfoot>
                 </table>
             )}
         </div>
@@ -96,8 +182,8 @@ export const getServerSideProps = (context) => {
     const token = parseCookies(context).TOKEN_OBRA;
 
     if (!token) {
-        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl),{
-            path:"/"
+        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl), {
+            path: "/"
         })
         return {
             redirect: {
