@@ -5,10 +5,19 @@ import {parseCookies,setCookie}from "nookies"
 
 const DashNotasPorTime = () => {
     const [data, setData] = useState([]);
+    const [time, setTime] = useState(new Date());
+
     useEffect(() => {
         AtualizarDash()
 
     }, [])
+    useEffect(() => {
+        const tick = setInterval(() => {
+            AtualizarDash();
+            setTime(new Date());
+        }, 10000);
+        return () => clearInterval(tick);
+    },[])
     function AtualizarDash() {
         api.get("/notas")
             .then(res => {console.log(res),MontarTabela({ info: res.data })})
@@ -30,10 +39,20 @@ const DashNotasPorTime = () => {
         let filter = table.find(item => item.time === "Leonardi");
         let index = table.indexOf(filter);
         table[index].contratado = 30000000
-
+        filter = table.find(item => item.time === "Unicon");
+        index = table.indexOf(filter);
+        table[index].contratado = 50000000
+        filter = table.find(item => item.time === "Pellizzer");
+        index = table.indexOf(filter);
         table[index].contratado = 15000000
+
+        filter = table.find(item => item.time === "Avulso");
+        index = table.indexOf(filter);
+        table[index].contratado = 50000000
         setData(table);
     }
+
+
 
     return (
         <div>
