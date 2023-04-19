@@ -129,7 +129,8 @@
     text-decoration: none;
 
 }
-.container_sub_menu p:hover{
+.container_sub_menu p:hover,
+.container_sub_menu a:hover{
     background-color: rgb(185,205,249,.8);
     color: rgb(26, 78, 223);
     transition: 0.5s;

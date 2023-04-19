@@ -17,6 +17,17 @@
 
 }
 
+.container_info_total{
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.container_info_total h5{
+    color: rgb(20, 54, 206);
+    font-size: 18px;
+}
+
 .container ::-webkit-scrollbar{
     width: 8px;
 

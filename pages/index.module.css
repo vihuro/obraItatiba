@@ -63,7 +63,14 @@
     height: 80px;
     display: grid;
     align-items: center;
+    background-image:linear-gradient(to left ,#0011f8, #e500fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+.containerTitle h1{
+
+}
+
 .containerTitle::before{
     content: "";
     position: absolute;

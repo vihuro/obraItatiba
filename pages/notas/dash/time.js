@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import style from "./time.module.css";
 import api from "../../../api/apiObraItatiba";
 import { parseCookies, setCookie } from "nookies"
+import Head from "next/head";
 
 const DashNotasPorTime = () => {
     const [data, setData] = useState([]);
     const [time, setTime] = useState(new Date());
+    const [totalGasto, setTotalGasto] = useState();
 
     useEffect(() => {
         AtualizarDash()
 
-    }, [])
+    }, []);
     useEffect(() => {
         const tick = setInterval(() => {
             AtualizarDash();
@@ -18,9 +20,10 @@ const DashNotasPorTime = () => {
         }, 10000);
         return () => clearInterval(tick);
     }, [])
+
     function AtualizarDash() {
         api.get("/notas")
-            .then(res => { console.log(res), MontarTabela({ info: res.data }) })
+            .then(res => { console.log(res), MontarTabela({ info: res.data }), TotalGasto(res.data) })
             .catch(err => console.log(err))
     }
 
@@ -36,7 +39,7 @@ const DashNotasPorTime = () => {
         FUNDO_CONTRATADO: "#0000FF",
         LETRA_CONTRARADO: "#FFFF00",
         LETRA_VERDE: "#66FF33",
-        FUNDO_VERDE:"#66FF33"
+        FUNDO_VERDE: "#66FF33"
     }
 
 
@@ -69,10 +72,24 @@ const DashNotasPorTime = () => {
         setData(table);
     }
 
+    function TotalGasto(info) {
+
+        console.log(info)
+        let total = 0;
+        for (var i = 0; i < info.length; i++) {
+            total += info[i]["valorTotalNota"];
+        }
+        setTotalGasto(total);
+    }
+
 
 
     return (
         <div>
+            <Head>
+                <link href="/favicon.ico" />
+                <title>THR - Dash (Gasto obra)</title>
+            </Head>
             {data && (
                 <table className={style.body_table} >
                     <thead>
@@ -83,9 +100,9 @@ const DashNotasPorTime = () => {
                             }}
                         >
                             <th>TIME</th>
-                            <th>PAGO</th>
-                            <th>A PAGAR</th>
-                            <th>TOTAL GASTO</th>
+                            <th>TOTAL / TIME</th>
+                            {/* <th>A PAGAR</th>
+                            <th>TOTAL GASTO</th> */}
                             <th>CONTRATADO</th>
                             <th>STATUS</th>
                         </tr>
@@ -108,25 +125,25 @@ const DashNotasPorTime = () => {
                                 >
                                     {item.time}
                                 </td>
-                                <td
+                                {/* <td
                                     style={{
                                         background: cores.FUNDO_PADRAO
                                     }}
                                 >
                                     R$ {item.totalGasto.toLocaleString("pt-br")}
-                                </td>
+                                </td> */}
                                 <td
                                     style={{
                                         background: cores.FUNDO_PADRAO
                                     }}
-                                >R$ {item.contratado.toLocaleString("pt-br")}</td>
-                                <td
+                                >R$ {item.totalGasto.toLocaleString("pt-br")}</td>
+                                {/* <td
                                     style={{
                                         background: cores.FUNDO_PADRAO
                                     }}
                                 >
                                     {`R$ ${(item.totalGasto).toLocaleString("pt-br")}`}
-                                </td>
+                                </td> */}
                                 <td
                                     style={{
                                         background: cores.FUNDO_CONTRATADO,
@@ -136,9 +153,9 @@ const DashNotasPorTime = () => {
                                     {`R$ ${(item.contratado).toLocaleString("pt-br")}`}
                                 </td>
                                 <td
-                                style={{
-                                    background:"#66FF33"
-                                }}
+                                    style={{
+                                        background: "#66FF33"
+                                    }}
                                 >
                                     {"NÃO ATINGIDO"}
                                 </td>
@@ -152,21 +169,24 @@ const DashNotasPorTime = () => {
                                 style={{
                                     borderRight: 0,
                                     background: cores.FUNDO_PRETO,
-                                    color: cores.LETRA_VERDE
+                                    color: cores.LETRA_VERDE,
+                                    fontSize:14
                                 }}
                             >
-                                ATÉ HOJE R$
+                                TOTAL GASTO
                             </th>
-                            <th
-                                style={{
-                                    borderRight: 0,
-                                    background: cores.FUNDO_PRETO,
-                                    color: cores.LETRA_VERDE
-                                }}
-                            >
-                                R$ 800.000,00
-                            </th>
-
+                            {totalGasto &&
+                                <th
+                                    style={{
+                                        borderRight: 0,
+                                        background: cores.FUNDO_PRETO,
+                                        color: cores.LETRA_VERDE,
+                                        fontSize:18
+                                    }}
+                                >
+                                    {`R$ ${totalGasto.toLocaleString("pt-Br")}`}
+                                </th>
+                            }
                         </tr>
                     </tfoot>
                 </table>

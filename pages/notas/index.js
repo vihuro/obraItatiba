@@ -10,6 +10,10 @@ import Modal from "../../components/ui/card/modal/Modal";
 import Button from "../../components/ui/button/ButtonUi";
 import AdicionarNota from "../../components/ui/card/Notas/thr/AdicionarNotaManual";
 import FiltroNotasTHR from "../../components/ui/filter/notas/FiltroNotasTHR";
+import Head from "next/head";
+import { FaFilter } from "react-icons/fa"
+import { VscGraph } from "react-icons/vsc"
+import GraficoTime from "../../components/ui/grafico/notas/time";
 
 const Notas = () => {
     const navigation = useRouter();
@@ -58,6 +62,9 @@ const Notas = () => {
 
     return (
         <div className={style.body}>
+            <Head>
+                <title>THR - NOTAS</title>
+            </Head>
             <div className={style.container} >
                 <Navbar />
                 <div className={style.wrap_container} >
@@ -76,6 +83,7 @@ const Notas = () => {
                             dataFilter={filter}
                         />
                     }
+                    {/* <GraficoTime /> */}
 
                     {/* <Modal 
                     mensagem={infoMessage.message}
@@ -83,27 +91,30 @@ const Notas = () => {
                     visible={setVisibleMessage}
                     /> */}
                     <div className={style.container_filtro} >
-                    </div>
-                    <div className={style.card_filtro} >
-                        <div className={style.container_button} >
-                            <Button
-                                action={() => { setCardAdicionarNota(true) }}
-                                text={"NOVA NOTA"}
-                                theme={"borderder-green"}
-                            />
+                        <div className={style.wrap_button} >
+                            <div className={style.wrap_button_novaNota} >
+                                <Button
+                                    text={"NOVA NOTA"}
+                                    theme={"borderder-green"}
+                                />
 
+                            </div>
                         </div>
-                        <div className={style.container_button} >
-                            <Button
-                                action={() => { setVisibleFilter(true) }}
-                                text={"FILTRO"}
-                                theme={"borderder-blue"}
-                            />
-
+                        <div className={style.wrap_filter} >
+                            <div className={style.wrap_button_filter} 
+                            onClick={() => setVisibleFilter(true)}
+                            >
+                                <FaFilter
+                                    size={20}
+                                    color="#4219EF" />
+                            </div>
+                            <div className={style.wrap_button_filter} >
+                                <VscGraph
+                                    size={25}
+                                    color="#D80EB2" />
+                            </div>
                         </div>
-
                     </div>
-
                     <div className={style.card_notas}>
                         {loading ? <Loader /> :
                             <NotasObra

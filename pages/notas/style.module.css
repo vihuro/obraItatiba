@@ -25,8 +25,14 @@
 }
 
 .container_filtro{
-    grid-area: 1 / 1 / 2 / 13; 
+    grid-area: 1 / 2 / 2 / 12;
     width: 100%;
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    align-items: center;
+    justify-content: right;
+    gap: 5px;
+    
 }
 
 .container_button{
@@ -34,15 +40,27 @@
     height: 40px;
     margin: 20px;
 }
-.card_filtro{
-    grid-area: 1 / 2 / 2 / 13;
-    width: 100%;
+.wrap_filter{
+    display: flex;
+    gap: 7px;
 }
+.wrap_button_filter{
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+}
+.wrap_button_novaNota{
+    width: 100px;
+    height: 30px;
+}
+
 
 
 .card_notas{
     grid-area: 2 / 2 / 2 / 12;
     width: 100%;
+    
 }
 
 @media(max-width:1030px){

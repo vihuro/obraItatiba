@@ -1,8 +1,15 @@
 import "../stylesheet/styles.css"
+import Head from 'next/head';
+
 
 function App({ Component, pageProps }) {
     return (
-        <Component {...pageProps} />
+        <>
+        <Head>
+            <title>THR</title>
+        </Head>
+            <Component {...pageProps} />
+        </>
     )
 
 }

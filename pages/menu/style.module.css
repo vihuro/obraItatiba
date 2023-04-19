@@ -12,9 +12,10 @@
 .container{
     width: 1024px;
     height: 100vh;
-    border: 1px solid rgba(155, 155, 155, 0.705);
+    border: 1px solid rgb(255, 255, 255);
     overflow: hidden;
     position: relative;
+    background-color: white
     
 }
 

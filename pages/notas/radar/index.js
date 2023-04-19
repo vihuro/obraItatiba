@@ -6,6 +6,8 @@ import NavBar from "../../../components/ui/navBar/NavBar";
 import { setCookie, parseCookies } from "nookies";
 import Loader from "../../../components/ui/Load/RingLoader";
 import Modal from "../../../components/ui/card/modal/Modal";
+import Head from "next/head";
+
 
 
 const NotasRadar = () => {
@@ -58,8 +60,18 @@ const NotasRadar = () => {
 
     return (
         <div className={style.body}>
+            <Head>
+                <title>THR - NOTAS/RADAR</title>
+            </Head>
             <div className={style.container}>
                 <NavBar />
+                <div className={style.container_info_total} >
+                    <h5>
+                        Total de notas não cadastradas:
+                    </h5>
+                    <p>{notas.length}</p>
+
+                </div>
                 <div className={style.containerCards} >
                     {visibleMessage ?
                         <Modal
