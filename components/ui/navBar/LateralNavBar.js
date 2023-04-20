@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import style from "./LateralNavBar.module.css"
 import { useRouter } from "next/router"
 import { ImExit } from "react-icons/im"
-import { destroyCookie } from "nookies"
+import { destroyCookie, parseCookies } from "nookies"
+import TokenDecriptor from "../../../service/TokenDecriptor"
 
 const LateralNavBar = ({ isOpen, onClose }) => {
 
@@ -11,9 +12,15 @@ const LateralNavBar = ({ isOpen, onClose }) => {
     }, [])
 
     const [toogleNotas, setOpenNotas] = useState(false);
+    const [toogleGerencial, setToogleGerencial] = useState(false);
     const [openGerencial, setOpenGerencial] = useState(false);
+    const [infoUsuario, setInfoUsuario] = useState([])
 
     const navigation = useRouter();
+
+    useEffect(() => {
+        setInfoUsuario(TokenDecriptor(parseCookies().TOKEN_OBRA))
+    }, [])
 
     return (
         <div className={style.overlay + (!isOpen ? `${style.show}` : "")}
@@ -26,14 +33,15 @@ const LateralNavBar = ({ isOpen, onClose }) => {
 
                     </div>
                     <div className={style.containerButton} >
-                        <div className={style.button_menu}
+                        {infoUsuario.FINANCEIRO && <div className={style.button_menu}
                             onClick={(e) => {
                                 e.stopPropagation()
                                 setOpenNotas(!toogleNotas)
                             }}
                         >
                             <p>NOTAS</p>
-                        </div>
+                        </div>}
+
                         {toogleNotas && (
                             <div className={style.button_subMenu} >
                                 <div className={style.container_sub_menu} >
@@ -50,9 +58,9 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                                 </div>
                                 <div className={style.container_sub_menu}  >
                                     <a href="/notas/dash/time"
-                                    target="_blank"
-                                        // onClick={() =>
-                                        //     navigation.push("/notas/dash/time")}
+                                        target="_blank"
+                                    // onClick={() =>
+                                    //     navigation.push("/notas/dash/time")}
                                     >DASH (NOTAS/TIME)</a>
                                 </div>
 
@@ -60,21 +68,26 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                             </div>
 
                         )}
-
                         <div className={style.button_menu}
-                            onClick={() => setOpenGerencial(!openGerencial)}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                setToogleGerencial(!toogleGerencial)
+                            }}
                         >
                             <p>GERENCIAL</p>
                         </div>
-                        <div className={style.button_subMenu} >
-                            <div className={style.container_sub_menu} >
-                                <p>LOGIN</p>
-                            </div>
-                            <div className={style.container_sub_menu} >
-                                <p>ACESSOS</p>
-                            </div>
+                        {toogleGerencial && (
+                            <div className={style.button_subMenu} >
+                                <div className={style.container_sub_menu} >
+                                    <p>LOGIN</p>
+                                </div>
+                                <div className={style.container_sub_menu} >
+                                    <p>ACESSOS</p>
+                                </div>
 
-                        </div>
+                            </div>
+                        )}
+
                     </div>
                     <div className={style.containerBottao_Sair}
                         onClick={() => {

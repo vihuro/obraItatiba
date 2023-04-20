@@ -23,7 +23,7 @@ const DashNotasPorTime = () => {
 
     function AtualizarDash() {
         api.get("/notas")
-            .then(res => { console.log(res), MontarTabela({ info: res.data }), TotalGasto(res.data) })
+            .then(res => {  MontarTabela({ info: res.data }), TotalGasto(res.data) })
             .catch(err => console.log(err))
     }
 
@@ -74,7 +74,6 @@ const DashNotasPorTime = () => {
 
     function TotalGasto(info) {
 
-        console.log(info)
         let total = 0;
         for (var i = 0; i < info.length; i++) {
             total += info[i]["valorTotalNota"];

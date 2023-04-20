@@ -31,16 +31,16 @@ const Notas = () => {
 
 
     useEffect(() => {
-        api.get("/notas")
-            .then(res => { CarregarData() })
-            .catch(err => setInfoMessage({ type: "error", message: err.message }))
-            .catch(err => { setInfoMessage({ type: "warning", message: err.response.data }) })
-            .catch(err => console.log(err))
-            .finally(() => setLoading(false));
+        CarregarData()
+        // api.get("/notas")
+        //     .then(res => { CarregarData() })
+        //     .catch(err => setInfoMessage({ type: "error", message: err.message }))
+        //     .catch(err => { setInfoMessage({ type: "warning", message: err.response.data }) })
+        //     .catch(err => console.log(err))
+        //     .finally(() => setLoading(false));
 
     }, [])
 
-    console.log(filter)
 
     useEffect(() => {
         // const tick = setInterval(() => {
@@ -55,7 +55,17 @@ const Notas = () => {
     function CarregarData() {
         api.get("/notas")
             .then(res => { setFilter(res.data) })
-            .catch(err => console.log(err))
+            .catch(err => {
+                if (err.response.data) {
+                    console.log(err)
+                    setInfoMessage({ type: "error", message: err.response.data.title })
+                    setVisibleMessage(true)
+                } else {
+                    setInfoMessage({ type: "error", message: err.message })
+                }
+                console.log(err)
+            })
+            .finally(() => setLoading(false));
 
     }
 
@@ -84,25 +94,28 @@ const Notas = () => {
                         />
                     }
                     {/* <GraficoTime /> */}
+                    {visibleMessage &&
+                        <Modal
+                            mensagem={infoMessage.message}
+                            type={infoMessage.type}
+                            visible={setVisibleMessage}
+                        />
+                    }
 
-                    {/* <Modal 
-                    mensagem={infoMessage.message}
-                    type={infoMessage.type}
-                    visible={setVisibleMessage}
-                    /> */}
                     <div className={style.container_filtro} >
                         <div className={style.wrap_button} >
                             <div className={style.wrap_button_novaNota} >
                                 <Button
                                     text={"NOVA NOTA"}
                                     theme={"borderder-green"}
+                                    action={() => setCardAdicionarNota(true)}
                                 />
 
                             </div>
                         </div>
                         <div className={style.wrap_filter} >
-                            <div className={style.wrap_button_filter} 
-                            onClick={() => setVisibleFilter(true)}
+                            <div className={style.wrap_button_filter}
+                                onClick={() => setVisibleFilter(true)}
                             >
                                 <FaFilter
                                     size={20}

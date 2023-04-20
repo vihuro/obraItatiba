@@ -68,8 +68,8 @@ const NotasRadar = () => {
                 <div className={style.container_info_total} >
                     <h5>
                         Total de notas não cadastradas:
-                    </h5>
-                    <p>{notas.length}</p>
+                    </h5>{notas && <p>{notas.length}</p>}
+                    
 
                 </div>
                 <div className={style.containerCards} >

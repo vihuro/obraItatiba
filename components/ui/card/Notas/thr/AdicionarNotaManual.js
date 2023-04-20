@@ -117,7 +117,7 @@ const AdicionarNota = ({
             };
             api.get(`/notas/${nota.numeroNota}`)
                 .then(res => {
-
+                    functions()
                 })
                 .catch(err => {
                     if (err.response.message) {
@@ -173,7 +173,7 @@ const AdicionarNota = ({
                         visible={setVisibleMessage}
                     />}
 
-                <div className={style.container_title} >
+                <div className={style.container_title_card} >
                     <h2>
                         ADICIONAR NOTA
                     </h2>
@@ -206,9 +206,12 @@ const AdicionarNota = ({
                                     }
                                 }}
                                 onBlur={() => {
-                                    if (valorNota !== 0) {
+                                    if (valorNota != null && typeof valorNota === "string") {
                                         setValorNota(parseFloat(valorNota.replace(",", ".").toLocaleString("pt-Br")))
                                     }
+                                }}
+                                onFocus={() =>{
+                                    
                                 }}
                             />
                         </div>
@@ -394,8 +397,8 @@ const AdicionarNota = ({
                     <div className={style.wrap_container_button} >
                         <Button
                             action={() => {
-                                CadastarNota(),
-                                    functions()
+                                CadastarNota()
+
                             }}
                             text={"ADICIONAR"}
                             theme={"borderder-green"}

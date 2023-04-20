@@ -1,90 +1,154 @@
-.table_wrapper{
+.table_wrapper {
     overflow: auto;
     height: 900px;
 }
 
-.body_table{
+.body_table {
     border-collapse: collapse;
-    border: 1px solid black;
-    overflow: scroll;
+    overflow: auto;
+    position: relative;
+    z-index: 500;
 }
 
-.body_table thead{
+.table_wrapper::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.table_wrapper::-webkit-scrollbar-thumb {
+    background-color: rgb(73, 73, 73);
+    border-radius: 7px;
+}
+
+.table_wrapper::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+.body_table::-webkit-scrollbar {
+    width: 8px;
+
+}
+
+.body_table::-webkit-scrollbar-track {
+    background-color: red;
+    border-radius: 7px;
+}
+
+.body_table::-webkit-scrollbar-thumb {
+    background-color: rgb(51, 51, 51);
+    border-radius: 5px;
+}
+
+.body_table thead {
     background-color: rgb(24, 0, 236);
     color: white;
     position: sticky;
     top: -2px;
+    z-index: 1;
 }
 
-.body_table td, 
-.body_table th{
-    border: 1px solid black;
+.body_table td,
+.body_table th {
+    border: 2px solid rgb(148, 148, 148, .5);
+    font-size: 14px;
+}
+.icon{
+
+}
+.iconRow {
+    transform: rotateX(180deg);
+    transition: .5s;
 }
 
+.iconRow_off {
+    transform: rotate(0deg);
+    transition: .5s;
+    z-index: 1;
+
+}
+
+.row_info_plus {
+    border-left: 2px solid rgb(148, 148, 148, .5);
+    border-right: 2px solid rgb(148, 148, 148, .5);
+
+
+}
+
+.row_info_plus td {
+    padding: 7px;
+    border: none;
+}
 
 
 .table_row {
-    border: 1px solid black;
+    border: 2px solid rgb(148, 148, 148, .5);
     align-items: center;
     text-align: center;
     color: rgb(66, 65, 65);
 }
 
-.table_row td, .body_table th{
-    padding: 5px;
-    
+.table_row:hover {
+    background-color: rgb(196, 196, 196);
+    cursor: default;
 }
 
-@media(max-height:1036px){
-    .table_wrapper{
+.table_row td,
+.body_table th {
+    padding: 8px;
+
+
+}
+
+@media(max-height:1036px) {
+    .table_wrapper {
         overflow: auto;
         height: 680px;
     }
 
 }
 
-@media(max-height:770px){
-    .table_wrapper{
+@media(max-height:770px) {
+    .table_wrapper {
         overflow: auto;
         height: 520px;
     }
-    .body_table{
+
+    .body_table {
         border-collapse: collapse;
         border: 1px solid black;
         overflow: scroll;
     }
 
-    .table_row td, 
-    .body_table th{
+    .table_row td,
+    .body_table th {
         padding: 7px;
         font-size: 12px;
-        
+
     }
-    
+
 }
 
 
-@media(max-height:770px){
-    .table_wrapper{
+@media(max-height:770px) {
+    .table_wrapper {
         overflow: auto;
-        height: 480px;
-        
+        height: 500px;
+
     }
-    .body_table{
+
+    .body_table {
         border-collapse: collapse;
         border: 1px solid black;
         overflow: scroll;
         width: 100%;
+
     }
 
-    .table_row td, .body_table th{
-        padding: 15px;
+    .table_row td,
+    .body_table th {
+
         font-size: 14px;
-        
+
     }
-    
+
 }
-
-
-
-
