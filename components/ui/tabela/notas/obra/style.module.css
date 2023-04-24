@@ -102,7 +102,7 @@
 @media(max-height:1036px) {
     .table_wrapper {
         overflow: auto;
-        height: 680px;
+        height: 630px;
     }
 
 }

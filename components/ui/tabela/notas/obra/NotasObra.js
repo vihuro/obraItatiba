@@ -6,6 +6,7 @@ import Loader from "../../../Load/RingLoader";
 import FiltroNotasTHR from "../../../filter/notas/FiltroNotasTHR";
 import { IoMdArrowDropdown } from "react-icons/io";
 import DateString from "../../../../../service/DateTimeString";
+import CardAlterarNota from "../../../card/Notas/thr/AlterarNota";
 
 const NotasObra = ({
     data
@@ -51,7 +52,6 @@ const NotasObra = ({
                 <CardNota
                     data={valueNota}
                 /> : null}
-
             <table
                 className={style.body_table} >
                 <thead  >
@@ -71,6 +71,7 @@ const NotasObra = ({
                     {filter && (
                         filter.map((item, index) =>
                             <React.Fragment key={index}>
+                                {/* <CardAlterarNota /> */}
                                 <tr
                                     className={style.table_row}
                                     onClick={() => {
@@ -79,7 +80,10 @@ const NotasObra = ({
                                     }}
                                 >
                                     <td className={`${selected === index ? style.iconRow : style.iconRow_off}`} >
-                                        <div style={{ position: "relative" }} ><IoMdArrowDropdown size={20} style={{ display: "flex" }} />
+                                        <div style={{ position: "relative" }} >
+                                            <IoMdArrowDropdown size={20}
+                                                style={{ display: "flex" }}
+                                            />
 
                                         </div>
 

@@ -7,6 +7,7 @@ function App({ Component, pageProps }) {
         <>
         <Head>
             <title>THR</title>
+
         </Head>
             <Component {...pageProps} />
         </>

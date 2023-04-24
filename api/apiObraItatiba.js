@@ -3,7 +3,7 @@ import { parseCookies } from "nookies";
 
 const ApiObra = axios.create({
 
-    baseURL: "http://192.168.2.89:9000/api"
+    baseURL: "http://localhost:9000/api"
 })
 
 ApiObra.interceptors.request.use((request) => {
