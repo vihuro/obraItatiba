@@ -12,7 +12,7 @@ function setBaseURL(req){
 
 const ApiObra = axios.create({
 
-    baseURL: "http://189.1.166.143:9090"
+    baseURL: "http://192.168.1.227:9090"
 })
 
 ApiObra.interceptors.request.use((request) => {
