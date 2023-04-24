@@ -5,17 +5,14 @@ const ipAddress = process.env.REACT_APP_IP_ADDRESS || "192.168.1.227";
 
 let baseURL = "";
 
-if (ipAddress.startsWith("192.168.1.227")) {
-    console.log(ipAddress)
-    baseURL = `http://${ipAddress}:9090/api`;
-} else if (ipAddress.startsWith("189.1.166.143")) {
-    console.log(ipAddress)
-    baseURL = `http://${ipAddress}:9090/api`;
+
+function setBaseURL(req){
+    console.log(req)
 }
 
 const ApiObra = axios.create({
 
-    baseURL: baseURL
+    baseURL: "http://189.1.166.143:9090"
 })
 
 ApiObra.interceptors.request.use((request) => {
@@ -26,4 +23,5 @@ ApiObra.interceptors.request.use((request) => {
 })
 
 export default ApiObra;
+export {setBaseURL}
 

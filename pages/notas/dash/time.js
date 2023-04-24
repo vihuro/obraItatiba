@@ -58,17 +58,17 @@ const DashNotasPorTime = () => {
         }
         let filter = table.find(item => item.time === "Leonardi");
         let index = table.indexOf(filter);
-        table[index].contratado = 30000000
+        table[index].contratado = 5189100
         filter = table.find(item => item.time === "Unicon");
         index = table.indexOf(filter);
-        table[index].contratado = 50000000
+        table[index].contratado = 700000
         filter = table.find(item => item.time === "Pellizzer");
         index = table.indexOf(filter);
-        table[index].contratado = 15000000
+        table[index].contratado = 0
 
         filter = table.find(item => item.time === "Avulso");
         index = table.indexOf(filter);
-        table[index].contratado = 50000000
+        table[index].contratado = 1000000
         setData(table);
     }
 
