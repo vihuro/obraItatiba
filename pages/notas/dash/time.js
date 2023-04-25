@@ -23,7 +23,7 @@ const DashNotasPorTime = () => {
 
     function AtualizarDash() {
         api.get("/notas")
-            .then(res => {  MontarTabela({ info: res.data }), TotalGasto(res.data) })
+            .then(res => { MontarTabela({ info: res.data }), TotalGasto(res.data) })
             .catch(err => console.log(err))
     }
 
@@ -39,7 +39,9 @@ const DashNotasPorTime = () => {
         FUNDO_CONTRATADO: "#0000FF",
         LETRA_CONTRARADO: "#FFFF00",
         LETRA_VERDE: "#66FF33",
-        FUNDO_VERDE: "#66FF33"
+        FUNDO_VERDE: "#66FF33",
+        FUNDO_VERMELHO:"#C00000",
+        LETRA_BRANCA:"#FFF"
     }
 
 
@@ -60,15 +62,22 @@ const DashNotasPorTime = () => {
         let index = table.indexOf(filter);
         table[index].contratado = 5189100
         filter = table.find(item => item.time === "Unicon");
-        index = table.indexOf(filter);
-        table[index].contratado = 700000
-        filter = table.find(item => item.time === "Pellizzer");
-        index = table.indexOf(filter);
-        table[index].contratado = 0
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 700000
+        }
 
+
+        filter = table.find(item => item.time === "Pellizzer");
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 20000
+        }
         filter = table.find(item => item.time === "Avulso");
-        index = table.indexOf(filter);
-        table[index].contratado = 1000000
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 1000000
+        }
         setData(table);
     }
 
@@ -149,14 +158,17 @@ const DashNotasPorTime = () => {
                                         color: cores.LETRA_CONTRARADO
                                     }}
                                 >
-                                    {`R$ ${(item.contratado).toLocaleString("pt-br")}`}
+                                    {`R$ ${item.contratado.toLocaleString("pt-br")}`}
                                 </td>
                                 <td
-                                    style={{
-                                        background: "#66FF33"
-                                    }}
+                                    style={
+                                        item.totalGasto >= item.contratado ? 
+                                        {background:cores.FUNDO_VERMELHO,color:cores.LETRA_BRANCA}:
+                                        {background:cores.FUNDO_VERDE}
+                                        
+                                    }
                                 >
-                                    {"NÃO ATINGIDO"}
+                                    {`${item.totalGasto >= item.contratado ? "ATINGIDO":"NÃO ATINGIDO"}`}
                                 </td>
                             </tr>
 
@@ -169,7 +181,7 @@ const DashNotasPorTime = () => {
                                     borderRight: 0,
                                     background: cores.FUNDO_PRETO,
                                     color: cores.LETRA_VERDE,
-                                    fontSize:14
+                                    fontSize: 14
                                 }}
                             >
                                 TOTAL GASTO
@@ -180,7 +192,7 @@ const DashNotasPorTime = () => {
                                         borderRight: 0,
                                         background: cores.FUNDO_PRETO,
                                         color: cores.LETRA_VERDE,
-                                        fontSize:18
+                                        fontSize: 18
                                     }}
                                 >
                                     {`R$ ${totalGasto.toLocaleString("pt-Br")}`}
