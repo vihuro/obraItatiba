@@ -28,7 +28,9 @@ const LateralNavBar = ({ isOpen, onClose }) => {
         >
             <div className={isOpen ? style.container : ""} >
                 <div className={isOpen ? style.navBarLateral : style.navBarLateral_off}  >
-                    <div className={style.containerLogo} >
+                    <div className={style.containerLogo} 
+                    onClick={() => navigation.push("/menu")}
+                    >
                         <img src="../../../logoMarcaSemFundo.png" />
 
                     </div>

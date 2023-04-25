@@ -111,5 +111,12 @@
         margin: 0 auto;
     
     }
+
+    .wrap_container_button{
+        width: 300px;        
+    }
+    .button_navegar_BI{
+        margin-left: 38px;
+    }
     
 }

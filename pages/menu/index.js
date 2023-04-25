@@ -15,7 +15,7 @@ const Menu = () => {
                 <div className={style.container_button} >
                     <div className={style.wrap_container_button} >
                         <div className={style.title} >
-                            <h5>Paineis</h5>
+                            <h5>Painéis</h5>
                         </div>
                         <div className={style.wrap_button_painel_obra} >
                             <a className={style.button_navegar_BI} href="/notas/dash/time" target="_blank" >
