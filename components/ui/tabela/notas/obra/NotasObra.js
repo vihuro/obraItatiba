@@ -7,6 +7,7 @@ import FiltroNotasTHR from "../../../filter/notas/FiltroNotasTHR";
 import { IoMdArrowDropdown } from "react-icons/io";
 import DateString from "../../../../../service/DateTimeString";
 import CardAlterarNota from "../../../card/Notas/thr/AlterarNota";
+import CardProdutoServico from "../../../card/modal/ProdutoServico";
 
 const NotasObra = ({
     data
@@ -21,6 +22,8 @@ const NotasObra = ({
     const [infoPlus, setInfoPlus] = useState(false);
     const [indiceInfoPlus, setIndiceInfoPlus] = useState();
     const [selected, setSelected] = useState(null);
+    const [visibleProdutoServico, setVisibleProdutoServico] = useState(false)
+    const [indexValue, setIndexValue] = useState(null);
 
 
     useEffect(() => {
@@ -76,8 +79,8 @@ const NotasObra = ({
                                     className={style.table_row}
                                     onClick={() => {
                                         handleRowClick(index)
-
                                     }}
+                                    onMouseEnter={() => setIndexValue(index)}
                                 >
                                     <td className={`${selected === index ? style.iconRow : style.iconRow_off}`} >
                                         <div style={{ position: "relative" }} >
@@ -100,7 +103,19 @@ const NotasObra = ({
                                     <td>{`R$${item.valorTotalNota.toLocaleString("pt-BR")}`}</td>
                                     <td>{item.time}</td>
                                     {width > 770 ? <td>{item.parcelas.length}</td> : null}
-                                    {width > 770 ? <td>{item.produtosServico.length}</td> : null}
+                                    {width > 770 ? <td
+                                        onClick={() => setVisibleProdutoServico(true)}
+                                        onMouseEnter={() => setVisibleProdutoServico(true)}
+                                        onMouseLeave={() => setVisibleProdutoServico(false)}
+                                        className={style.produtoServico}
+                                        data-produto-servico={item.produtosServico.length} >
+                                        {indexValue === index ?
+                                            <CardProdutoServico
+                                                visible={visibleProdutoServico}
+                                                data={item.produtosServico}
+                                            /> : null}
+
+                                    </td> : null}
                                     {width > 770 ? <td>
                                         <FiEdit size={25} color="blue" />
                                     </td>

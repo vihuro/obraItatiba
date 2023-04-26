@@ -43,6 +43,19 @@ const DashNotasPorTime = () => {
         FUNDO_VERMELHO:"#C00000",
         LETRA_BRANCA:"#FFF"
     }
+    function formatValor(valor){
+        if(Number.isInteger(valor)){
+            return valor.toLocaleString("pt-br",{minimumFractionDigits:2})
+        }
+        return valor.toLocaleString("pt-br")
+    }
+    function formatValorReduzido(valor){
+        const formater = Intl.NumberFormat("br",{
+            notation:'compact'
+        });
+        return formater.format(valor)
+
+    }
 
 
     function MontarTabela({
@@ -121,13 +134,13 @@ const DashNotasPorTime = () => {
                                 <td
                                     style={
                                         item.time === "Leonardi" ?
-                                            { background: cores.FUNDO_LEONARDI } :
+                                            { background: cores.FUNDO_UNICON } :
                                             item.time === "Unicon" ?
                                                 { background: cores.FUNDO_UNICON } :
                                                 item.time === "Pellizzer" ?
-                                                    { background: cores.FUNDO_PELIZER } :
+                                                    { background: cores.FUNDO_UNICON } :
                                                     item.time === "Avulso" ?
-                                                        { background: cores.FUNDO_AVULSO } :
+                                                        { background: cores.FUNDO_UNICON } :
                                                         { background: cores.FUNDO_PADRAO }
                                     }
                                 >
@@ -144,7 +157,7 @@ const DashNotasPorTime = () => {
                                     style={{
                                         background: cores.FUNDO_PADRAO
                                     }}
-                                >R$ {item.totalGasto.toLocaleString("pt-br")}</td>
+                                >R$ {formatValor(item.totalGasto)}</td>
                                 {/* <td
                                     style={{
                                         background: cores.FUNDO_PADRAO
@@ -158,7 +171,7 @@ const DashNotasPorTime = () => {
                                         color: cores.LETRA_CONTRARADO
                                     }}
                                 >
-                                    {`R$ ${item.contratado.toLocaleString("pt-br")}`}
+                                    {`R$ ${formatValor(item.contratado)}`}
                                 </td>
                                 <td
                                     style={
@@ -195,7 +208,7 @@ const DashNotasPorTime = () => {
                                         fontSize: 18
                                     }}
                                 >
-                                    {`R$ ${totalGasto.toLocaleString("pt-Br")}`}
+                                    {`R$ ${formatValor(totalGasto)}`}
                                 </th>
                             }
                         </tr>
