@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
-import { FiEdit } from "react-icons/fi";
+import { FiEdit } from "react-icons/Fi";
 import CardNota from "../../../card/Notas/thr/Notas";
 import Loader from "../../../Load/RingLoader";
 import FiltroNotasTHR from "../../../filter/notas/FiltroNotasTHR";

@@ -24,7 +24,7 @@ const CardProdutoServico = ({
                 <div className={style.body} >
                     {data && (
                         data.map((item, index) =>
-                            <div className={style.row} >
+                            <div className={style.row} key={index}>
                                 <div className={style.row_descricao} >
                                     {item.descricaoProdutoServico}
                                 </div>

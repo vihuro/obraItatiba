@@ -52,9 +52,9 @@
     border: 2px solid rgb(148, 148, 148, .5);
     font-size: 14px;
 }
-.icon{
 
-}
+.icon {}
+
 .iconRow {
     transform: rotateX(180deg);
     transition: .5s;
@@ -97,15 +97,15 @@
     padding: 8px;
 }
 
-.produtoServico{
+.produtoServico {
     text-align: center;
-    height:auto;
+    height: auto;
     border: none;
     position: relative;
     vertical-align: middle;
 }
 
-.produtoServico::before{
+.produtoServico::before {
     position: absolute;
     content: attr(data-produto-servico);
     width: 20px;
@@ -124,7 +124,15 @@
     .table_wrapper {
         overflow: auto;
         height: 720px;
-        
+
+    }
+
+}
+@media(max-height:960px) {
+    .table_wrapper {
+        overflow: auto;
+        height: 710px;
+
     }
 
 }
@@ -168,9 +176,20 @@
 
     .table_row td,
     .body_table th {
-
         font-size: 14px;
+    }
 
+}
+
+@media(max-width:425px) {
+    .table_wrapper {
+        width: 100%;
+        overflow: auto;
+    }
+
+    .table_row td,
+    .body_table th {
+        padding: 2px;
     }
 
 }

@@ -1,19 +1,25 @@
 import axios from "axios";
 import { parseCookies } from "nookies";
 
-const ipAddress = process.env.REACT_APP_IP_ADDRESS || "192.168.1.227";
 
-let baseURL = "";
+let BASE_URL = "";
+
+const ApiObra = axios.create()
 
 
-function setBaseURL(req){
-    console.log(req)
+function setBaseURL(url){
+
+    if(url.startsWith("192")){
+        BASE_URL = "http://192.168.1.227:9090/api"
+    }else{
+        BASE_URL = "http://189.1.166.143:9090/api"
+    }
+    ApiObra.defaults.baseURL = BASE_URL;
+    console.log(BASE_URL)
 }
-
-const ApiObra = axios.create({
-
-    baseURL: "http://192.168.1.227:9090/api"
-})
+if (typeof window !== "undefined") {
+    setBaseURL(window.location.hostname);
+  }
 
 ApiObra.interceptors.request.use((request) => {
     const token = parseCookies("TOKEN_OBRA");

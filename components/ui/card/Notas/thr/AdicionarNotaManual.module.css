@@ -33,7 +33,7 @@
     display: grid;
     align-items: center;
     text-align: center;
-    background-image:linear-gradient(to left ,#0011f8, #e500fa);
+    background-image: linear-gradient(to left, #0011f8, #e500fa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
@@ -45,7 +45,8 @@
     width: 200px;
     margin-top: 35px;
     height: 2px;
-    background-image: linear-gradient(to left ,#0011f8, #e500fa);;
+    background-image: linear-gradient(to left, #0011f8, #e500fa);
+    ;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,13 +62,6 @@
     text-align: center;
 }
 
-.container_title h2 {
-    font-weight: 00;
-}
-
-
-
-
 
 .container_primeiraLinha {
     grid-area: 2 / 1 / 3 / 11;
@@ -80,24 +74,32 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    column-gap: 5px;
+    display: flex;
 }
 
 .wrapRow input,
-.column input {
+.column input,
+.column_adicionar_produto_servico input {
     margin-top: 10px;
     padding: 8px;
     border: none;
     background-color: rgb(213, 213, 213);
     outline: 0;
+    width: 100%;
+
 }
 
 
-.column {
+.column,
+.column_adicionar_produto_servico {
     width: 100%;
 }
 
 .column h5,
-.container_title h5 {
+.container_title h5,
+.row_comboBox h5,
+.column_adicionar_produto_servico h5 {
     color: rgb(84, 84, 84);
 }
 
@@ -182,9 +184,8 @@
 .container_button_produto_servico {
     width: 200px;
     height: 35px;
-    margin-right: 80px;
+    margin-left: 30px;
     margin-top: 15px;
-
 }
 
 .container_button {
@@ -197,4 +198,92 @@
 .wrap_container_button {
     width: 250px;
     height: 40px;
+}
+
+@media(max-width:768px) {
+    .card {
+        width: 620px;
+        height: 630px;
+        background-color: rgba(255, 255, 255, 1);
+        position: absolute;
+        border-radius: 7px;
+        overflow: auto;
+        box-shadow: 0px 10px 20px 0px rgb(48, 94, 221, .5);
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: 80px repeat(4, 1fr) repeat(2, 80px) repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .wrap_produto_servico {
+        border: 1px solid rgb(84, 84, 84, .5);
+        border-radius: 7px;
+        width: 290px;
+        height: 150px;
+        overflow-y: auto;
+    }
+
+}
+
+@media(max-width:425px) {
+    .card {
+        width: 360px;
+        height: 730px;
+        background-color: rgba(255, 255, 255, 1);
+        position: absolute;
+        border-radius: 7px;
+        overflow: auto;
+        box-shadow: 0px 10px 20px 0px rgb(48, 94, 221, .5);
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: 80px repeat(4, 1fr) repeat(2, 80px) repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .container_produto_servico_adicionar {
+        grid-area: 8 / 1 / 8 / 11;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-self: center;
+        padding: 15px;
+    }
+
+    .wrap_produto_servico {
+        border: 1px solid rgb(84, 84, 84, .5);
+        border-radius: 7px;
+        width: 340px;
+        height: 150px;
+        overflow-y: auto;
+    }
+
+    .container_produto_servico_adicionar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .container_button_produto_servico {
+        width: 80%;
+    }
+
+    .container_button {
+        grid-area: 9 / 1 / 12 / 11;
+        width: 100%;
+        display: flex;
+        padding: 10px;
+    }
+    .wrap_container_button{
+        margin: 5px;
+    }
+
+    .wrapRow input,
+    .column input,
+    .column_adicionar_produto_servico input {
+        padding: 4px;
+    }
+
 }

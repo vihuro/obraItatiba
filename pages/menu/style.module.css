@@ -37,7 +37,7 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 30px 1fr;
     border-radius: 7px;
-    box-shadow: 1px 1px 10px 1px rgb(0, 8, 254);
+    box-shadow: 0px 5px 20px 1px rgb(0, 8, 254,.25);
 }
 
 .wrap_button_painel_obra{

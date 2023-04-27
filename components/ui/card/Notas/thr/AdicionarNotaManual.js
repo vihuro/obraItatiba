@@ -351,7 +351,7 @@ const AdicionarNota = ({
                 </div>
                 <div className={style.container_produto_servico_adicionar} >
 
-                    <div className={style.column}>
+                    <div className={style.column_adicionar_produto_servico}>
                         <h5>
                             Produto/Serviço:
                         </h5>
@@ -361,7 +361,7 @@ const AdicionarNota = ({
                                 setProdutoServico({ ...produtoServico, descricaoProdutoServico: e.target.value })
                             }
                         />
-                        <div className={style.column}>
+                        <div className={style.column_adicionar_produto_servico}>
                             <h5>
                                 Complemento:
                             </h5>
