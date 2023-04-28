@@ -5,6 +5,8 @@ import TabelaTimes from "../../../components/ui/tabela/time/TabelaTimes";
 import CadastroTime from "../../../components/ui/card/Time/CadastrarTimes";
 import Button from "../../../components/ui/button/ButtonUi";
 import { useEffect, useState } from "react";
+import { setCookie,parseCookies } from "nookies";
+
 
 const Times = () => {
     const [data, setData] = useState([]);

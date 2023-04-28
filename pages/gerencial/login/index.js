@@ -3,6 +3,8 @@ import NavBar from "../../../components/ui/navBar/NavBar";
 import TableUsuario from "../../../components/ui/tabela/login/Usuario";
 import api from "../../../api/apiObraItatiba";
 import { useEffect, useState } from "react";
+import { setCookie,parseCookies } from "nookies";
+
 
 const Login =() =>{
 
