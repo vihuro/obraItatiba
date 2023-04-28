@@ -28,8 +28,8 @@ const LateralNavBar = ({ isOpen, onClose }) => {
         >
             <div className={isOpen ? style.container : ""} >
                 <div className={isOpen ? style.navBarLateral : style.navBarLateral_off}  >
-                    <div className={style.containerLogo} 
-                    onClick={() => navigation.push("/menu")}
+                    <div className={style.containerLogo}
+                        onClick={() => navigation.push("/menu")}
                     >
                         <img src="../../../logoMarcaSemFundo.png" />
 
@@ -80,7 +80,10 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                         {toogleGerencial && (
                             <div className={style.button_subMenu} >
                                 <div className={style.container_sub_menu} >
-                                    <p>LOGIN</p>
+                                    <p onClick={() => navigation.push("/gerencial/login")}>LOGIN</p>
+                                </div>
+                                <div className={style.container_sub_menu} >
+                                    <p onClick={() => navigation.push("/gerencial/times")}>TIMES</p>
                                 </div>
                                 <div className={style.container_sub_menu} >
                                     <p>ACESSOS</p>

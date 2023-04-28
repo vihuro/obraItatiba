@@ -14,8 +14,11 @@ function setBaseURL(url){
     }else{
         BASE_URL = "http://189.1.166.143:9090/api"
     }
-    ApiObra.defaults.baseURL = BASE_URL;
-    console.log(BASE_URL)
+
+    // ApiObra.defaults.baseURL = "http://localhost:9000/api";
+
+     ApiObra.defaults.baseURL = BASE_URL;
+
 }
 if (typeof window !== "undefined") {
     setBaseURL(window.location.hostname);

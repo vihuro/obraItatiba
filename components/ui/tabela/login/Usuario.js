@@ -1,4 +1,6 @@
 import style from "./style.module.css";
+import { FiEdit } from "react-icons/Fi";
+
 
 const TableUsuario = ({
     data
@@ -7,17 +9,19 @@ const TableUsuario = ({
         data ? 
         
         <table className={style.table} >
-            <thead>
-                <tr className={style.head} >
-                    <td>ID</td>
-                    <td>APELIDO</td>
-                    <td>NOME</td>
+            <thead >
+                <tr className={style.head}>
+                    <th>ID</th>
+                    <th>APELIDO</th>
+                    <th>NOME</th>
+                    <th>CLAIMS</th>
+                    <th>EDIT.</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className={style.body} >
                 {data && (
                     data.map((item, index) =>
-                        <tr>
+                        <tr key={index} >
                             <td>
                                 {item.usuarioId}
                             </td>
@@ -26,6 +30,10 @@ const TableUsuario = ({
                             </td>
                             <td>
                                 {item.nomeUsuario}
+                            </td>
+                            <td className={style.row_claims} data-claims={item.claims.length} />
+                            <td>
+                                <FiEdit color="#1AEA50"size={"20"} />
                             </td>
                         </tr>
                     )

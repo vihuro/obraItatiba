@@ -12,7 +12,6 @@
     background-color: rgb(56, 56, 56);
     color: white;
 }
-
 .head th {
     padding: 7px;
     text-align: center;
@@ -24,6 +23,17 @@
     font-size: 14px;
     font-weight: 500;
     color: rgba(243, 243, 243, 0.959);
+}
+
+.row_usuario::before{
+    position: relative;
+    display: inline-block;
+    content: attr(data-usuario);
+    width: 100px;
+    height: 20px;
+    background-color: rgb(25, 218, 208);
+    border-radius: 7px;
+    vertical-align: middle;
 }
 
 .table>thead>tr:not(:last-child)>th,
@@ -42,27 +52,4 @@
 
 .body{
     background-color: rgb(255, 255, 255,.1);
-}
-
-.row_claims{
-    text-align: center;
-    vertical-align: middle;
-    position: relative;
-}
-
-.row_claims::before{
-    position: absolute;
-    content: attr(data-claims);
-    font-size: 12px;
-    text-align: center;
-    font-weight: 500;
-    color: white;
-    width: 60px;
-    height: 15px;
-    background-color: rgb(25, 218, 208);
-    border-radius:10px ;
-    margin-left: -27px;
-    vertical-align: middle;
-    bottom: 10px;
-
 }

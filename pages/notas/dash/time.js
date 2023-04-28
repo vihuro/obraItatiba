@@ -40,18 +40,18 @@ const DashNotasPorTime = () => {
         LETRA_CONTRARADO: "#FFFF00",
         LETRA_VERDE: "#66FF33",
         FUNDO_VERDE: "#66FF33",
-        FUNDO_VERMELHO:"#C00000",
-        LETRA_BRANCA:"#FFF"
+        FUNDO_VERMELHO: "#C00000",
+        LETRA_BRANCA: "#FFF"
     }
-    function formatValor(valor){
-        if(Number.isInteger(valor)){
-            return valor.toLocaleString("pt-br",{minimumFractionDigits:2})
+    function formatValor(valor) {
+        if (Number.isInteger(valor)) {
+            return valor.toLocaleString("pt-br", { minimumFractionDigits: 2 })
         }
         return valor.toLocaleString("pt-br")
     }
-    function formatValorReduzido(valor){
-        const formater = Intl.NumberFormat("br",{
-            notation:'compact'
+    function formatValorReduzido(valor) {
+        const formater = Intl.NumberFormat("br", {
+            notation: 'compact'
         });
         return formater.format(valor)
 
@@ -73,23 +73,45 @@ const DashNotasPorTime = () => {
         }
         let filter = table.find(item => item.time === "Leonardi");
         let index = table.indexOf(filter);
-        table[index].contratado = 5189100
+        table[index].contratado = 5326836.10
         filter = table.find(item => item.time === "Unicon");
         if (filter) {
             index = table.indexOf(filter);
             table[index].contratado = 700000
         }
-
-
         filter = table.find(item => item.time === "Pellizzer");
         if (filter) {
             index = table.indexOf(filter);
-            table[index].contratado = 20000
+            table[index].contratado = 2799000
         }
         filter = table.find(item => item.time === "Avulso");
         if (filter) {
             index = table.indexOf(filter);
             table[index].contratado = 1000000
+        }
+        filter = table.find(item => item.time === "Fernandes");
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 1000000
+        }
+        filter = table.find(item => item.time === "GM");
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 1000000
+        }
+        filter = table.find(item => item.time === "Paladino");
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 78000
+        }
+        filter = table.find(item => item.time === "Engepoli");
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 270000
+        }filter = table.find(item => item.time === "Office");
+        if (filter) {
+            index = table.indexOf(filter);
+            table[index].contratado = 95000
         }
         setData(table);
     }
@@ -175,13 +197,13 @@ const DashNotasPorTime = () => {
                                 </td>
                                 <td
                                     style={
-                                        item.totalGasto >= item.contratado ? 
-                                        {background:cores.FUNDO_VERMELHO,color:cores.LETRA_BRANCA}:
-                                        {background:cores.FUNDO_VERDE}
-                                        
+                                        item.totalGasto >= item.contratado ?
+                                            { background: cores.FUNDO_VERMELHO, color: cores.LETRA_BRANCA } :
+                                            { background: cores.FUNDO_VERDE }
+
                                     }
                                 >
-                                    {`${item.totalGasto >= item.contratado ? "ATINGIDO":"NÃO ATINGIDO"}`}
+                                    {`${item.totalGasto >= item.contratado ? "ATINGIDO" : "NÃO ATINGIDO"}`}
                                 </td>
                             </tr>
 

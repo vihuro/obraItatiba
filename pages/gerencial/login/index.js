@@ -1,7 +1,7 @@
 import styles from "./style.module.css";
-import NavBar from "../../components/ui/navBar/NavBar";
-import TableUsuario from "../../components/ui/tabela/login/Usuario";
-import api from "../../api/apiObraItatiba";
+import NavBar from "../../../components/ui/navBar/NavBar";
+import TableUsuario from "../../../components/ui/tabela/login/Usuario";
+import api from "../../../api/apiObraItatiba";
 import { useEffect, useState } from "react";
 
 const Login =() =>{
@@ -37,3 +37,25 @@ const Login =() =>{
 }
 
 export default Login
+
+export const getServerSideProps = (context) => {
+    const url = parseCookies(context).OBRA_THR;
+    const token = parseCookies(context).TOKEN_OBRA;
+
+    if (!token) {
+        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl), {
+            path: "/"
+        })
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            },
+            props: {}
+        }
+
+    }
+
+    return { props: {} }
+
+}
