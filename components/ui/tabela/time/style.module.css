@@ -53,3 +53,16 @@
 .body{
     background-color: rgb(255, 255, 255,.1);
 }
+
+@media(max-width:380px){
+
+    .head th {
+        padding: 2px;
+    }
+    
+    .table td {
+        padding: 2px;
+
+    }
+
+}

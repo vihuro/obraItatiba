@@ -9,6 +9,8 @@ const ApiObra = axios.create()
 
 function setBaseURL(url){
 
+    // BASE_URL = "http://192.168.1.227:9090/api"
+
     if(url.startsWith("192")){
         BASE_URL = "http://192.168.1.227:9090/api"
     }else{

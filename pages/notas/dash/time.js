@@ -154,17 +154,7 @@ const DashNotasPorTime = () => {
                         {data.map((item, index) =>
                             <tr key={index} >
                                 <td
-                                    style={
-                                        item.time === "Leonardi" ?
-                                            { background: cores.FUNDO_UNICON } :
-                                            item.time === "Unicon" ?
-                                                { background: cores.FUNDO_UNICON } :
-                                                item.time === "Pellizzer" ?
-                                                    { background: cores.FUNDO_UNICON } :
-                                                    item.time === "Avulso" ?
-                                                        { background: cores.FUNDO_UNICON } :
-                                                        { background: cores.FUNDO_PADRAO }
-                                    }
+                                    style={{background:cores.FUNDO_UNICON}}
                                 >
                                     {item.time}
                                 </td>
