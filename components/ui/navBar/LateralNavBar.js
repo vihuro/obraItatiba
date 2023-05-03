@@ -12,6 +12,7 @@ const LateralNavBar = ({ isOpen, onClose }) => {
     }, [])
 
     const [toogleNotas, setOpenNotas] = useState(false);
+    const [toogleConhecimento, setToogleConhecimento] = useState(false);
     const [toogleGerencial, setToogleGerencial] = useState(false);
     const [openGerencial, setOpenGerencial] = useState(false);
     const [infoUsuario, setInfoUsuario] = useState([])
@@ -35,14 +36,15 @@ const LateralNavBar = ({ isOpen, onClose }) => {
 
                     </div>
                     <div className={style.containerButton} >
-                        {infoUsuario.FINANCEIRO && <div className={style.button_menu}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                setOpenNotas(!toogleNotas)
-                            }}
-                        >
-                            <p>NOTAS</p>
-                        </div>}
+                        {infoUsuario.FINANCEIRO &&
+                            <div className={style.button_menu}
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setOpenNotas(!toogleNotas)
+                                }}
+                            >
+                                <p>NOTAS</p>
+                            </div>}
 
                         {toogleNotas && (
                             <div className={style.button_subMenu} >
@@ -58,14 +60,40 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                                             navigation.push("/notas")}
                                     >THR</p>
                                 </div>
+
                                 <div className={style.container_sub_menu}  >
                                     <a href="/notas/dash/time"
                                         target="_blank"
 
                                     >DASH (NOTAS/TIME)</a>
                                 </div>
+                            </div>
 
+                        )}
+                        {infoUsuario.FINANCEIRO &&
+                            <div className={style.button_menu}
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setToogleConhecimento(!toogleConhecimento)
+                                }}
+                            >
+                                <p>CONHECIMENTO</p>
+                            </div>}
 
+                        {toogleConhecimento && (
+                            <div className={style.button_subMenu} >
+                                <div className={style.container_sub_menu} >
+                                    <p onClick={() => {
+                                        navigation.push("/conhecimento/obra/radar")
+                                    }} >
+                                        RADAR</p>
+                                </div>
+                                <div className={style.container_sub_menu}  >
+                                    <p
+                                        onClick={() =>
+                                            navigation.push("/notas")}
+                                    >THR</p>
+                                </div>
                             </div>
 
                         )}
