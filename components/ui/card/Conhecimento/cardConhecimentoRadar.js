@@ -2,23 +2,37 @@ import style from "./style.module.css";
 import DateFormat from "../../../../service/DateString";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 import { BiAddToQueue } from "react-icons/Bi"
+import { useState } from "react";
+import AdicionarConhecimento from "./AdicionarConhecimento";
 
 
 const CardConhecimentoRadar = ({
-    data
+    data,
+    dataTime
 }) => {
 
-    console.log(data)
+    const [visibleValue, setVisibleValue] = useState(false);
+    const [visibleCard, setVisibleCard] = useState(false);
+
     return (
         data ?
             <div className={style.card} >
+                {visibleCard ?
+                    <AdicionarConhecimento
+                        changeVisible={setVisibleCard}
+                        data={data}
+                        dataTime={dataTime}
+                    />
+                    : null
+                }
+
                 <div className={style.containerTitle} >
                     <div className={style.wrap_container_title} >
                         <h5>{` Nº ${data.numeroDocumento}`}</h5>
                     </div>
                 </div>
                 <div className={style.containerButtonPlus}>
-                    <div className={style.wrap_buttonPlus} >
+                    <div className={style.wrap_buttonPlus} onClick={() => setVisibleCard(true)} >
                         <BiAddToQueue size={30} color="blue" />
                     </div>
 
@@ -44,12 +58,18 @@ const CardConhecimentoRadar = ({
                         </div>
                     </div>
                     <div className={style.containerValorConhecimento} >
-                        <div className={style.wrap_container_valor} >
+                        <div className={
+                            visibleValue ? style.wrap_container_valor :
+                                style.wrap_container_valor_off} >
                             <h5>Frete:</h5>
                             <p>{`R$ ${data.valorFrete}`}</p>
                         </div>
-                        <div className={style.container_button_visible} >
-                            <MdOutlineVisibility color="gray" size={20} />
+                        <div className={style.container_button_visible} onClick={() => setVisibleValue(!visibleValue)} >
+                            {visibleValue ?
+                                < MdOutlineVisibility color="gray" size={20} /> :
+                                < MdOutlineVisibilityOff color="gray" size={20} />
+                            }
+
 
                         </div>
                     </div>

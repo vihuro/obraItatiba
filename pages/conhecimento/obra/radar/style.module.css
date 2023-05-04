@@ -14,9 +14,33 @@
     position: relative;
 }
 
+.container_filter{
+    width: 90%;
+    height: 100px;
+    margin-left: 40px;
+}
+
+.container_filter h3{
+    margin-top: 20px;
+    color: rgb(0, 32, 173);
+}
+.wrap_container_filter{
+    padding: 10px;
+    color: blue;
+}
+.wrap_container_filter input{
+    border: 1px solid rgba(19, 63, 185, 0.534);
+    padding: 5px;
+    margin-top: 10px;
+    outline: none;
+    border-radius: 7px;
+    width: 200px;
+    
+}
+
 .conatinerCards{
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 220px);
     overflow: auto;
 }
 @media(max-width:900px){
@@ -28,6 +52,16 @@
         padding: 0;
         margin: 0 auto;
         position: relative;
+    }
+    .container_filter{
+        width: 85%;
+        height: 120px;
+        margin-left: 40px;
+    }
+    .conatinerCards{
+        width: 100%;
+        height: calc(100vh - 240px);
+        overflow: auto;
     }
 
 }

@@ -10,27 +10,63 @@ const ConhecimentoRadar = () => {
     }, [])
 
     const [data, setData] = useState([]);
+    const [filter, setFilter] = useState("");
+    const [dataFilter, setDataFilter] = useState([])
+    const [dataTime, setDataTime] = useState([]);
+
     function FechData() {
         apiObra.get("/conhecimento/radar/notsaved")
             .then(res => setData(res.data))
+            .catch(err => console.log(err));
+        apiObra.get("/time")
+            .then(res => MontarList(res.data))
             .catch(err => console.log(err))
     }
+
+    function MontarList(data) {
+        if (data) {
+            setDataTime(prev => {
+                const newItem = data.map(item => ({ "Id": item.timeId, "Value": item.time }))
+                return [...prev, ...newItem]
+            })
+        }
+    }
+
+    const filtro = data.filter((doc) => doc.numeroDocumento.toString().startsWith(parseInt(filter)))
+
+
 
     return (
         <div className={style.body} >
             <div className={style.container}>
-
                 <NavBar />
+                <div className={style.container_filter} >
+                    <h3>Total de conhecimentos não cadastrados: {data.length}</h3>
+                    <div className={style.wrap_container_filter} >
+                        <h5>Filtro</h5>
+                        <input type="number" value={filter} onChange={e => setFilter(e.target.value)} />
+                    </div>
+                </div>
                 <div className={style.conatinerCards} >
-                    {data && (
-                        data.map((item, index) =>
-                            <CardConhecimentoRadar
-                                data={item}
-                            />)
+                    {filter !== "" ?
+                        filtro && dataTime && (
+                            filtro.map((item, index) =>
+                                <CardConhecimentoRadar
+                                    key={index}
+                                    data={item}
+                                    dataTime={dataTime}
+                                />)
 
-                    )}
-
-
+                        )
+                        : data && dataTime && (
+                            data.map((item, index) =>
+                                <CardConhecimentoRadar
+                                    key={index}
+                                    data={item}
+                                    dataTime={dataTime}
+                                />
+                            )
+                        )}
                 </div>
 
             </div>
