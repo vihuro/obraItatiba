@@ -1,6 +1,8 @@
 import style from "./style.module.css";
 import DateFormat from "../../../../service/DateString";
-import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md"
+import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import { BiAddToQueue } from "react-icons/Bi"
+
 
 const CardConhecimentoRadar = ({
     data
@@ -14,6 +16,12 @@ const CardConhecimentoRadar = ({
                     <div className={style.wrap_container_title} >
                         <h5>{` Nº ${data.numeroDocumento}`}</h5>
                     </div>
+                </div>
+                <div className={style.containerButtonPlus}>
+                    <div className={style.wrap_buttonPlus} >
+                        <BiAddToQueue size={30} color="blue" />
+                    </div>
+
                 </div>
 
                 <div className={style.containerBody} >
@@ -37,7 +45,7 @@ const CardConhecimentoRadar = ({
                     </div>
                     <div className={style.containerValorConhecimento} >
                         <div className={style.wrap_container_valor} >
-                            <h5>Valor do Frete:</h5>
+                            <h5>Frete:</h5>
                             <p>{`R$ ${data.valorFrete}`}</p>
                         </div>
                         <div className={style.container_button_visible} >
@@ -46,7 +54,18 @@ const CardConhecimentoRadar = ({
                         </div>
                     </div>
                     <div className={style.containerInfoPlus} >
-                        <div />
+                        <div className={style.info}>
+                            <p>Parcelas</p>
+                            <div className={style.infoParcelas} >
+                                <p>{data.parcelas.length}</p>
+                            </div>
+                        </div>
+                        <div className={style.info}>
+                            <p>Notas</p>
+                            <div className={style.infoNotas} >
+                                <p>{data.notas.length}</p>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
