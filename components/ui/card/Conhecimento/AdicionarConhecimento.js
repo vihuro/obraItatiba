@@ -5,6 +5,7 @@ import ApiObra from "../../../../api/apiObraItatiba";
 import ComboBox from "../../comboBox/ComboBox";
 import listaAutorizador from "../../../../service/list/Autorizador";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
+import Button from "../../button/ButtonUi";
 
 const AdicionarConhecimento = ({
     data,
@@ -19,26 +20,7 @@ const AdicionarConhecimento = ({
     });
     const [comboBoxTime, setComboBoxTime] = useState(false);
     const [comboBoxAutorizador, setComboBoxAutorizador] = useState(false);
-    const [listAutorizador, setlistAutorizador] = useState([
-        {
-            "Id": 1, "Value": "ROBERTO"
-        },
-        {
-            "Id": 2, "Value": "BRUNO"
-        },
-        {
-            "Id": 3, "Value": "TETSUO"
-        },
-        {
-            "Id": 4, "Value": "HELENA"
-        },
-        {
-            "Id": 5, "Value": "TOMIKO"
-        },
-        {
-            "Id": 6, "Value": "WAGNER"
-        },
-    ]);
+
     const [valueAutorizador, setValueAutorizador] = useState({
         "id": 0,
         "value": ""
@@ -83,8 +65,6 @@ const AdicionarConhecimento = ({
         },
 
     ]
-
-    console.log(data)
 
     return (
         <div className={style.container} onClick={() => changeVisible(false)} >
@@ -221,8 +201,18 @@ const AdicionarConhecimento = ({
                     </div>
                 </div>
                 <div className={style.containerButton} >
-
-                    LANÇAR
+                    <div className={style.wrap_container_button} >
+                        <Button
+                            text={"CADASTRAR"}
+                            action={() => { }}
+                        />
+                    </div>
+                    <div className={style.wrap_container_button} >
+                        <Button
+                            text={"CANCELAR"}
+                            action={() => { }}
+                        />
+                    </div>
                 </div>
             </div>
 
