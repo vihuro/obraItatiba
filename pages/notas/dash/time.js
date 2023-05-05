@@ -23,7 +23,15 @@ const DashNotasPorTime = () => {
 
     function AtualizarDash() {
         api.get("/notas")
-            .then(res => { MontarTabela({ info: res.data }), TotalGasto(res.data) })
+            .then(resNota => {
+                api.get("/conhecimento")
+                    .then(resConhecimento => {
+                        MontarTabela({ infoConhecimento: resConhecimento.data, infoNotas: resNota.data })
+                        TotalGasto({infoNotas:resNota.data,infoConhecimentos:resConhecimento.data})
+                    })
+                // MontarTabela({ info: res.data }),
+
+            })
             .catch(err => console.log(err))
     }
 
@@ -59,16 +67,27 @@ const DashNotasPorTime = () => {
 
 
     function MontarTabela({
-        info
+        infoNotas,
+        infoConhecimento
     }) {
+
         let table = [];
-        for (var i = 0; i < info.length; i++) {
-            const filter = table.find((s) => s.time === info[i]["time"]);
+        for (var i = 0; i < infoNotas.length; i++) {
+            const filter = table.find((s) => s.time === infoNotas[i]["time"]);
             if (filter === undefined) {
-                table = [...table, { time: info[i]["time"], "totalGasto": info[i]["valorTotalNota"], contratado: 0 }];
+                table = [...table, { time: infoNotas[i]["time"], "totalGasto": infoNotas[i]["valorTotalNota"], contratado: 0 }];
             } else {
                 const index = table.indexOf(filter)
-                table[index].totalGasto += info[i]["valorTotalNota"];
+                table[index].totalGasto += infoNotas[i]["valorTotalNota"];
+            }
+        }
+        for (var i = 0; i < infoConhecimento.length; i++) {
+            const filter = table.find((s) => s.time === infoConhecimento[i]["time"]);
+            if (filter === undefined) {
+                table = [...table, { time: infoConhecimento[i]["time"], "totalGasto": infoConhecimento[i]["valorFrete"], contratado: 0 }];
+            } else {
+                const index = table.indexOf(filter)
+                table[index].totalGasto += infoConhecimento[i]["valorFrete"];
             }
         }
         let filter = table.find(item => item.time === "Leonardi");
@@ -108,19 +127,27 @@ const DashNotasPorTime = () => {
         if (filter) {
             index = table.indexOf(filter);
             table[index].contratado = 270000
-        }filter = table.find(item => item.time === "Office");
+        } filter = table.find(item => item.time === "Office");
         if (filter) {
             index = table.indexOf(filter);
             table[index].contratado = 95000
         }
+
         setData(table);
     }
 
-    function TotalGasto(info) {
+    function TotalGasto({
+        infoNotas,
+        infoConhecimentos
+
+    }) {
 
         let total = 0;
-        for (var i = 0; i < info.length; i++) {
-            total += info[i]["valorTotalNota"];
+        for (var i = 0; i < infoNotas.length; i++) {
+            total += infoNotas[i]["valorTotalNota"];
+        }
+        for (var i = 0; i < infoConhecimentos.length; i++) {
+            total += infoConhecimentos[i]["valorFrete"]
         }
         setTotalGasto(total);
     }
@@ -154,7 +181,7 @@ const DashNotasPorTime = () => {
                         {data.map((item, index) =>
                             <tr key={index} >
                                 <td
-                                    style={{background:cores.FUNDO_UNICON}}
+                                    style={{ background: cores.FUNDO_UNICON }}
                                 >
                                     {item.time}
                                 </td>
@@ -169,7 +196,8 @@ const DashNotasPorTime = () => {
                                     style={{
                                         background: cores.FUNDO_PADRAO
                                     }}
-                                >R$ {formatValor(item.totalGasto)}</td>
+                                >
+                                    R$ {formatValor(item.totalGasto)}</td>
                                 {/* <td
                                     style={{
                                         background: cores.FUNDO_PADRAO

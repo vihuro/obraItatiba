@@ -8,7 +8,8 @@ import AdicionarConhecimento from "./AdicionarConhecimento";
 
 const CardConhecimentoRadar = ({
     data,
-    dataTime
+    dataTime,
+    refresh
 }) => {
 
     const [visibleValue, setVisibleValue] = useState(false);
@@ -22,6 +23,7 @@ const CardConhecimentoRadar = ({
                         changeVisible={setVisibleCard}
                         data={data}
                         dataTime={dataTime}
+                        refresh={() => refresh()}
                     />
                     : null
                 }

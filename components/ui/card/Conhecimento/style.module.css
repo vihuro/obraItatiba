@@ -161,6 +161,7 @@
 .info p {
     color: rgb(107, 107, 107);
     font-weight: 500;
+    font-size: 14px;
 }
 
 .infoParcelas,

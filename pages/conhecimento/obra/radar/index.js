@@ -3,6 +3,8 @@ import NavBar from "../../../../components/ui/navBar/NavBar";
 import { useEffect, useState } from "react";
 import apiObra from "../../../../api/apiObraItatiba";
 import CardConhecimentoRadar from "../../../../components/ui/card/Conhecimento/cardConhecimentoRadar";
+import { parseCookies,setCookie } from "nookies";
+
 
 const ConhecimentoRadar = () => {
     useEffect(() => {
@@ -64,6 +66,7 @@ const ConhecimentoRadar = () => {
                                     key={index}
                                     data={item}
                                     dataTime={dataTime}
+                                    refresh={() => FechData()}
                                 />
                             )
                         )}
@@ -74,3 +77,23 @@ const ConhecimentoRadar = () => {
     )
 }
 export default ConhecimentoRadar
+
+export const getServerSideProps = (context) => {
+    const url = parseCookies(context).OBRA_THR;
+    const token = parseCookies(context).TOKEN_OBRA;
+
+    if (!token) {
+        setCookie(context, "OBRA_THR", encodeURIComponent(context.resolvedUrl))
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            },
+            props: {}
+        }
+
+    }
+
+    return { props: {} }
+
+}

@@ -16,50 +16,50 @@ const ComboBox = ({
     useEffect(() => {
         setList(data);
     }, [])
-    
+
     return (
-        data ? 
-        <div
-            onClick={e => e.stopPropagation()}
-            style={{ width: width }}
-            className={style.container}>
-            <input
-                className={style.input}
-                placeholder={placeHolder}
-                value={text}
-                readOnly
-                onClick={() => {
-                    changeVisible(true)
-                }}
-            />
-            {valueVisible && (
-                <div className={style.card_select}>
-                    {list && valueVisible && (
-                        list.map((item, index) => {
-                            return (
-                                <div
-                                    key={item.Id}
-                                    style={{ width: width }}
-                                    className={style.containerSelect}
-                                >
-                                    <p onClick={() => {
-                                        setText(item.Value);
-                                        value({ "id": item.Id, "value": item.Value })
-                                        changeVisible(false)
-                                    }
-                                    } key={index} >{item.Value}</p>
-                                </div>
+        data ?
+            <div
+                onClick={e => e.stopPropagation()}
+                style={{ width: width }}
+                className={style.container}>
+                <input
+                    className={style.input}
+                    placeholder={placeHolder}
+                    value={text}
+                    readOnly
+                    onClick={() => {
+                        changeVisible(true)
+                    }}
+                />
+                {valueVisible && (
+                    <div className={style.card_select}>
+                        {list && valueVisible && (
+                            list.map((item, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        style={{ width: width }}
+                                        className={style.containerSelect}
+                                    >
+                                        <p onClick={() => {
+                                            setText(item.Value);
+                                            value({ "id": item.Id, "value": item.Value })
+                                            changeVisible(false)
+                                        }
+                                        } key={index} >{item.Value}</p>
+                                    </div>
 
-                            )
-                        })
-                    )}
-                </div>
-
-
-            )}
+                                )
+                            })
+                        )}
+                    </div>
 
 
-            {/* {list && valueVisible && (
+                )}
+
+
+                {/* {list && valueVisible && (
                         
                         list.map((item) =>
                             <div
@@ -77,7 +77,7 @@ const ComboBox = ({
                             )
                         )} */}
 
-        </div>:null
+            </div> : null
     )
 }
 

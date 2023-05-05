@@ -91,7 +91,7 @@ const LateralNavBar = ({ isOpen, onClose }) => {
                                 <div className={style.container_sub_menu}  >
                                     <p
                                         onClick={() =>
-                                            navigation.push("/notas")}
+                                            navigation.push("/conhecimento/obra/thr")}
                                     >THR</p>
                                 </div>
                             </div>

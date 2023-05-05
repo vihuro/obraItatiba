@@ -16,8 +16,8 @@ import DateStingFormat from "../../../../service/DateString";
 const AdicionarNota = ({
     data,
     visible,
-    dataTimes, 
-    refesh    
+    dataTimes,
+    refesh
 }) => {
 
     const [nota, setNota] = useState(null);
@@ -41,7 +41,7 @@ const AdicionarNota = ({
         "cnpj": data.cnpj.replace(/[^\d]+/g, ''),
         "descricaoProdutoServico": data.descricaoProdutoServico,
         "avulsoFinalidade": "",
-        "autorizador": "Bruno",
+        "autorizador": "",
         "usuarioCadastroId": 0,
         "timeId": 0,
         "tipoExportacao": "RADAR",
@@ -94,17 +94,18 @@ const AdicionarNota = ({
 
     function CadastrarNota() {
         setLoading(true)
-        const nota = { ...valueNota, timeId: valueTIme.id, autorizador: valueAutorizador.value }
+        const nota = { ...valueNota, timeId: valueTIme.id, autorizador: valueAutorizador.value, usuarioCadastroId: 2 }
 
         api.post("/notas", nota)
-            .then(res => { 
-                setVisibleMessage(true), 
-                setInfoMessage({ message: "Cadastrado com sucesso!", type: "sucess" }) 
+            .then(res => {
+                setVisibleMessage(true),
+                    setInfoMessage({ message: "Cadastrado com sucesso!", type: "sucess" })
                 refesh()
             })
             .catch(err => {
+                console.log(err)
                 if (err.response.data) {
-                    
+
                     setInfoMessage({ message: err.response.data.title, type: "warning" })
                 } else {
                     setInfoMessage({ message: err.message, type: "warning" })
@@ -134,12 +135,18 @@ const AdicionarNota = ({
                     setModalTime(false);
                 })}
                 className={style.cardNovaNota}>
-                {visibleMessage ? <Modal
-                    visible={setVisibleMessage}
-                    mensagem={infoMessage.message}
-                    type={infoMessage.type}
-                /> : null}
-                {loading ? <LoaderRing /> : null}
+                {visibleMessage ?
+                    <Modal
+                        visible={setVisibleMessage}
+                        mensagem={infoMessage.message}
+                        type={infoMessage.type}
+                    /> :
+                    null
+                }
+                {loading ?
+                    <LoaderRing /> :
+                    null
+                }
                 {nota && dataTimes && (
                     <>
                         <div className={style.containerTitle}>
