@@ -81,6 +81,8 @@ const AdicionarNota = ({
             "Id": 6, "Value": "WAGNER"
         },
     ])
+    const [textComboBoxAutorizador, setTextComboBoxAutorizador] = useState("");
+    const [textComboBoxTime, setTextComboBoxTime] = useState("");
 
 
 
@@ -117,8 +119,6 @@ const AdicionarNota = ({
             .finally(() => {
                 setLoading(false)
             })
-
-
     }
 
     return (
@@ -227,6 +227,8 @@ const AdicionarNota = ({
                                         placeHolder={"Selecione o autorizador..."}
                                         data={listAutorizador}
                                         value={setValueAutorizador}
+                                        changeText={setTextComboBoxAutorizador}
+                                        text={textComboBoxAutorizador}
 
                                     />
                                 </div>
@@ -238,6 +240,8 @@ const AdicionarNota = ({
                                         placeHolder={"Selecione o time..."}
                                         data={dataTimes}
                                         value={setValueTime}
+                                        text={textComboBoxTime}
+                                        changeText={setTextComboBoxTime}
                                     />
                                 </div>
                             </div>

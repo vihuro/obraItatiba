@@ -1,29 +1,70 @@
-.table {
+.container_table {
+    overflow: auto;
     width: 90%;
+    height: 400px;
     border-radius: 7px;
-    --border: 1px solid rgb(0, 0, 0 ,.2);
-    border-spacing: 0px;
-    border: var(--border);
-    overflow: hidden;
+    background-color: rgba(226, 226, 226, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.table {
+    width: 100%;
+    border-radius: 8px;
+    --border: 1px solid rgb(0, 0, 0, .2);
+    overflow: auto;
+    max-height: 100px;
+    border-collapse: collapse;
+
+    /* border: var(--border); */
 
 }
 
-.head {
+/* .table thead {
+    position: sticky;
+    z-index: 1;
+    top: -1px;
+    border-radius: 7px;
     background-color: rgb(56, 56, 56);
     color: white;
+} */
+
+.table th,
+.table td {
+    
+    padding: 1rem;
+    border: none;
+}
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: rgb(56, 56, 56);
+    color: white;
+    z-index: 2;
+}
+
+
+.head {
+    /* background-color: rgb(56, 56, 56);
+    color: white;
+    height: 20px; */
+
 }
 
 .head th {
-    padding: 7px;
+    /* padding: 7px; */
     text-align: center;
+    position: sticky;
 }
 
 .table td {
-    padding: 7px;
+    /* padding: 7px; */
     text-align: center;
     font-size: 14px;
     font-weight: 500;
     color: rgba(243, 243, 243, 0.959);
+
 }
 
 .table>thead>tr:not(:last-child)>th,
@@ -37,20 +78,24 @@
 .table>thead:not(:last-child),
 .table>tbody:not(:last-child),
 .table>tfoot:not(:last-child) {
-    border-bottom: 1px solid rgba(226, 226, 226, 0.589)
+    border-bottom: 1px solid rgba(226, 226, 226, 0.589);
 }
 
-.body{
-    background-color: rgb(255, 255, 255,.1);
-}
+.body {
 
-.row_claims{
-    text-align: center;
-    vertical-align: middle;
     position: relative;
+    overflow: auto;
+
+
 }
 
-.row_claims::before{
+.row_claims {
+    position: relative;
+    width: 50px;
+
+}
+
+.row_claims::before {
     position: absolute;
     content: attr(data-claims);
     font-size: 12px;
@@ -60,9 +105,8 @@
     width: 60px;
     height: 15px;
     background-color: rgb(25, 218, 208);
-    border-radius:10px ;
+    border-radius: 10px;
     margin-left: -27px;
     vertical-align: middle;
-    bottom: 10px;
-
+    bottom: 20px;
 }

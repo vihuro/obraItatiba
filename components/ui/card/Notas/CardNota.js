@@ -154,7 +154,6 @@ const CardNotas = ({
                         data={data}
                         dataTimes={listTimes}
                         refesh={refresh}
-
                     />
                 }
             </div>

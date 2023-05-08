@@ -74,6 +74,8 @@ const AdicionarNota = ({
     });
     const [loading, setLoading] = useState(false);
     const [dadosUsuario, setDataDosUsuario] = useState("");
+    const [textComboBoxTime, setTextComboBoxTime] = useState("");
+    const [textComboBoxAutorizador, setTextComboBoxAutorizador] = useState("");
 
     useEffect(() => {
         function times() {
@@ -283,6 +285,8 @@ const AdicionarNota = ({
                                     changeVisible={setVisibleTime}
                                     valueVisible={visibleTime}
                                     value={setValueTime}
+                                    changeText={setTextComboBoxTime}
+                                    text={textComboBoxTime}
                                 />
                             )}
                         </div>
@@ -296,6 +300,8 @@ const AdicionarNota = ({
                                 changeVisible={setVisibleAutorizador}
                                 valueVisible={visibleAutorizador}
                                 value={setValueAutorizador}
+                                changeText={setTextComboBoxAutorizador}
+                                text={textComboBoxAutorizador}
                             />
                         </div>
 

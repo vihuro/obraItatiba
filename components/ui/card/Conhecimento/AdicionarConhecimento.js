@@ -91,6 +91,8 @@ const AdicionarConhecimento = ({
         "parcelas":[],
         "notas":[]
     })
+    const [textComboBoxTime, setTextComboBoxTime] = useState("");
+    const [textComboBoxAutorizador, setTextComboxAutorizador] = useState("");
 
     useEffect(() => {
         const infoUsuario = TokenDecriptor(parseCookies().TOKEN_OBRA)
@@ -222,6 +224,8 @@ const AdicionarConhecimento = ({
                                 changeVisible={setComboBoxTime}
                                 valueVisible={comboBoxTime}
                                 value={setValueTime}
+                                changeText={setTextComboBoxTime}
+                                text={textComboBoxTime}
                             />
                         </div>
                     }
@@ -236,7 +240,8 @@ const AdicionarConhecimento = ({
                                 changeVisible={setComboBoxAutorizador}
                                 valueVisible={comboBoxAutorizador}
                                 value={setValueAutorizador}
-
+                                changeText={setTextComboxAutorizador}
+                                text={textComboBoxAutorizador}
                             />
                         </div>
                     }

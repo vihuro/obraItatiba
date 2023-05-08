@@ -7,10 +7,12 @@ const ComboBox = ({
     changeVisible,
     valueVisible,
     width,
-    value
+    value,
+    text,
+    changeText
 }) => {
     const [list, setList] = useState(null);
-    const [text, setText] = useState("");
+
     const [modal, setModal] = useState(true);
 
     useEffect(() => {
@@ -43,7 +45,7 @@ const ComboBox = ({
                                         className={style.containerSelect}
                                     >
                                         <p onClick={() => {
-                                            setText(item.Value);
+                                            changeText(item.Value);
                                             value({ "id": item.Id, "value": item.Value })
                                             changeVisible(false)
                                         }
