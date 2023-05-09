@@ -62,20 +62,24 @@ const EditUsuario = ({
     }
 
     function removeClaimForUser() {
-        const info = {
-            ...changeClaim,
-            usuarioCadastroId: parseInt(infoToken.idUser)
+        if (changeClaim.claimId !== 0) {
+            const info = {
+                ...changeClaim,
+                usuarioCadastroId: parseInt(infoToken.idUser)
+            }
+            api.delete("/claims/user/delete", { data: info })
+                .then(res => {
+                    refresh()
+                    api.get(`/login/apelido/${infoUsuario.apelido}`)
+                        .then(res => {
+                            setInfoUsuario(res.data)
+                            setTextComboBox("");
+                        })
+                        .catch(err => console.log(err))
+                })
+
         }
-        api.delete(`/claims/user/delete/${1}`, info)
-            .then(res => {
-                refresh()
-                api.get(`/login/apelido/${infoUsuario.apelido}`)
-                    .then(res =>{
-                        setInfoUsuario(res.data)
-                        setTextComboBox("");
-                    })
-                    .catch(err => console.log(err))
-            })
+
     }
 
     return (
@@ -90,15 +94,15 @@ const EditUsuario = ({
                     <div className={style.container_body_apelido} >
                         <div className={style.wrap_apelido} >
                             <p>APELIDO:</p>
-                            <input readOnly value={infoUsuario.apelido} />
+                            <input type="text" readOnly value={infoUsuario?.apelido || ""} />
                         </div>
                         <div className={style.wrap_nome} >
                             <p>NOME:</p>
-                            <input readOnly value={infoUsuario.nomeUsuario} />
+                            <input type="text" readOnly value={infoUsuario?.nomeUsuario || ""}/>
                         </div>
                         <div className={style.wrap_senha} >
                             <p>SENHA:</p>
-                            <input />
+                            <input readOnly value={""}/>
                         </div>
                     </div>
                     <div className={style.container_body_claims} >
@@ -130,10 +134,11 @@ const EditUsuario = ({
                                                     </p>
                                                 </div>
                                                 <div>
-                                                    <RiDeleteBin7Line color="red" size={18}  onClick={() => {
-                                                        setChangeClaims({...changeClaim,claimId:item.claimId}),removeClaimForUser()
+                                                    {item.claimId !== 0 ? <RiDeleteBin7Line color="red" size={18} onClick={() => {
+                                                        setChangeClaims({ ...changeClaim, claimId: item.claimId }), removeClaimForUser()
 
-                                                        }} />
+                                                    }} /> : null}
+
                                                 </div>
                                             </div>
                                         )
