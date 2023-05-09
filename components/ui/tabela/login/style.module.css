@@ -1,10 +1,25 @@
 .container_table {
     overflow: auto;
     width: 90%;
-    height: 400px;
+    height: auto;
+    max-height: 100%;
     border-radius: 7px;
     background-color: rgba(226, 226, 226, 0.1);
     backdrop-filter: blur(10px);
+
+}
+
+.container_table::-webkit-scrollbar{
+    width: 7px;
+}
+.container_table::-webkit-scrollbar-thumb{
+    background-color: rgb(34, 0, 187);
+    border-radius: 7px;
+    visibility: hidden;
+}
+
+.container_table:hover::-webkit-scrollbar-thumb{
+    visibility: visible;
 }
 
 .table {
@@ -14,23 +29,10 @@
     overflow: auto;
     max-height: 100px;
     border-collapse: collapse;
-
-    /* border: var(--border); */
-
 }
-
-/* .table thead {
-    position: sticky;
-    z-index: 1;
-    top: -1px;
-    border-radius: 7px;
-    background-color: rgb(56, 56, 56);
-    color: white;
-} */
 
 .table th,
 .table td {
-    
     padding: 1rem;
     border: none;
 }
@@ -82,11 +84,8 @@
 }
 
 .body {
-
     position: relative;
     overflow: auto;
-
-
 }
 
 .row_claims {

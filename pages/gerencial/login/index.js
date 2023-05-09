@@ -28,6 +28,7 @@ const Login = () => {
         <div className={styles.body} >
             <div className={styles.container} >
                 <NavBar />
+                <img  className={styles.image} src={"../../../rm380-07.jpg"} />
                 <div className={styles.wrap_container} >
                     <div className={styles.container_filter} >
                     </div>

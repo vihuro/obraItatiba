@@ -6,6 +6,7 @@ import ComboBox from "../../comboBox/ComboBox";
 import Button from "../../button/ButtonUi";
 import { parseCookies } from "nookies";
 import TokenDecriptor from "../../../../service/TokenDecriptor";
+import Loading from "../../Load/RingLoader";
 
 const EditUsuario = ({
     valueVisible,
@@ -26,48 +27,70 @@ const EditUsuario = ({
         usuarioCadastroId: 0
     });
     const [textComboBox, setTextComboBox] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setInfoUsuario(data);
-        setInfoToken(TokenDecriptor(parseCookies().TOKEN_OBRA))
-        api.get("/claimstype")
-            .then(res => {
-                setClaimsNome(prev => {
-                    const list = res.data.map(item => ({ Id: item.claimId, Value: `${item.nome} - ${item.valor}` }))
-                    list.sort((a, b) => a.Value.localeCompare(b.Value));
-                    return [...prev, ...list]
-                })
-            })
-            .catch(err => console.log(err))
+        setInfoToken(TokenDecriptor(parseCookies().TOKEN_OBRA));
+        getAllClaims();
     }, [])
 
-    function changeClaimsForUser() {
+    async function getAllClaims() {
+        setLoading(true)
+        await api.get("/claimstype")
+            .then(res => {
+                montarLista(res.data)
+            })
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
+    }
 
+    function montarLista(lista) {
+        setClaimsNome(prev => {
+            const list = lista.map(item => ({ Id: item.claimId, Value: `${item.nome} - ${item.valor}` }));
+            list.sort((a, b) => a.Value.localeCompare(b.Value));
+            return [...prev, ...list]
+        })
+    }
+
+    async function changeClaimsForUser() {
+        setLoading(true)
         const info = {
             ...changeClaim,
             claimId: valueClaims.id,
             usuarioCadastroId: parseInt(infoToken.idUser)
         }
-        api.put("/claims/user", info)
+        await api.put("/claims/user", info)
             .then(res => {
                 refresh()
-                api.get(`/login/apelido/${infoUsuario.apelido}`)
-                    .then(res => {
-                        setInfoUsuario(res.data)
-                        setTextComboBox("");
-                    })
+                getInfoUser(infoUsuario.apelido)
                     .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
+            .finally(() => setLoading(false))
     }
 
-    function removeClaimForUser() {
-        if (changeClaim.claimId !== 0) {
+    async function getInfoUser(apelido) {
+        setLoading(true)
+        await api.get(`/login/apelido/${apelido}`)
+            .then(res => {
+                setInfoUsuario(res.data),
+                    setTextComboBox("");
+            })
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
+    }
+
+    async function removeClaimForUser(claimId) {
+
+        if (claimId !== 0) {
+            setLoading(true);
             const info = {
                 ...changeClaim,
+                claimId:claimId,
                 usuarioCadastroId: parseInt(infoToken.idUser)
             }
-            api.delete("/claims/user/delete", { data: info })
+            await api.delete("/claims/user/delete", { data: info })
                 .then(res => {
                     refresh()
                     api.get(`/login/apelido/${infoUsuario.apelido}`)
@@ -76,16 +99,17 @@ const EditUsuario = ({
                             setTextComboBox("");
                         })
                         .catch(err => console.log(err))
+                        .finally(() => setLoading(false))
                 })
 
         }
-
     }
 
     return (
         infoUsuario ?
             <div className={style.body} onClick={() => changeVisible(false)} >
                 <div className={style.card} onClick={e => e.stopPropagation()} >
+                    {loading ? <Loading /> : null}
                     <div className={style.title} >
                         <h3>
                             EDITAR USUÁRIO
@@ -98,11 +122,11 @@ const EditUsuario = ({
                         </div>
                         <div className={style.wrap_nome} >
                             <p>NOME:</p>
-                            <input type="text" readOnly value={infoUsuario?.nomeUsuario || ""}/>
+                            <input type="text" readOnly value={infoUsuario?.nomeUsuario || ""} />
                         </div>
                         <div className={style.wrap_senha} >
                             <p>SENHA:</p>
-                            <input readOnly value={""}/>
+                            <input readOnly value={""} />
                         </div>
                     </div>
                     <div className={style.container_body_claims} >
@@ -133,11 +157,13 @@ const EditUsuario = ({
                                                         {item.valor}
                                                     </p>
                                                 </div>
-                                                <div>
-                                                    {item.claimId !== 0 ? <RiDeleteBin7Line color="red" size={18} onClick={() => {
-                                                        setChangeClaims({ ...changeClaim, claimId: item.claimId }), removeClaimForUser()
+                                                <div onClick={() => {
+                                                    console.log('aqui')
+                                                    // setChangeClaims({ ...changeClaim, claimId: item.claimId }),
+                                                    removeClaimForUser(item.claimId)
 
-                                                    }} /> : null}
+                                                }} >
+                                                    <RiDeleteBin7Line color="red" size={18} />
 
                                                 </div>
                                             </div>

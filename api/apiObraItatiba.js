@@ -16,7 +16,7 @@ function setBaseURL(url){
     }else if(url.startsWith("189")){
         BASE_URL = "http://189.1.166.143:9090/api"
     }else{
-        BASE_URL = "http://localhost:9090/api"
+        BASE_URL = "http://192.168.1.227:9090/api"
     }
 
     // ApiObra.defaults.baseURL = "http://localhost:9000/api";
